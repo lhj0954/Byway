@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -37,7 +38,9 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     implementation("com.naver.maps:map-sdk:3.21.0") // ✅ 네이버 지도 SDK
-    implementation("com.google.android.gms:play-services-location:21.0.1") //현재 위치
+    implementation("com.google.android.gms:play-services-location:21.0.1")
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.database) //현재 위치
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

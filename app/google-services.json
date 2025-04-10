@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "850152357276",
+    "project_id": "byway-a821a",
+    "storage_bucket": "byway-a821a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:850152357276:android:d9650cc7db69308f6e5c59",
+        "android_client_info": {
+          "package_name": "com.example.byway"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCttP9CT2-zUiMqxuD-mSVNeEjBa5cU14I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
