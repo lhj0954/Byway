@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         // 위치 소스 초기화
         locationSource = new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
-
+        
         // 위치 버튼 클릭 리스너 등록
         ImageButton locationButton = findViewById(R.id.my_location_button);
         locationButton.setOnClickListener(new View.OnClickListener() {
