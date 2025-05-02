@@ -39,12 +39,15 @@
             android:value="8zslpahklt" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- ✅ MainActivity는 일반 화면으로 이동 -->
+        <activity android:name=".MainActivity" android:exported="true" />
     </application>
 </manifest>
