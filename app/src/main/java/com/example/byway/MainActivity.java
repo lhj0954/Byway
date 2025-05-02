@@ -5,11 +5,18 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.CameraUpdate;
@@ -17,6 +24,7 @@ import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.MapView;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.OnMapReadyCallback;
+import com.naver.maps.map.overlay.PolylineOverlay;
 import com.naver.maps.map.util.FusedLocationSource;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -26,6 +34,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private FusedLocationSource locationSource;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
     private Location lastLocation;
+    //길 등록중인지
+    private boolean isRecording = false;
+
+    private PathRecorder pathRecorder;
+    private MapManager mapManager;
+    private Button startRecordButton;
+    private Button finishRecordButton;
+    private Button submitPathButton;
+    private LinearLayout recordingControls;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,61 +56,99 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         // 위치 소스 초기화
         locationSource = new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
 
-        // 위치 버튼 클릭 리스너 등록
+        pathRecorder=new PathRecorder();
+
+        setupUI();
+    }
+
+    private void setupUI() {
         ImageButton locationButton = findViewById(R.id.my_location_button);
-        locationButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (naverMap == null || lastLocation == null) return;
+        startRecordButton = findViewById(R.id.start_record_button);
+        finishRecordButton = findViewById(R.id.finish_record_button);
+        submitPathButton = findViewById(R.id.submit_path_button);
+        recordingControls = findViewById(R.id.recording_controls);
 
-                LatLng currentLatLng = new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude());
-                LatLng center = naverMap.getCameraPosition().target;
+        locationButton.setOnClickListener(v -> {
+            if (naverMap == null || lastLocation == null) return;
 
-                double distance = currentLatLng.distanceTo(center);
+            LatLng currentLatLng = new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude());
+            LatLng center = naverMap.getCameraPosition().target;
 
-                if (distance > 100) {
-                    // 지도 중심이 많이 벗어나 있으면 이동만 함
-                    naverMap.moveCamera(CameraUpdate.scrollTo(currentLatLng));
-                } else {
-                    // 가까우면 추적 모드 전환 (Follow <-> Face)
-                    LocationTrackingMode currentMode = naverMap.getLocationTrackingMode();
-                    if (currentMode == LocationTrackingMode.Face) {
-                        naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
-                    } else {
-                        naverMap.setLocationTrackingMode(LocationTrackingMode.Face);
-                    }
-                }
+            double distance = currentLatLng.distanceTo(center);
+            if (distance > 100) {
+                naverMap.moveCamera(CameraUpdate.scrollTo(currentLatLng));
+            } else {
+                LocationTrackingMode currentMode = naverMap.getLocationTrackingMode();
+                naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
             }
+        });
+
+        startRecordButton.setOnClickListener(v -> {
+            if (isRecording) return;
+            isRecording = true;
+//            pathRecorder.clear();
+
+
+            startRecordButton.setVisibility(View.GONE);
+            recordingControls.setVisibility(View.VISIBLE);
+            Toast.makeText(this, "길 등록 시작!", Toast.LENGTH_SHORT).show();
+        });
+
+        finishRecordButton.setOnClickListener(v -> {
+            if (!isRecording) return;
+            isRecording = false;
+            pathRecorder.clear();
+            mapManager.clearPath();
+
+            startRecordButton.setVisibility(View.VISIBLE);
+            recordingControls.setVisibility(View.GONE);
+            Toast.makeText(this, "길 등록이 취소되었습니다.", Toast.LENGTH_SHORT).show();
+        });
+
+        submitPathButton.setOnClickListener(v -> {
+            new AlertDialog.Builder(MainActivity.this)
+                    .setTitle("경로 등록")
+                    .setMessage("현재까지의 경로를 등록하시겠습니까?")
+                    .setPositiveButton("예", (dialog, which) -> {
+                        Toast.makeText(MainActivity.this, "경로가 등록되었습니다.", Toast.LENGTH_SHORT).show();
+
+
+                        isRecording = false;
+                        pathRecorder.clear();
+                        mapManager.clearPath();
+
+                        startRecordButton.setVisibility(View.VISIBLE);
+                        recordingControls.setVisibility(View.GONE);
+                    })
+                    .setNegativeButton("아니오", null)
+                    .show();
         });
     }
 
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
         this.naverMap = naverMap;
+        mapManager = new MapManager(naverMap);
         naverMap.setLocationSource(locationSource);
+        naverMap.getUiSettings().setLocationButtonEnabled(false);
 
-        // 위치 추적 모드 초기화
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
-            naverMap.setLocationTrackingMode(LocationTrackingMode.Face);
+            naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
         } else {
-            requestLocationPermission();
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    LOCATION_PERMISSION_REQUEST_CODE);
         }
 
-        // 위치 변경 감지
         naverMap.addOnLocationChangeListener(location -> {
             lastLocation = location;
+            if (isRecording) {
+                LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                pathRecorder.addPoint(latLng);
+                mapManager.updatePath(pathRecorder.getPath());
+            }
         });
-
-        // 기본 위치 버튼 비활성화
-        naverMap.getUiSettings().setLocationButtonEnabled(false);
-    }
-
-    // 위치 권한 요청 메서드
-    private void requestLocationPermission() {
-        ActivityCompat.requestPermissions(this,
-                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                LOCATION_PERMISSION_REQUEST_CODE);
     }
 
     // 권한 요청 결과 처리
@@ -102,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (locationSource.onRequestPermissionsResult(requestCode, permissions, grantResults)) {
             if (naverMap != null) {
                 if (locationSource.isActivated()) {
-                    naverMap.setLocationTrackingMode(LocationTrackingMode.Face);
+                    naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
                 } else {
                     naverMap.setLocationTrackingMode(LocationTrackingMode.None);
                 }
