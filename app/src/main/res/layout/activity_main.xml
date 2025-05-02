@@ -89,14 +89,13 @@
         app:itemTextColor="@color/brown_tint_selector"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"/>-->
-        app:layout_constraintStart_toStartOf="parent"/>
 
     <!-- 길 등록 시작 버튼 -->
     <Button
         android:id="@+id/start_record_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="길 등록"
+        android:text="경로 저장"
         android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -119,7 +118,7 @@
             android:id="@+id/finish_record_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="등록 끝내기" />
+            android:text="저장 끝내기" />
 
         <!-- 경로 등록하기 -->
         <Button

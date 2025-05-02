@@ -18,6 +18,7 @@ import androidx.core.app.ActivityCompat;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.CameraUpdate;
 import com.naver.maps.map.LocationTrackingMode;
@@ -63,11 +64,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private void setupUI() {
         ImageButton locationButton = findViewById(R.id.my_location_button);
-        startRecordButton = findViewById(R.id.start_record_button);
-        finishRecordButton = findViewById(R.id.finish_record_button);
-        submitPathButton = findViewById(R.id.submit_path_button);
-        recordingControls = findViewById(R.id.recording_controls);
+        startRecordButton = findViewById(R.id.start_record_button); //경로 저장(등록 프로세스 시작버튼)
+        finishRecordButton = findViewById(R.id.finish_record_button); //저장 끝내기
+        submitPathButton = findViewById(R.id.submit_path_button); //경로 등록
+        recordingControls = findViewById(R.id.recording_controls); //저장끝내기, 경로 등록하기 묶음
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
+        //현위치 눌렀을때
         locationButton.setOnClickListener(v -> {
             if (naverMap == null || lastLocation == null) return;
 
@@ -83,28 +86,59 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
+
+        // BottomNavigationView 메뉴 클릭 리스너 설정
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+
+            if (itemId == R.id.nav_byway) {
+                if (!isRecording) {
+                    isRecording = true;
+                    startRecordButton.setVisibility(View.GONE);
+                    recordingControls.setVisibility(View.VISIBLE);
+                    Toast.makeText(this, "길 등록 시작!", Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            }
+
+            // 다른 탭 처리 예시 (선택적)
+            else if (itemId == R.id.nav_nearby) {
+                Toast.makeText(this, "주변 버튼 눌림", Toast.LENGTH_SHORT).show();
+                return true;
+            } else if (itemId == R.id.nav_my) {
+                Toast.makeText(this, "MY 버튼 눌림", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+
+            return false;
+        });
+
+
+        //경로 저장 버튼 눌렀을때
         startRecordButton.setOnClickListener(v -> {
             if (isRecording) return;
             isRecording = true;
-//            pathRecorder.clear();
 
-
+            //저장끝내기, 경로 등록 묶음 보이게
             startRecordButton.setVisibility(View.GONE);
             recordingControls.setVisibility(View.VISIBLE);
             Toast.makeText(this, "길 등록 시작!", Toast.LENGTH_SHORT).show();
         });
 
+        //등록 끝내기 버튼 눌렀을때
         finishRecordButton.setOnClickListener(v -> {
             if (!isRecording) return;
             isRecording = false;
             pathRecorder.clear();
             mapManager.clearPath();
 
+            //처음 화면으로
             startRecordButton.setVisibility(View.VISIBLE);
             recordingControls.setVisibility(View.GONE);
             Toast.makeText(this, "길 등록이 취소되었습니다.", Toast.LENGTH_SHORT).show();
         });
 
+        //경로 등록 눌렀을때
         submitPathButton.setOnClickListener(v -> {
             new AlertDialog.Builder(MainActivity.this)
                     .setTitle("경로 등록")
@@ -117,6 +151,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         pathRecorder.clear();
                         mapManager.clearPath();
 
+                        //맨 처음 화면으로
                         startRecordButton.setVisibility(View.VISIBLE);
                         recordingControls.setVisibility(View.GONE);
                     })
