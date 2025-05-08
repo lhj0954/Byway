@@ -1,1 +1,5 @@
-샛길 피그마 주소 (https://www.figma.com/design/rpt3pc1lK1napvzeUb1X4n/%EC%83%9B%EA%B8%B8?node-id=0-1)
+# 프론트엔드
+
+main color: #A47764
+<br>
+<img src="https://github.com/user-attachments/assets/da1e178b-d01f-4043-8a7f-55de7ba891be" width="20%" alt="이미지">
