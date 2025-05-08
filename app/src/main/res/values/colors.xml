@@ -2,4 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="kakao_yellow">#FEE500</color>
+    <color name="google_white">#FFFFFF</color>
+    <color name="text_brown">#B68D6D</color>
 </resources>
