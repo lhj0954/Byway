@@ -38,6 +38,12 @@
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="8zslpahklt" />
 
+
+        <!-- 네이버 경로 추천 API인데 등록이 겹침  -->
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID_PATH"
+            android:value="b8amspex8g" />
+
         <activity
             android:name=".SplashActivity"
             android:exported="true">
@@ -49,5 +55,6 @@
 
         <!-- ✅ MainActivity는 일반 화면으로 이동 -->
         <activity android:name=".MainActivity" android:exported="true" />
+
     </application>
 </manifest>

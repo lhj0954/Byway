@@ -39,9 +39,16 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation("com.naver.maps:map-sdk:3.21.0") // ✅ 네이버 지도 SDK
     implementation("com.google.android.gms:play-services-location:21.0.1")
+
+    //네이버 경로 추천
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
     implementation(libs.firebase.auth)
     implementation(libs.firebase.database) //현재 위치
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+
 }

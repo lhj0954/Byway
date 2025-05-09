@@ -2,13 +2,25 @@ package com.example.byway;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+//경로추천 import
+import android.widget.EditText;
+import android.widget.TextView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -25,13 +37,26 @@ import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.MapView;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.OnMapReadyCallback;
+import com.naver.maps.map.overlay.PathOverlay;
 import com.naver.maps.map.overlay.PolylineOverlay;
 import com.naver.maps.map.util.FusedLocationSource;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
+    //공통 인자 (경로 탐색, 지도 표기)
     private MapView mapView;
     private NaverMap naverMap;
+
+    //경로 탐색 인자
+    private static final String CLIENT_ID = "b8amspex8g";
+    private static final String CLIENT_SECRET = "n3S8Tc6Tt88WDBC1qyJ8UBytr8Smq9cXmwSkvsWi";
+
+
+    private EditText startEditText;
+    private EditText goalEditText;
+    private TextView infoTextView;
+    private NaverDirectionApi directionApi;
+
     private FusedLocationSource locationSource;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
     private Location lastLocation;
@@ -54,13 +79,74 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
 
+        startEditText = findViewById(R.id.startEditText);
+        goalEditText = findViewById(R.id.endEditText);
+
         // 위치 소스 초기화
         locationSource = new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
 
         pathRecorder=new PathRecorder();
 
+        //naver map api - direction
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://naveropenapi.apigw.ntruss.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        directionApi = retrofit.create(NaverDirectionApi.class);
+
+        Button searchButton = findViewById(R.id.searchButton);
+        searchButton.setOnClickListener(v -> {
+            String start = startEditText.getText().toString();
+            String goal = goalEditText.getText().toString();
+            Log.d("start" , start);
+            Log.d("goal" , goal);
+            requestWalkRoute(start, goal);
+        });
+
         setupUI();
     }
+
+    private void requestWalkRoute(String start, String goal) {
+        WalkRouteRequest request = new WalkRouteRequest(start, goal, "walk");
+
+        Call<WalkRouteResponse> call = directionApi.getWalkRoute(request, CLIENT_ID, CLIENT_SECRET);
+        call.enqueue(new Callback<WalkRouteResponse>() {
+            @Override
+            public void onResponse(Call<WalkRouteResponse> call, Response<WalkRouteResponse> response) {
+                Log.d("onResponse", "onResponse 호출됨");
+                if (response.isSuccessful() && response.body() != null) {
+                    RoutePath path = response.body().getRoute().getTraoptimal().get(0);
+                    List<List<Double>> coords = path.getPath();
+                    List<LatLng> latLngList = new ArrayList<>();
+
+                    for (List<Double> coord : coords) {
+                        latLngList.add(new LatLng(coord.get(1), coord.get(0)));
+                    }
+
+                    PathOverlay overlay = new PathOverlay();
+                    overlay.setCoords(latLngList);
+                    overlay.setColor(Color.BLUE);
+                    overlay.setWidth(10);
+                    overlay.setMap(naverMap);
+
+                    int distance = path.getSummary().getDistance();
+                    int duration = path.getSummary().getDuration();
+
+                    Log.d("distance, duration", distance + " / " + duration);
+
+                    infoTextView.setText("거리: " + distance + "m, 시간: " + duration / 60000 + "분");
+                } else {
+                    Toast.makeText(MainActivity.this, "응답 실패", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<WalkRouteResponse> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "API 호출 실패", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 
     private void setupUI() {
         ImageButton locationButton = findViewById(R.id.my_location_button);
