@@ -8,7 +8,8 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!-- 지도 -->
+
+
     <com.naver.maps.map.MapView
         android:id="@+id/map_view"
         android:layout_width="match_parent"
@@ -72,10 +73,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:menu="@menu/bottom_nav_menu"
-            app:itemIconTint="@color/brown_tint_selector"
+            app:itemIconTint="@null"
             app:itemTextColor="@color/brown_tint_selector"
             app:labelVisibilityMode="labeled"
-            android:background="@android:color/transparent" />
+            android:background="@android:color/transparent"
+            />
     </androidx.cardview.widget.CardView>
     <!--하단 바
         <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -88,4 +90,43 @@
         app:itemTextColor="@color/brown_tint_selector"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"/>-->
+
+    <!-- 길 등록 시작 버튼 -->
+    <Button
+        android:id="@+id/start_record_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="경로 저장"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- 길 등록 중: 종료 + 등록 그룹 -->
+    <LinearLayout
+        android:id="@+id/recording_controls"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/finish_record_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="저장 끝내기" />
+
+        <!-- 경로 등록하기 -->
+        <Button
+            android:id="@+id/submit_path_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="경로 등록하기" />
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
