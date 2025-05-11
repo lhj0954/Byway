@@ -1,15 +1,12 @@
-/*
- * Java 버전: NearbyBottomSheetFragment.java + 어댑터 + 모델 클래스
- */
 package com.example.byway;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,8 +23,7 @@ public class NearbyBottomSheetFragment extends BottomSheetDialogFragment {
 
 	@Nullable
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-			@Nullable Bundle savedInstanceState) {
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_nearby_bottom_sheet, container, false);
 
 		RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
@@ -36,10 +32,9 @@ public class NearbyBottomSheetFragment extends BottomSheetDialogFragment {
 
 		return view;
 	}
-	
+
 	private List<CategoryItem> getMockData() {
 		List<CategoryItem> items = new ArrayList<>();
-        // 리스트 예시: 실제로는 백엔드 데이터 받음
 		items.add(new CategoryItem("우리 지역 베스트 샛길", "156", R.drawable.ic_launcher_foreground, R.color.brown));
 		items.add(new CategoryItem("데이트 코스", "156", R.drawable.ic_launcher_foreground, R.color.heart));
 		items.add(new CategoryItem("산책 코스", "156", R.drawable.ic_launcher_foreground, R.color.green));
@@ -49,7 +44,6 @@ public class NearbyBottomSheetFragment extends BottomSheetDialogFragment {
 		return items;
 	}
 
-	// 내부 클래스: 모델 클래스
 	public static class CategoryItem {
 		public final String title;
 		public final String count;
@@ -64,7 +58,6 @@ public class NearbyBottomSheetFragment extends BottomSheetDialogFragment {
 		}
 	}
 
-	// 내부 클래스: RecyclerView Adapter
 	public class NearbyAdapter extends RecyclerView.Adapter<NearbyAdapter.ViewHolder> {
 		private final List<CategoryItem> items;
 
@@ -86,6 +79,13 @@ public class NearbyBottomSheetFragment extends BottomSheetDialogFragment {
 			holder.icon.setColorFilter(holder.itemView.getContext().getColor(item.colorRes));
 			holder.title.setText(item.title);
 			holder.count.setText(item.count);
+
+			holder.itemView.setOnClickListener(v -> {
+				if ("사진 명소 추천 스팟".equals(item.title)) {
+					Intent intent = new Intent(getContext(), PhotoSpotActivity.class);
+					startActivity(intent);
+				}
+			});
 		}
 
 		@Override
