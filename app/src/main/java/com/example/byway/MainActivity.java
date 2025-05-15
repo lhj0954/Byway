@@ -30,6 +30,8 @@ import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.util.FusedLocationSource;
 
+import com.example.byway.utils.PreferenceManager;
+
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private MapView mapView;
@@ -133,6 +135,21 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 Toast.makeText(this, "MY 버튼 눌림", Toast.LENGTH_SHORT).show();
                 return false;
             }
+            /*
+            // 로그인 체크 후 My 클릭 시
+            else if (itemId == R.id.nav_my) {
+                Intent intent;
+                if (PreferenceManager.isLoggedIn(MainActivity.this)) {
+                    intent = new Intent(MainActivity.this, MyPageActivity.class);
+                } else {
+                    intent = new Intent(MainActivity.this, LoginActivity.class);
+                }
+                startActivity(intent);
+                return true;
+            }
+             */
+
+
             return false;
         });
 
