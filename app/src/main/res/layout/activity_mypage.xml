@@ -28,7 +28,7 @@
                 android:layout_width="120dp"
                 android:layout_height="100dp"
                 android:text="나만의 샛길"
-                android:drawableTop="@drawable/ic_route"
+                android:drawableTop="@drawable/ic_launcher_foreground"
                 android:background="@drawable/btn_background" />
 
             <Space android:layout_width="16dp" android:layout_height="match_parent"/>
@@ -37,7 +37,7 @@
                 android:layout_width="120dp"
                 android:layout_height="100dp"
                 android:text="설정"
-                android:drawableTop="@drawable/ic_settings"
+                android:drawableTop="@drawable/ic_launcher_foreground"
                 android:background="@drawable/btn_background" />
         </LinearLayout>
 
@@ -53,7 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="180dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/map_sample"
+            android:src="@drawable/ic_launcher_foreground"
             android:layout_marginBottom="16dp"/>
 
         <!-- 히스토리 목록 -->
