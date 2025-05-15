@@ -43,6 +43,8 @@ dependencies {
     //네이버 경로 추천
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+    implementation ("org.json:json:20240303")
 
     implementation(libs.firebase.auth)
     implementation(libs.firebase.database) //현재 위치

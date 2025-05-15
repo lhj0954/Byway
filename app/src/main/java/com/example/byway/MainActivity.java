@@ -15,11 +15,16 @@ import android.widget.Toast;
 //경로추천 import
 import android.widget.EditText;
 import android.widget.TextView;
+
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import okhttp3.logging.HttpLoggingInterceptor;
+
+import java.io.IOException;
 
 
 import androidx.annotation.NonNull;
@@ -32,14 +37,15 @@ import java.util.List;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.naver.maps.geometry.LatLng;
+import com.naver.maps.geometry.LatLngBounds;
 import com.naver.maps.map.CameraUpdate;
 import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.MapView;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.overlay.PathOverlay;
-import com.naver.maps.map.overlay.PolylineOverlay;
 import com.naver.maps.map.util.FusedLocationSource;
+
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -48,14 +54,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private NaverMap naverMap;
 
     //경로 탐색 인자
-    private static final String CLIENT_ID = "b8amspex8g";
-    private static final String CLIENT_SECRET = "n3S8Tc6Tt88WDBC1qyJ8UBytr8Smq9cXmwSkvsWi";
+    private static final String CLIENT_ID = "b8amspex8g".trim();
+    private static final String CLIENT_SECRET = "n3S8Tc6Tt88WDBC1qyJ8UBytr8Smq9cXmwSkvsWi".trim();
 
 
     private EditText startEditText;
     private EditText goalEditText;
     private TextView infoTextView;
-    private NaverDirectionApi directionApi;
 
     private FusedLocationSource locationSource;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
@@ -87,65 +92,129 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         pathRecorder=new PathRecorder();
 
-        //naver map api - direction
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://naveropenapi.apigw.ntruss.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        directionApi = retrofit.create(NaverDirectionApi.class);
+        //Tmap - 도보 경로 찾기 api
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY); // 전체 로그 (요청 URL, 헤더, 바디 등)
 
         Button searchButton = findViewById(R.id.searchButton);
         searchButton.setOnClickListener(v -> {
-            String start = startEditText.getText().toString();
+
+            if (lastLocation == null) {
+                Toast.makeText(this, "현재 위치를 가져올 수 없습니다.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             String goal = goalEditText.getText().toString();
-            Log.d("start" , start);
-            Log.d("goal" , goal);
-            requestWalkRoute(start, goal);
+            String start = startEditText.getText().toString();
+
+            // 여기선 테스트용으로 위도,경도 직접 입력 받는다고 가정
+            try {
+                String[] goals = goal.split(",");
+                double endLat = Double.parseDouble(goals[0].trim());
+                double endLng = Double.parseDouble(goals[1].trim());
+
+                String[] starts = start.split(",");
+                double startLat = Double.parseDouble(starts[0].trim());
+                double startLng = Double.parseDouble(starts[1].trim());
+
+                requestTmapWalkRoute(startLat, startLng, endLat, endLng);
+            } catch (Exception e) {
+                Toast.makeText(this, "도착지를 '위도,경도' 형식으로 입력하세요.", Toast.LENGTH_SHORT).show();
+            }
         });
 
         setupUI();
     }
 
-    private void requestWalkRoute(String start, String goal) {
-        WalkRouteRequest request = new WalkRouteRequest(start, goal, "walk");
+    private void requestTmapWalkRoute(double startX, double startY, double endX, double endY) {
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY); // 전체 로그 출력
 
-        Call<WalkRouteResponse> call = directionApi.getWalkRoute(request, CLIENT_ID, CLIENT_SECRET);
-        call.enqueue(new Callback<WalkRouteResponse>() {
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(loggingInterceptor)
+                .build();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://apis.openapi.sk.com/tmap/")
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        TmapApiService apiService = retrofit.create(TmapApiService.class);
+
+        TmapWalkRequest request = new TmapWalkRequest(
+                String.valueOf(startX),
+                String.valueOf(startY),
+                String.valueOf(endX),
+                String.valueOf(endY)
+        );
+
+        Call<TmapResponse> call = apiService.getWalkingRoute(
+                "iwCg3TsBeQ35D1YwoVsYm9yaP1NT6UtW3vXIRpEK", // <- 반드시 본인 AppKey로 변경
+                request
+        );
+
+        call.enqueue(new Callback<TmapResponse>() {
             @Override
-            public void onResponse(Call<WalkRouteResponse> call, Response<WalkRouteResponse> response) {
-                Log.d("onResponse", "onResponse 호출됨");
+            public void onResponse(Call<TmapResponse> call, Response<TmapResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    RoutePath path = response.body().getRoute().getTraoptimal().get(0);
-                    List<List<Double>> coords = path.getPath();
                     List<LatLng> latLngList = new ArrayList<>();
 
-                    for (List<Double> coord : coords) {
-                        latLngList.add(new LatLng(coord.get(1), coord.get(0)));
+                    for (TmapResponse.Feature feature : response.body().features) {
+                        if (feature.geometry != null && feature.geometry.type.equals("LineString")) {
+                            Object coordinatesObj = feature.geometry.coordinates;
+
+                            if (coordinatesObj instanceof List) {
+                                List<?> coordList = (List<?>) coordinatesObj;
+
+                                for (Object coord : coordList) {
+                                    if (coord instanceof List) {
+                                        List<?> point = (List<?>) coord;
+
+                                        if (point.size() >= 2 && point.get(0) instanceof Number && point.get(1) instanceof Number) {
+                                            double lng = ((Number) point.get(0)).doubleValue();
+                                            double lat = ((Number) point.get(1)).doubleValue();
+
+                                            LatLng latLng = new LatLng(lat, lng);
+                                            latLngList.add(latLng);
+                                            //Log.d("route", "lat: " + lat + ", lng: " + lng);
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
 
-                    PathOverlay overlay = new PathOverlay();
-                    overlay.setCoords(latLngList);
-                    overlay.setColor(Color.BLUE);
-                    overlay.setWidth(10);
-                    overlay.setMap(naverMap);
+                    if (latLngList.size() >= 2) {
+                        Log.d("draw", "draw");
+                        PathOverlay pathOverlay = new PathOverlay();
+                        pathOverlay.setCoords(latLngList);
+                        pathOverlay.setColor(Color.BLUE);
+                        pathOverlay.setWidth(12);
+                        pathOverlay.setMap(naverMap);
 
-                    int distance = path.getSummary().getDistance();
-                    int duration = path.getSummary().getDuration();
-
-                    Log.d("distance, duration", distance + " / " + duration);
-
-                    infoTextView.setText("거리: " + distance + "m, 시간: " + duration / 60000 + "분");
+                        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                        for (LatLng latLng : latLngList) {
+                            builder.include(latLng);
+                        }
+                        LatLngBounds bounds = builder.build();
+                        naverMap.moveCamera(CameraUpdate.fitBounds(bounds, 100));
+                    } else {
+                        Toast.makeText(MainActivity.this, "경로가 충분하지 않습니다.", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
-                    Toast.makeText(MainActivity.this, "응답 실패", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "TMAP 응답 실패", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<WalkRouteResponse> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "API 호출 실패", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<TmapResponse> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "TMAP 요청 실패: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+
     }
+
 
 
     private void setupUI() {
