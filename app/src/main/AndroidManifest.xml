@@ -49,5 +49,6 @@
 
         <!-- ✅ MainActivity는 일반 화면으로 이동 -->
         <activity android:name=".MainActivity" android:exported="true" />
+        <activity android:name=".PhotoSpotActivity" />
     </application>
 </manifest>

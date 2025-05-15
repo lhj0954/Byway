@@ -32,6 +32,7 @@ android {
 }
 
 dependencies {
+    // AndroidX & Test
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -41,4 +42,14 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    // --- OAuth 로그인용 의존성 추가 ---
+    // Google Play services
+    implementation 'com.google.gms:google-services:4.3.15'
+    implementation 'com.google.firebase:firebase-auth:22.0.0'
+    implementation 'com.google.firebase:firebase-bom:32.0.0'
+    implementation 'com.google.android.gms:play-services-auth:20.5.0'
+
+    // Kakao SDK (User API)
+    implementation "com.kakao.sdk:v2-user:2.15.0"
 }
