@@ -1,6 +1,8 @@
 package com.example.byway.utils;
+
 import android.content.Context;
 import android.content.SharedPreferences;
+
 public class PreferenceManager {
 
     private static final String PREF_NAME = "UserPrefs";

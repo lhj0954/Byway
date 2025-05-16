@@ -23,7 +23,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton; // 👈 추가
+import com.google.android.material.floatingactionbutton.FloatingActionButton; 
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.CameraUpdate;
 import com.naver.maps.map.LocationTrackingMode;
@@ -135,6 +135,19 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 Toast.makeText(this, "MY 버튼 눌림", Toast.LENGTH_SHORT).show();
                 return false;
             }
+			/*
+            // 로그인 체크 후 My 클릭 시
+            else if (itemId == R.id.nav_my) {
+                Intent intent;
+                if (PreferenceManager.isLoggedIn(MainActivity.this)) {
+                    intent = new Intent(MainActivity.this, MyPageActivity.class);
+                } else {
+                    intent = new Intent(MainActivity.this, LoginActivity.class);
+                }
+                startActivity(intent);
+                return true;
+            }
+             */
             return false;
         });
 
