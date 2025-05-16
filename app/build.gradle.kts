@@ -4,12 +4,12 @@ plugins {
 
 android {
     namespace = "com.example.byway"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.byway"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -43,12 +43,12 @@ dependencies {
 
     // --- OAuth 로그인용 의존성 추가 ---
     // Google Play services
-    implementation 'com.google.gms:google-services:4.3.15'
-    implementation 'com.google.firebase:firebase-auth:22.0.0'
-    implementation 'com.google.firebase:firebase-bom:32.0.0'
-    implementation 'com.google.android.gms:play-services-auth:20.5.0'
-
+    implementation("com.google.gms:google-services:4.3.15")
+    implementation("com.google.firebase:firebase-auth:22.0.0")
+    implementation("com.google.firebase:firebase-bom:32.0.0")
+    implementation("com.google.android.gms:play-services-location:21.0.1")
+    implementation("com.naver.maps:map-sdk:3.21.0")
     // Kakao SDK (User API)
-    implementation "com.kakao.sdk:v2-user:2.15.0"
+    implementation("com.kakao.sdk:v2-user:2.15.0")
 }
 
