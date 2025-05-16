@@ -1,16 +1,28 @@
 package com.example.byway;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.CameraUpdate;
 import com.naver.maps.map.LocationTrackingMode;
@@ -18,6 +30,8 @@ import com.naver.maps.map.MapView;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.util.FusedLocationSource;
+import com.naver.maps.map.overlay.Marker;
+
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -26,6 +40,120 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private FusedLocationSource locationSource;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
     private Location lastLocation;
+    private boolean isRecording = false; //길 등록중인지
+    private boolean isAddingSpot = false; //스팟 등록중인지
+    private PathRecorder pathRecorder;
+    private MapManager mapManager;
+    private SpotManager spotManager;
+    private Button startRecordButton, finishRecordButton, submitPathButton, addSpotButton, cancelSpotButton, selectSpotButton;
+    private LinearLayout recordingControls;
+    private LatLng selectedSpot; //스팟위치
+    private Marker spotMarker; //스팟 마커
+    private ActivityResultLauncher<Intent> spotActivityLauncher;
+
+    public Location getLastLocation() {
+        return lastLocation;
+    }
+
+    public void setLastLocation(Location lastLocation) {
+        this.lastLocation = lastLocation;
+    }
+
+    public boolean isRecording() {
+        return isRecording;
+    }
+
+    public void setRecording(boolean recording) {
+        isRecording = recording;
+    }
+
+    public boolean isAddingSpot() {
+        return isAddingSpot;
+    }
+
+    public void setAddingSpot(boolean addingSpot) {
+        isAddingSpot = addingSpot;
+    }
+
+    public PathRecorder getPathRecorder() {
+        return pathRecorder;
+    }
+
+    public void setPathRecorder(PathRecorder pathRecorder) {
+        this.pathRecorder = pathRecorder;
+    }
+
+    public Button getStartRecordButton() {
+        return startRecordButton;
+    }
+
+    public void setStartRecordButton(Button startRecordButton) {
+        this.startRecordButton = startRecordButton;
+    }
+
+    public Button getFinishRecordButton() {
+        return finishRecordButton;
+    }
+
+    public void setFinishRecordButton(Button finishRecordButton) {
+        this.finishRecordButton = finishRecordButton;
+    }
+
+    public Button getSubmitPathButton() {
+        return submitPathButton;
+    }
+
+    public void setSubmitPathButton(Button submitPathButton) {
+        this.submitPathButton = submitPathButton;
+    }
+
+    public Button getAddSpotButton() {
+        return addSpotButton;
+    }
+
+    public void setAddSpotButton(Button addSpotButton) {
+        this.addSpotButton = addSpotButton;
+    }
+
+    public Button getCancelSpotButton() {
+        return cancelSpotButton;
+    }
+
+    public void setCancelSpotButton(Button cancelSpotButton) {
+        this.cancelSpotButton = cancelSpotButton;
+    }
+
+    public Button getSelectSpotButton() {
+        return selectSpotButton;
+    }
+
+    public void setSelectSpotButton(Button selectSpotButton) {
+        this.selectSpotButton = selectSpotButton;
+    }
+
+    public LinearLayout getRecordingControls() {
+        return recordingControls;
+    }
+
+    public void setRecordingControls(LinearLayout recordingControls) {
+        this.recordingControls = recordingControls;
+    }
+
+    public LatLng getSelectedSpot() {
+        return selectedSpot;
+    }
+
+    public void setSelectedSpot(LatLng selectedSpot) {
+        this.selectedSpot = selectedSpot;
+    }
+
+    public ActivityResultLauncher<Intent> getSpotActivityLauncher() {
+        return spotActivityLauncher;
+    }
+
+    public void setSpotActivityLauncher(ActivityResultLauncher<Intent> spotActivityLauncher) {
+        this.spotActivityLauncher = spotActivityLauncher;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,66 +162,73 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         mapView = findViewById(R.id.map_view);
         mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(this);
+        mapView.getMapAsync(this); //onMapReady 호출
 
         // 위치 소스 초기화
         locationSource = new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
 
-        // 위치 버튼 클릭 리스너 등록
-        ImageButton locationButton = findViewById(R.id.my_location_button);
-        locationButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (naverMap == null || lastLocation == null) return;
+        pathRecorder=new PathRecorder();
 
-                LatLng currentLatLng = new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude());
-                LatLng center = naverMap.getCameraPosition().target;
-
-                double distance = currentLatLng.distanceTo(center);
-
-                if (distance > 100) {
-                    // 지도 중심이 많이 벗어나 있으면 이동만 함
-                    naverMap.moveCamera(CameraUpdate.scrollTo(currentLatLng));
-                } else {
-                    // 가까우면 추적 모드 전환 (Follow <-> Face)
-                    LocationTrackingMode currentMode = naverMap.getLocationTrackingMode();
-                    if (currentMode == LocationTrackingMode.Face) {
-                        naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
-                    } else {
-                        naverMap.setLocationTrackingMode(LocationTrackingMode.Face);
+        //스팟등록모드
+        spotActivityLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK) {
+                        Intent data = result.getData();
+                        if (data != null && data.getBooleanExtra("restoreSpotMode", false)) {
+                            isAddingSpot = true;
+                            cancelSpotButton.setVisibility(View.VISIBLE);
+                            selectSpotButton.setVisibility(View.VISIBLE);
+                            addSpotButton.setVisibility(View.GONE);
+                            Toast.makeText(this, "스팟 등록 모드로 돌아왔습니다.", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
-            }
-        });
+        );
+
     }
+
 
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
         this.naverMap = naverMap;
-        naverMap.setLocationSource(locationSource);
+        mapManager = new MapManager(naverMap);
+        spotManager = new SpotManager();
 
-        // 위치 추적 모드 초기화
+        naverMap.setLocationSource(locationSource);
+        naverMap.getUiSettings().setLocationButtonEnabled(false);
+
+        UIController uiController = new UIController(this, naverMap, mapManager, spotManager);
+        uiController.setupUI();
+
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
-            naverMap.setLocationTrackingMode(LocationTrackingMode.Face);
+            naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
         } else {
-            requestLocationPermission();
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    LOCATION_PERMISSION_REQUEST_CODE);
         }
 
-        // 위치 변경 감지
         naverMap.addOnLocationChangeListener(location -> {
             lastLocation = location;
+            if (isRecording) {
+                LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                pathRecorder.addPoint(latLng);
+                mapManager.updatePath(pathRecorder.getPath());
+            }
         });
 
-        // 기본 위치 버튼 비활성화
-        naverMap.getUiSettings().setLocationButtonEnabled(false);
-    }
+        // 스팟 등록
+        naverMap.setOnMapClickListener((point, latLng) -> {
+            if (!isAddingSpot) return;
 
-    // 위치 권한 요청 메서드
-    private void requestLocationPermission() {
-        ActivityCompat.requestPermissions(this,
-                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                LOCATION_PERMISSION_REQUEST_CODE);
+            selectedSpot = latLng;
+
+            // 기존 마커가 있다면 제거하고 추가
+            spotManager.addSpotMarker(naverMap,latLng);
+
+        });
     }
 
     // 권한 요청 결과 처리
@@ -102,7 +237,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (locationSource.onRequestPermissionsResult(requestCode, permissions, grantResults)) {
             if (naverMap != null) {
                 if (locationSource.isActivated()) {
-                    naverMap.setLocationTrackingMode(LocationTrackingMode.Face);
+                    naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
                 } else {
                     naverMap.setLocationTrackingMode(LocationTrackingMode.None);
                 }

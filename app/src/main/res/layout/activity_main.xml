@@ -18,16 +18,144 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
-    <ImageButton
+    <!-- 검색 바 -->
+    <EditText
+        android:id="@+id/search_input"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="32dp"
+        android:hint="길찾기"
+        android:background="@drawable/search_background"
+        android:drawableStart="@drawable/ic_search"
+        android:drawablePadding="8dp"
+        android:padding="12dp"
+        android:textColor="#000000"
+        android:textColorHint="#999999"
+        android:elevation="8dp"
+        android:inputType="text"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <!-- 현재 위치 버튼 -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/my_location_button"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_margin="16dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:src="@android:drawable/ic_menu_mylocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="120dp"
         android:contentDescription="내 위치"
-        android:tint="@android:color/holo_red_dark"
+        android:src="@drawable/ic_current_location_24"
+        app:backgroundTint="#A47764"
+        app:tint="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- 하단 원형 네비게이션 바 -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="24dp"
+        app:cardCornerRadius="28dp"
+        app:cardElevation="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="true">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:menu="@menu/bottom_nav_menu"
+            app:itemIconTint="@color/brown_tint_selector"
+            app:itemTextColor="@color/brown_tint_selector"
+            app:labelVisibilityMode="labeled"
+            android:background="@android:color/transparent" />
+    </androidx.cardview.widget.CardView>
+    <!--하단 바
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@drawable/bottom_nav_background"
+        app:menu="@menu/bottom_nav_menu"
+        app:itemIconTint="@color/brown_tint_selector"
+        app:itemTextColor="@color/brown_tint_selector"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"/>-->
+
+    <!-- 스팟 등록 버튼 (화면 중앙) -->
+    <LinearLayout
+        android:id="@+id/spot_buttons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/add_spot_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="스팟 등록" />
+
+        <Button
+            android:id="@+id/cancel_spot_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="등록 취소"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/select_spot_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="선택 완료"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+
+
+    <!-- 길 등록 시작 버튼 -->
+    <Button
+        android:id="@+id/start_record_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="경로 저장"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- 길 등록 중: 종료 + 등록 그룹 -->
+    <LinearLayout
+        android:id="@+id/recording_controls"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/finish_record_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="저장 끝내기" />
+
+        <!-- 경로 등록하기 -->
+        <Button
+            android:id="@+id/submit_path_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="경로 등록하기" />
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
