@@ -27,7 +27,7 @@ pluginManagement {
     repositories {
         gradlePluginPortal()
         google()
-        mavenCentral() // ✅
+        mavenCentral()
     }
 }
 dependencyResolutionManagement {
@@ -35,7 +35,8 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven("https://repository.map.naver.com/archive/maven") // ✅ 여기에 있어야 함!
+        maven("https://repository.map.naver.com/archive/maven")
+        maven ("https://devrepo.kakao.com/nexus/content/groups/public/")
     }
 }
 rootProject.name = "Byway"
