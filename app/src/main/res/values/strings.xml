@@ -7,6 +7,7 @@
     <string name="btn_submit_path">경로 등록</string>
 
     <string-array name="category_array">
+        <item>카테고리</item>
         <item>샛길</item>
         <item>데이트 코스</item>
         <item>산책 코스</item>

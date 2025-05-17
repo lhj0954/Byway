@@ -8,16 +8,18 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!-- 검색 바 -->
     <com.naver.maps.map.MapView
         android:id="@+id/map_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
-    <!-- 검색 바 -->
     <EditText
         android:id="@+id/search_input"
         android:layout_width="0dp"
@@ -142,6 +144,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:backgroundTint="@color/brown"
+                android:textColor="@color/white"
                 android:text="@string/btn_finish_record" />
             <Space
                 android:layout_width="10dp"
@@ -151,10 +154,12 @@
                 android:id="@+id/category_spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
                 android:spinnerMode="dropdown"
+                android:gravity="center"
                 android:entries="@array/category_array"
-                android:background="@color/brown"/>
+                android:background="@drawable/spinner_custom"/>
 
             <Space
                 android:layout_width="10dp"
@@ -164,6 +169,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/btn_submit_path"
+                android:textColor="@color/white"
                 app:backgroundTint="@color/brown"/>
         </LinearLayout>
 
@@ -180,6 +186,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="등록 취소"
+                android:textColor="@color/white"
                 app:backgroundTint="@color/brown"/>
 
             <Space
@@ -191,6 +198,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="선택 완료"
+                android:textColor="@color/white"
                 app:backgroundTint="@color/brown"/>
         </LinearLayout>
     </LinearLayout>

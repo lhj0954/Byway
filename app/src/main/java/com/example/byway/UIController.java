@@ -1,12 +1,17 @@
 package com.example.byway;
 
+import static java.security.AccessController.getContext;
+
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Spinner;
 
@@ -19,6 +24,8 @@ import com.naver.maps.map.CameraUpdate;
 import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.NaverMap;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -80,8 +87,10 @@ public class UIController {
             pathControls.setVisibility(View.GONE);
             spotControls.setVisibility(View.GONE);
 
-
             bottomBarCard.setVisibility(View.VISIBLE);
+
+            categorySpinner.setSelection(0);
+
 
             Toast.makeText(activity, "길 등록이 취소되었습니다.", Toast.LENGTH_SHORT).show();
         });
@@ -96,7 +105,7 @@ public class UIController {
                                 ? categorySpinner.getSelectedItem().toString()
                                 : null;
 
-                        if (selectedCategory == null) {
+                        if (selectedCategory == null || selectedCategory.equals("카테고리")) {
                             Toast.makeText(activity, "카테고리를 선택해주세요.", Toast.LENGTH_SHORT).show();
                             return;
                         }
@@ -106,12 +115,6 @@ public class UIController {
                         if (pathPoints == null || !activity.getPathRecorder().hasEnoughPoints()) {
                             Toast.makeText(activity, "경로 데이터가 충분하지 않습니다. 최소 2개의 지점이 필요합니다.", Toast.LENGTH_SHORT).show();
                             return;
-                        }
-
-                        Log.d("MainActivity", "pathPoints size: " + pathPoints.size());
-                        for (int i = 0; i < pathPoints.size(); i++) {
-                            LatLng point = pathPoints.get(i);
-                            Log.d("MainActivity",  "" + point.latitude + ", " + point.longitude);
                         }
 
                         Toast.makeText(activity, "경로가 등록되었습니다.", Toast.LENGTH_SHORT).show();
