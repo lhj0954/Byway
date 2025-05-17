@@ -13,12 +13,17 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.location.Address;
+import android.location.Geocoder;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.List;
+import java.util.Locale;
 
 public class SpotActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
@@ -56,7 +61,21 @@ public class SpotActivity extends AppCompatActivity {
         // 좌표 전달받기
         double latitude = getIntent().getDoubleExtra("latitude", 0.0);
         double longitude = getIntent().getDoubleExtra("longitude", 0.0);
-        //spotLocationTextView.setText("위도: " + latitude + "\n경도: " + longitude);
+
+        // 주소 변환 및 표시
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
+            if (addresses != null && !addresses.isEmpty()) {
+                String address = addresses.get(0).getAddressLine(0);
+                spotLocationTextView.setText("위치: " + address);
+            } else {
+                spotLocationTextView.setText("주소를 찾을 수 없습니다");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            spotLocationTextView.setText("주소 변환 실패");
+        }
 
         // 드롭다운 설정
         String[] keywords = {"노점상", "위험구역"};

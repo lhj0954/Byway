@@ -38,7 +38,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="스팟 유형 선택"
+                android:text="카테고리"
                 android:textStyle="bold"
                 android:layout_marginBottom="4dp" />
 
@@ -48,18 +48,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="설명"
-                android:textStyle="bold"
-                android:layout_marginBottom="4dp" />
 
             <EditText
                 android:id="@+id/descriptionEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="간단한 설명을 입력해주세요"
+                android:hint="스팟에 대해 간단하게 설명해주세요"
                 android:minLines="3"
                 android:gravity="top"
                 android:background="@android:drawable/edit_text"

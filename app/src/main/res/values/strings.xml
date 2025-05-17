@@ -5,4 +5,11 @@
     <string name="btn_start_record">경로 저장</string>
     <string name="btn_finish_record">기록 중지</string>
     <string name="btn_submit_path">경로 등록</string>
+
+    <string-array name="category_array">
+        <item>샛길</item>
+        <item>데이트 코스</item>
+        <item>산책 코스</item>
+        <item>쇼핑 코스</item>
+    </string-array>
 </resources>

@@ -4,6 +4,9 @@ import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.overlay.Marker;
 
+import java.util.function.Supplier;
+
+//마커 관리만
 public class SpotManager {
     private Marker spotMarker;
     private LatLng selectedSpot;
