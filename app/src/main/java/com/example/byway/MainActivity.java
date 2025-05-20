@@ -107,8 +107,18 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             String goal = goalEditText.getText().toString();
             String start = startEditText.getText().toString();
 
+            //Geocode 구현 : 주소로 검색하기
+
+            Geocoder geocoder = new Geocoder(this);
+
+            geocoder.geocodeAddress(start, (startLat, startLng) -> {
+                geocoder.geocodeAddress(goal, (endLat, endLng) -> {
+                    requestTmapWalkRoute(startLng, startLat, endLng, endLat);
+                });
+            });
+
             // 여기선 테스트용으로 위도,경도 직접 입력 받는다고 가정
-            try {
+            /*try {
                 String[] goals = goal.split(",");
                 double endLat = Double.parseDouble(goals[0].trim());
                 double endLng = Double.parseDouble(goals[1].trim());
@@ -120,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 requestTmapWalkRoute(startLat, startLng, endLat, endLng);
             } catch (Exception e) {
                 Toast.makeText(this, "도착지를 '위도,경도' 형식으로 입력하세요.", Toast.LENGTH_SHORT).show();
-            }
+            }*/
         });
 
         setupUI();
@@ -150,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         );
 
         Call<TmapResponse> call = apiService.getWalkingRoute(
-                "iwCg3TsBeQ35D1YwoVsYm9yaP1NT6UtW3vXIRpEK", // <- 반드시 본인 AppKey로 변경
+                "iwCg3TsBeQ35D1YwoVsYm9yaP1NT6UtW3vXIRpEK", // <- 반드시 본인 AppKey
                 request
         );
 
