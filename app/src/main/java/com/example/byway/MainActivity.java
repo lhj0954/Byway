@@ -75,6 +75,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private Button submitPathButton;
     private LinearLayout recordingControls;
 
+    //경로 탐색 길 표기
+    private PathOverlay currentPathOverlay; // <-- 새로 추가
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -196,12 +200,24 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     }
 
                     if (latLngList.size() >= 2) {
-                        Log.d("draw", "draw");
-                        PathOverlay pathOverlay = new PathOverlay();
+
+                        //Log.d("draw", "draw");
+
+                        if (currentPathOverlay != null) {
+                            currentPathOverlay.setMap(null); // 기존 경로 제거
+                        }
+
+                        currentPathOverlay = new PathOverlay();
+                        currentPathOverlay.setCoords(latLngList);
+                        currentPathOverlay.setColor(Color.BLUE);
+                        currentPathOverlay.setWidth(12);
+                        currentPathOverlay.setMap(naverMap);
+
+                        /*PathOverlay pathOverlay = new PathOverlay();
                         pathOverlay.setCoords(latLngList);
                         pathOverlay.setColor(Color.BLUE);
                         pathOverlay.setWidth(12);
-                        pathOverlay.setMap(naverMap);
+                        pathOverlay.setMap(naverMap);*/
 
                         LatLngBounds.Builder builder = new LatLngBounds.Builder();
                         for (LatLng latLng : latLngList) {
