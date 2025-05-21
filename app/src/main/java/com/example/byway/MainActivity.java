@@ -1,6 +1,7 @@
 package com.example.byway;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -13,19 +14,20 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate; // ✅ 추가됨
 import androidx.core.app.ActivityCompat;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.CameraUpdate;
 import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.MapView;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.OnMapReadyCallback;
-import com.naver.maps.map.overlay.PolylineOverlay;
 import com.naver.maps.map.util.FusedLocationSource;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -35,7 +37,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private FusedLocationSource locationSource;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
     private Location lastLocation;
-    //길 등록중인지
     private boolean isRecording = false;
 
     private PathRecorder pathRecorder;
@@ -47,30 +48,50 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true); // ✅ 추가됨
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Button logoutBtn = findViewById(R.id.btn_logout);
+
+        logoutBtn.setOnClickListener(v -> {
+            FirebaseAuth.getInstance().signOut(); // Firebase 로그아웃
+            GoogleSignInClient googleSignInClient = GoogleSignIn.getClient(
+                    this, GoogleSignInOptions.DEFAULT_SIGN_IN
+            );
+            googleSignInClient.signOut().addOnCompleteListener(task -> {
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            });
+        });
 
         mapView = findViewById(R.id.map_view);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
 
-        // 위치 소스 초기화
         locationSource = new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
-
-        pathRecorder=new PathRecorder();
+        pathRecorder = new PathRecorder();
 
         setupUI();
     }
 
     private void setupUI() {
         ImageButton locationButton = findViewById(R.id.my_location_button);
-        startRecordButton = findViewById(R.id.start_record_button); //경로 저장(등록 프로세스 시작버튼)
-        finishRecordButton = findViewById(R.id.finish_record_button); //저장 끝내기
-        submitPathButton = findViewById(R.id.submit_path_button); //경로 등록
-        recordingControls = findViewById(R.id.recording_controls); //저장끝내기, 경로 등록하기 묶음
+        startRecordButton = findViewById(R.id.start_record_button);
+        finishRecordButton = findViewById(R.id.finish_record_button);
+        submitPathButton = findViewById(R.id.submit_path_button);
+        recordingControls = findViewById(R.id.recording_controls);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
-        //현위치 눌렀을때
+        // ✅ 탭 선택 초기화 코드 추가
+        bottomNavigationView.getMenu().setGroupCheckable(0, true, false);
+        for (int i = 0; i < bottomNavigationView.getMenu().size(); i++) {
+            bottomNavigationView.getMenu().getItem(i).setChecked(false);
+        }
+        bottomNavigationView.getMenu().setGroupCheckable(0, true, true);
+
         locationButton.setOnClickListener(v -> {
             if (naverMap == null || lastLocation == null) return;
 
@@ -86,8 +107,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
-
-        // BottomNavigationView 메뉴 클릭 리스너 설정
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
 
@@ -99,59 +118,51 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     Toast.makeText(this, "길 등록 시작!", Toast.LENGTH_SHORT).show();
                 }
                 return true;
-            }
-
-            // 다른 탭 처리 예시 (선택적)
-            else if (itemId == R.id.nav_nearby) {
-                Toast.makeText(this, "주변 버튼 눌림", Toast.LENGTH_SHORT).show();
+            } else if (itemId == R.id.nav_nearby) {
+                //Toast.makeText(this, "주변 버튼 눌림", Toast.LENGTH_SHORT).show();
+                NearbyBottomSheetFragment bottomSheet = new NearbyBottomSheetFragment();
+                bottomSheet.show(getSupportFragmentManager(), bottomSheet.getTag());
                 return true;
             } else if (itemId == R.id.nav_my) {
-                Toast.makeText(this, "MY 버튼 눌림", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "MY 버튼 눌림", Toast.LENGTH_SHORT).show();
+                String name = getIntent().getStringExtra("name");
+                Intent intent = new Intent(MainActivity.this, MypageActivity.class);
+                intent.putExtra("name", name);
+                startActivity(intent);
                 return true;
             }
 
             return false;
         });
 
-
-        //경로 저장 버튼 눌렀을때
         startRecordButton.setOnClickListener(v -> {
             if (isRecording) return;
             isRecording = true;
-
-            //저장끝내기, 경로 등록 묶음 보이게
             startRecordButton.setVisibility(View.GONE);
             recordingControls.setVisibility(View.VISIBLE);
             Toast.makeText(this, "길 등록 시작!", Toast.LENGTH_SHORT).show();
         });
 
-        //등록 끝내기 버튼 눌렀을때
         finishRecordButton.setOnClickListener(v -> {
             if (!isRecording) return;
             isRecording = false;
             pathRecorder.clear();
             mapManager.clearPath();
-
-            //처음 화면으로
             startRecordButton.setVisibility(View.VISIBLE);
             recordingControls.setVisibility(View.GONE);
             Toast.makeText(this, "길 등록이 취소되었습니다.", Toast.LENGTH_SHORT).show();
         });
 
-        //경로 등록 눌렀을때
         submitPathButton.setOnClickListener(v -> {
             new AlertDialog.Builder(MainActivity.this)
                     .setTitle("경로 등록")
                     .setMessage("현재까지의 경로를 등록하시겠습니까?")
                     .setPositiveButton("예", (dialog, which) -> {
+                        PathUploader.uploadPath(MainActivity.this, pathRecorder.getPath());
                         Toast.makeText(MainActivity.this, "경로가 등록되었습니다.", Toast.LENGTH_SHORT).show();
-
-
                         isRecording = false;
                         pathRecorder.clear();
                         mapManager.clearPath();
-
-                        //맨 처음 화면으로
                         startRecordButton.setVisibility(View.VISIBLE);
                         recordingControls.setVisibility(View.GONE);
                     })
@@ -186,7 +197,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
     }
 
-    // 권한 요청 결과 처리
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (locationSource.onRequestPermissionsResult(requestCode, permissions, grantResults)) {
@@ -202,7 +212,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
-    // 생명주기 관리
     @Override protected void onStart() { super.onStart(); mapView.onStart(); }
     @Override protected void onResume() { super.onResume(); mapView.onResume(); }
     @Override protected void onPause() { mapView.onPause(); super.onPause(); }

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Byway</string>
+    <string name="default_web_client_id">730299805058-3lp07b21en4mrt2tpk01du8sm1veku9n.apps.googleusercontent.com</string>
+    <string name="kakao_native_app_key">c652e0a453d542758e0c379495dfc05b</string>
 </resources>
