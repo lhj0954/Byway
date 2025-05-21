@@ -5,9 +5,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-<!--    <uses-permission android:name="android.permission.CAMERA" />-->
-<!--    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"-->
-<!--        android:maxSdkVersion="28" />-->
+
     <!-- ✅ 인터넷 권한 -->
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -26,6 +24,12 @@
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="8zslpahklt" />
+
+
+        <!-- 네이버 경로 추천 API인데 등록이 겹침  -->
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID_PATH"
+            android:value="b8amspex8g" />
 
         <activity
             android:name=".SplashActivity"

@@ -1,39 +1,29 @@
 package com.example.byway;
-import com.example.byway.utils.PreferenceManager;
 
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+//경로추천 import
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 
-
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import java.util.ArrayList;
-import java.util.List;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.naver.maps.geometry.LatLng;
-import com.naver.maps.map.CameraUpdate;
 import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.MapView;
 import com.naver.maps.map.NaverMap;
@@ -46,6 +36,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private MapView mapView;
     private NaverMap naverMap;
+
+    //경로 탐색 인자
+    private static final String CLIENT_ID = "b8amspex8g".trim();
+    private static final String CLIENT_SECRET = "n3S8Tc6Tt88WDBC1qyJ8UBytr8Smq9cXmwSkvsWi".trim();
+
+
+    private EditText startEditText;
+    private EditText goalEditText;
+    private TextView infoTextView;
+
     private FusedLocationSource locationSource;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
     private Location lastLocation;
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private PathRecorder pathRecorder;
     private MapManager mapManager;
     private SpotManager spotManager;
-    private Button finishRecordButton, submitPathButton, addSpotButton, cancelSpotButton, selectSpotButton;
+    private Button finishRecordButton, submitPathButton, addSpotButton, cancelSpotButton, selectSpotButton, searchButton ;
     private LinearLayout recordingControls;
     private LinearLayout fabSubContainer;
     private LatLng selectedSpot; //스팟위치
@@ -133,6 +133,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         return selectSpotButton;
     }
 
+    public Button getSearchButton() {
+        return searchButton;
+    }
+
+    public void setSearchButton(Button searchButton) {
+        this.searchButton = searchButton;
+    }
+
     public void setSelectSpotButton(Button selectSpotButton) {
         this.selectSpotButton = selectSpotButton;
     }
@@ -169,6 +177,30 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         isFabOpen = fabOpen;
     }
 
+    public EditText getStartEditText() {
+        return startEditText;
+    }
+
+    public void setStartEditText(EditText startEditText) {
+        this.startEditText = startEditText;
+    }
+
+    public EditText getGoalEditText() {
+        return goalEditText;
+    }
+
+    public void setGoalEditText(EditText goalEditText) {
+        this.goalEditText = goalEditText;
+    }
+
+    public TextView getInfoTextView() {
+        return infoTextView;
+    }
+
+    public void setInfoTextView(TextView infoTextView) {
+        this.infoTextView = infoTextView;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
@@ -181,7 +213,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         // 위치 소스 초기화
         locationSource = new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
-        pathRecorder = new PathRecorder();
+
+        pathRecorder=new PathRecorder();
 
         //스팟등록모드
         spotActivityLauncher = registerForActivityResult(
@@ -240,7 +273,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
-    // 생명주기
+    // 생명주기 관리
     @Override protected void onStart() { super.onStart(); mapView.onStart(); }
     @Override protected void onResume() { super.onResume(); mapView.onResume(); }
     @Override protected void onPause() { mapView.onPause(); super.onPause(); }
