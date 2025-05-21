@@ -122,6 +122,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
+        <!-- 맵 뷰가 들어와야 할 곳-->
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="180dp"
