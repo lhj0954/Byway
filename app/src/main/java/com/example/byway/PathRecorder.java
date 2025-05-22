@@ -5,6 +5,7 @@ import com.naver.maps.geometry.LatLng;
 import java.util.ArrayList;
 import java.util.List;
 
+//경로 데이터 관리만
 public class PathRecorder {
     private final List<LatLng> path = new ArrayList<>();
 
