@@ -11,6 +11,14 @@
         android:padding="24dp"
         android:background="#FFFFFF">
 
+        <TextView
+            android:id="@+id/user_name_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⚙ Unknown"
+            android:textSize="18sp"
+            android:layout_marginBottom="16dp" />
+
         <!-- 상단: ID + 로그아웃 -->
         <RelativeLayout
             android:layout_width="match_parent"

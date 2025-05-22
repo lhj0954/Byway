@@ -1,26 +1,45 @@
 {
   "project_info": {
-    "project_number": "850152357276",
-    "project_id": "byway-a821a",
-    "storage_bucket": "byway-a821a.firebasestorage.app"
+    "project_number": "730299805058",
+    "project_id": "byway-bea46",
+    "storage_bucket": "byway-bea46.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:850152357276:android:d9650cc7db69308f6e5c59",
+        "mobilesdk_app_id": "1:730299805058:android:56b666e684eae7f593739b",
         "android_client_info": {
           "package_name": "com.example.byway"
         }
       },
-      "oauth_client": [],
+
+      "oauth_client": [
+        {
+          "client_id": "730299805058-u1dsjg00ufp00lh4vvkk5hs0trfudmf8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.byway",
+            "certificate_hash": "d263f93c7442c8c1c06c2aa0880cdf2bd61f712c"
+          }
+        },
+        {
+          "client_id": "730299805058-3lp07b21en4mrt2tpk01du8sm1veku9n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyCttP9CT2-zUiMqxuD-mSVNeEjBa5cU14I"
+          "current_key": "AIzaSyDCGsFnIyD__kATbin5WbKom2IMGQggV5A"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "730299805058-3lp07b21en4mrt2tpk01du8sm1veku9n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

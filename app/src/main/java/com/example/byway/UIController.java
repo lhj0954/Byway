@@ -12,8 +12,12 @@ import android.widget.Spinner;
 
 import androidx.cardview.widget.CardView;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.CameraUpdate;
 import com.naver.maps.map.LocationTrackingMode;
@@ -46,6 +50,7 @@ public class UIController {
         Button cancelSpotButton = activity.findViewById(R.id.cancel_spot_button);
         Button selectSpotButton = activity.findViewById(R.id.select_spot_button);
         Button searchButton = activity.findViewById(R.id.searchButton);
+        Button logoutBtn = activity.findViewById(R.id.btn_logout);
         LinearLayout recordingControls = activity.findViewById(R.id.recording_controls);
         LinearLayout fabSubContainer = activity.findViewById(R.id.fab_sub_container);
         FloatingActionButton fabSubLeft = activity.findViewById(R.id.fab_sub_left);
@@ -57,6 +62,18 @@ public class UIController {
         Spinner categorySpinner = activity.findViewById(R.id.category_spinner);
         TextView startEditText = activity.findViewById(R.id.startEditText);
         TextView goalEditText = activity.findViewById(R.id.endEditText);
+
+        logoutBtn.setOnClickListener(v -> {
+            FirebaseAuth.getInstance().signOut(); // Firebase 로그아웃
+            GoogleSignInClient googleSignInClient = GoogleSignIn.getClient(
+                    activity, GoogleSignInOptions.DEFAULT_SIGN_IN
+            );
+            googleSignInClient.signOut().addOnCompleteListener(task -> {
+                Intent intent = new Intent(activity, LoginActivity.class);
+                activity.startActivity(intent);
+                activity.finish();
+            });
+        });
 
         searchButton.setOnClickListener(v -> {
             if (activity.getLastLocation() == null)

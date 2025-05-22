@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_nearby"
+        android:icon="@drawable/ic_nearby"
+        android:title="주변"/>
+    <item
+        android:id="@+id/nav_add"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:title=""/>
+
+<!--    <item-->
+<!--        android:id="@+id/nav_byway"-->
+<!--        android:icon="@drawable/ic_byway"-->
+<!--        android:title="샛길"/>-->
+    <item
+        android:id="@+id/nav_my"
+        android:icon="@drawable/ic_my"
+        android:title="MY"/>
+</menu>
