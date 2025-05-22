@@ -46,9 +46,8 @@ dependencies {
     implementation("com.google.gms:google-services:4.3.15")
     implementation("com.google.firebase:firebase-auth:22.0.0")
     implementation("com.google.firebase:firebase-bom:32.0.0")
-    implementation("com.google.android.gms:play-services-location:21.0.1")
-    implementation("com.naver.maps:map-sdk:3.21.0")
+    implementation("com.google.android.gms:play-services-location:21.0.1") // 현재 위치
+    implementation("com.naver.maps:map-sdk:3.21.0") // 네이버 지도 SDK
     // Kakao SDK (User API)
     implementation("com.kakao.sdk:v2-user:2.15.0")
 }
-
