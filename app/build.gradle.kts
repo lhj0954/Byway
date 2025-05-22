@@ -32,13 +32,22 @@ android {
 }
 
 dependencies {
+    // AndroidX & Test
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
-    implementation("com.naver.maps:map-sdk:3.21.0") // ✅ 네이버 지도 SDK
-    implementation("com.google.android.gms:play-services-location:21.0.1") //현재 위치
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    // --- OAuth 로그인용 의존성 추가 ---
+    // Google Play services
+    implementation("com.google.gms:google-services:4.3.15")
+    implementation("com.google.firebase:firebase-auth:22.0.0")
+    implementation("com.google.firebase:firebase-bom:32.0.0")
+    implementation("com.google.android.gms:play-services-location:21.0.1") // 현재 위치
+    implementation("com.naver.maps:map-sdk:3.21.0") // 네이버 지도 SDK
+    // Kakao SDK (User API)
+    implementation("com.kakao.sdk:v2-user:2.15.0")
 }

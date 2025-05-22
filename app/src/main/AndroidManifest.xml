@@ -5,7 +5,9 @@
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" />
     <!-- ✅ 인터넷 권한 -->
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -20,18 +22,33 @@
         android:theme="@style/Theme.Byway"
         tools:targetApi="31">
 
+        <!--        카메라 -->
+        <!--        <provider-->
+        <!--            android:name="androidx.core.content.FileProvider"-->
+        <!--            android:authorities="${applicationId}.fileprovider"-->
+        <!--            android:exported="false"-->
+        <!--            android:grantUriPermissions="true">-->
+        <!--            <meta-data-->
+        <!--                android:name="android.support.FILE_PROVIDER_PATHS"-->
+        <!--                android:resource="@xml/file_paths" />-->
+        <!--        </provider>-->
+
         <!--  네이버 지도 API -->
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="8zslpahklt" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- ✅ MainActivity는 일반 화면으로 이동 -->
+        <activity android:name=".MainActivity" android:exported="true" />
+        <activity android:name=".PhotoSpotActivity" />
     </application>
 </manifest>
