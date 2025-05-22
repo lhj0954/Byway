@@ -1,8 +1,0 @@
-<resources>
-    <string name="app_name">Byway</string>
-    <string name="hint_search">길찾기</string>
-    <string name="desc_current_location">내 위치</string>
-    <string name="btn_start_record">경로 저장</string>
-    <string name="btn_finish_record">기록 중지</string>
-    <string name="btn_submit_path">경로 등록</string>
-</resources>
