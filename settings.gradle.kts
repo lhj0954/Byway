@@ -1,14 +1,8 @@
 pluginManagement {
     repositories {
-        google {
-            content {
-                includeGroupByRegex("com\\.android.*")
-                includeGroupByRegex("com\\.google.*")
-                includeGroupByRegex("androidx.*")
-            }
-        }
-        mavenCentral()
         gradlePluginPortal()
+        google()
+        mavenCentral()
     }
 }
 dependencyResolutionManagement {
@@ -16,11 +10,9 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven { url = uri("https://devrepo.kakao.com/nexus/content/groups/public/") }
         maven("https://repository.map.naver.com/archive/maven")
+        maven ("https://devrepo.kakao.com/nexus/content/groups/public/")
     }
 }
-
 rootProject.name = "Byway"
 include(":app")
- 
