@@ -31,6 +31,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 }
+
 dependencies {
     // Firebase BOM - 버전 통일
     implementation(platform(libs.firebase.bom)) // libs.versions.toml에서 관리됨

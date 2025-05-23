@@ -29,6 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:background="@drawable/btn_background"
+        android:backgroundTint="#FEE500"
         android:drawableLeft="@drawable/ic_google"
         android:elevation="6dp"
         android:text="구글 계정으로 로그인" />

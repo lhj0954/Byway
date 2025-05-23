@@ -172,6 +172,9 @@ public class UIController {
                             return;
                         }
 
+                        //db 업로드
+                        PathUploader.uploadPath(activity, pathPoints);
+
                         Toast.makeText(activity, "경로가 등록되었습니다.", Toast.LENGTH_SHORT).show();
 
                         activity.setRecording(false);

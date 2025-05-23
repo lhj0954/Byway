@@ -3116,6 +3116,7 @@ drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
 drawable circle_background
+drawable comment_background
 drawable common_full_open_on_phone
 drawable common_google_signin_btn_icon_dark
 drawable common_google_signin_btn_icon_dark_focused
@@ -3154,7 +3155,12 @@ drawable ic_clear_black_24
 drawable ic_clock_black_24dp
 drawable ic_current_location
 drawable ic_current_location_24
+drawable ic_emoji_happy
+drawable ic_emoji_neutral
+drawable ic_emoji_sad
+drawable ic_flag
 drawable ic_google
+drawable ic_image
 drawable ic_kakao
 drawable ic_keyboard_black_24dp
 drawable ic_launcher_background
@@ -3175,7 +3181,6 @@ drawable ic_search
 drawable ic_search_black_24
 drawable ic_settings
 drawable ic_splash
-drawable ico_mybyway
 drawable ico_tools
 drawable indeterminate_static
 drawable m3_avd_hide_password
@@ -3443,6 +3448,10 @@ id clip_vertical
 id clockwise
 id closest
 id collapseActionView
+id comment_examples
+id comment_input
+id comment_section
+id comment_submit_button
 id completeButton
 id compress
 id confirm_button
@@ -3475,6 +3484,9 @@ id design_menu_item_action_area
 id design_menu_item_action_area_stub
 id design_menu_item_text
 id design_navigation_view
+id detail_address
+id detail_image
+id detail_name
 id dialog_button
 id dimensions
 id direct
@@ -3501,6 +3513,9 @@ id edit_query
 id edit_text_id
 id elastic
 id embed
+id emoji_happy
+id emoji_neutral
+id emoji_sad
 id end
 id endEditText
 id endToStart
@@ -3724,6 +3739,7 @@ id path_controls
 id peekHeight
 id percent
 id photo_address
+id photo_attach_button
 id photo_image
 id photo_name
 id photo_spot_count
@@ -3766,6 +3782,7 @@ id search_button
 id search_close_btn
 id search_edit_frame
 id search_go_btn
+id search_input
 id search_mag_icon
 id search_plate
 id search_src_text
@@ -3842,6 +3859,7 @@ id textTop
 id text_input_end_icon
 id text_input_error_icon
 id text_input_start_icon
+id text_logout
 id text_user_id
 id textinput_counter
 id textinput_error
@@ -3894,6 +3912,7 @@ id withinBounds
 id wrap
 id wrap_content
 id wrap_content_constrained
+id write_comment_button
 id x_left
 id x_right
 integer abc_config_activityDefaultDur
@@ -4015,6 +4034,7 @@ layout activity_login
 layout activity_main
 layout activity_mypage
 layout activity_photo_spot
+layout activity_photo_spot_detail
 layout activity_register
 layout activity_splash
 layout activity_spot

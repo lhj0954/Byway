@@ -45,8 +45,8 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="#000000" />
-            <!--
-             로그아웃 버튼
+
+            <!-- 로그아웃 버튼 -->
             <TextView
                 android:id="@+id/text_logout"
                 android:layout_width="wrap_content"
@@ -57,13 +57,10 @@
                 android:textSize="14sp"
                 android:clickable="true"
                 android:focusable="true" />
-            -->
         </RelativeLayout>
 
         <LinearLayout
-
             android:layout_width="match_parent"
-
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
@@ -133,6 +130,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
+        <!-- 맵 뷰가 들어와야 할 곳-->
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="180dp"
@@ -145,11 +143,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <!--
-            <TextView android:text="📷 충북대학교 야외공연장\n04.07 월" />
-            <TextView android:text="⚙ 자취방 샛길\n04.07 월" android:layout_marginTop="12dp"/>
-            <TextView android:text="📷 충대 정문 벚꽃나무\n04.07 월" android:layout_marginTop="12dp"/>
-            -->
+
+<!--            <TextView android:text="📷 충북대학교 야외공연장\n04.07 월" />-->
+<!--            <TextView android:text="⚙ 자취방 샛길\n04.07 월" android:layout_marginTop="12dp"/>-->
+<!--            <TextView android:text="📷 충대 정문 벚꽃나무\n04.07 월" android:layout_marginTop="12dp"/>-->
         </LinearLayout>
 
         <Button
