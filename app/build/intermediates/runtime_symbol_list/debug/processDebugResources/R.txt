@@ -4332,8 +4332,6 @@ int string mtrl_switch_track_decoration_path 0x7f1200ba
 int string mtrl_switch_track_path 0x7f1200bb
 int string mtrl_timepicker_cancel 0x7f1200bc
 int string mtrl_timepicker_confirm 0x7f1200bd
-int string naver_client_id 0x7f1200be
-int string naver_client_secret 0x7f1200bf
 int string navermap_compass 0x7f1200c0
 int string navermap_copyright 0x7f1200c1
 int string navermap_current_location 0x7f1200c2

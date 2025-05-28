@@ -4333,8 +4333,6 @@ string mtrl_switch_track_decoration_path
 string mtrl_switch_track_path
 string mtrl_timepicker_cancel
 string mtrl_timepicker_confirm
-string naver_client_id
-string naver_client_secret
 string navermap_compass
 string navermap_copyright
 string navermap_current_location

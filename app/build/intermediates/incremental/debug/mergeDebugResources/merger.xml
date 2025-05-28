@@ -11687,7 +11687,7 @@
         <item>데이트 코스</item>
         <item>산책 코스</item>
         <item>쇼핑 코스</item>
-    </string-array><string name="default_web_client_id">730299805058-3lp07b21en4mrt2tpk01du8sm1veku9n.apps.googleusercontent.com</string><string name="kakao_native_app_key">c652e0a453d542758e0c379495dfc05b</string><string name="naver_client_id">Q5eG3oo19LQwmCT4qojm</string><string name="naver_client_secret">TcYfxfzShx</string></file><file path="C:\Users\brian\StudioProjects\Byway\app\src\main\res\values\themes.xml" qualifiers=""><style name="Base.Theme.Byway" parent="Theme.Material3.DayNight.NoActionBar">
+    </string-array><string name="default_web_client_id">730299805058-3lp07b21en4mrt2tpk01du8sm1veku9n.apps.googleusercontent.com</string><string name="kakao_native_app_key">c652e0a453d542758e0c379495dfc05b</string></file><file path="C:\Users\brian\StudioProjects\Byway\app\src\main\res\values\themes.xml" qualifiers=""><style name="Base.Theme.Byway" parent="Theme.Material3.DayNight.NoActionBar">
         
         
     </style><style name="Theme.Byway" parent="Base.Theme.Byway"/></file><file path="C:\Users\brian\StudioProjects\Byway\app\src\main\res\values-night\themes.xml" qualifiers="night-v8"><style name="Base.Theme.Byway" parent="Theme.Material3.DayNight.NoActionBar">
