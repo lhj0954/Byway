@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private LatLng selectedSpot; //스팟위치
     private Marker spotMarker; //스팟 마커
     private ActivityResultLauncher<Intent> spotActivityLauncher;
+
     private FloatingActionButton fabSubLeft, fabSubRight;
     private EditText startPoint, searchInput;
 
@@ -137,10 +138,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     public void setCancelSpotButton(Button cancelSpotButton) {
         this.cancelSpotButton = cancelSpotButton;
-    }
-
-    public Button getSelectSpotButton() {
-        return selectSpotButton;
     }
 
     public Button getSearchButton() {
