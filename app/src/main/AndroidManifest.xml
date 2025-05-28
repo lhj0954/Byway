@@ -5,9 +5,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="28" />
+
     <!-- ✅ 인터넷 권한 -->
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -22,17 +20,6 @@
         android:theme="@style/Theme.Byway"
         tools:targetApi="31">
 
-<!--        카메라-->
-<!--        <provider-->
-<!--            android:name="androidx.core.content.FileProvider"-->
-<!--            android:authorities="${applicationId}.fileprovider"-->
-<!--            android:exported="false"-->
-<!--            android:grantUriPermissions="true">-->
-<!--            <meta-data-->
-<!--                android:name="android.support.FILE_PROVIDER_PATHS"-->
-<!--                android:resource="@xml/file_paths" />-->
-<!--        </provider>-->
-
         <!--  네이버 지도 API -->
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
@@ -40,9 +27,14 @@
 
 
         <!-- 네이버 경로 추천 API인데 등록이 겹침  -->
+<!--        <meta-data-->
+<!--            android:name="com.naver.maps.map.CLIENT_ID_PATH"-->
+<!--            android:value="b8amspex8g" />-->
+
+        <!-- Kakao SDK 앱 키 -->
         <meta-data
-            android:name="com.naver.maps.map.CLIENT_ID_PATH"
-            android:value="b8amspex8g" />
+            android:name="com.kakao.sdk.AppKey"
+            android:value="@string/kakao_native_app_key"/>
 
         <activity
             android:name=".SplashActivity"
@@ -53,8 +45,40 @@
             </intent-filter>
         </activity>
 
-        <!-- ✅ MainActivity는 일반 화면으로 이동 -->
-        <activity android:name=".MainActivity" android:exported="true" />
+        <!-- Kakao 로그인용 Activity -->
+        <activity
+            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="kakaoc652e0a453d542758e0c379495dfc05b"/>
+            </intent-filter>
+        </activity>
+
+<!--         로그인 화면 -->
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Byway" />
+
+        <!-- 메인 화면 -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".PhotoSpotActivity"
+            android:exported="true"/>
+
+        <activity
+            android:name=".MypageActivity"
+            android:exported="true"/>
+
+        <activity android:name=".SpotActivity" />
+
+
 
     </application>
 </manifest>
