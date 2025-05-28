@@ -56,6 +56,8 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
     implementation("org.json:json:20240303")
 
+
+
     // AndroidX & 테스트
     implementation(libs.appcompat)
     implementation(libs.material)

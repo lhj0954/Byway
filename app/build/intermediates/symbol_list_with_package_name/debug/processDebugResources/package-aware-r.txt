@@ -3517,7 +3517,6 @@ id emoji_happy
 id emoji_neutral
 id emoji_sad
 id end
-id endEditText
 id endToStart
 id enterAlways
 id enterAlwaysCollapsed
@@ -3574,7 +3573,6 @@ id immediateStop
 id included
 id indeterminate
 id info
-id infoTextView
 id invisible
 id inward
 id is_pooling_container_tag
@@ -3746,6 +3744,8 @@ id photo_spot_count
 id photo_spot_list
 id photo_spot_title
 id pin
+id poi_address
+id poi_name
 id pooling_container_listener_holder_tag
 id position
 id postLayout
@@ -3785,6 +3785,7 @@ id search_go_btn
 id search_input
 id search_mag_icon
 id search_plate
+id search_results_recycler
 id search_src_text
 id search_voice_btn
 id selectImageButton
@@ -3823,10 +3824,10 @@ id src_in
 id src_over
 id standard
 id start
-id startEditText
 id startHorizontal
 id startToEnd
 id startVertical
+id start_point
 id staticLayout
 id staticPostLayout
 id stop
@@ -4063,6 +4064,7 @@ layout ime_base_split_test_activity
 layout ime_secondary_split_test_activity
 layout item_category
 layout item_photo_spot
+layout item_place
 layout m3_alert_dialog
 layout m3_alert_dialog_actions
 layout m3_alert_dialog_title
@@ -4331,6 +4333,8 @@ string mtrl_switch_track_decoration_path
 string mtrl_switch_track_path
 string mtrl_timepicker_cancel
 string mtrl_timepicker_confirm
+string naver_client_id
+string naver_client_secret
 string navermap_compass
 string navermap_copyright
 string navermap_current_location
