@@ -1,6 +1,7 @@
 package com.example.byway;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -73,6 +74,15 @@ public class PhotoSpotActivity extends AppCompatActivity {
             holder.name.setText(spot.name);
             holder.address.setText(spot.address);
             holder.image.setImageResource(spot.imageRes);
+
+            // 🔥 클릭 시 상세 페이지 이동
+            holder.itemView.setOnClickListener(v -> {
+                Intent intent = new Intent(context, PhotoSpotDetailActivity.class);
+                intent.putExtra("name", spot.name);
+                intent.putExtra("address", spot.address);
+                intent.putExtra("imageRes", spot.imageRes);
+                context.startActivity(intent);
+            });
         }
 
         @Override

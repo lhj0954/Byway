@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 
 import com.google.gson.Gson;
 
-import java.util.List;
+import java.util.Locale;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Call;

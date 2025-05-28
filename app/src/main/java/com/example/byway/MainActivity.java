@@ -2,9 +2,12 @@ package com.example.byway;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.pm.Signature;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -38,8 +41,9 @@ import com.naver.maps.map.util.FusedLocationSource;
 import com.naver.maps.map.overlay.Marker;
 
 
-public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
+
+public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
     private MapView mapView;
     private NaverMap naverMap;
 
@@ -58,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private boolean isRecording = false; //길 등록중인지
     private boolean isAddingSpot = false; //스팟 등록중인지
     private boolean isFabOpen = false;
+    private boolean isStartPointInitialized = false;
     private PathRecorder pathRecorder;
     private MapManager mapManager;
     private SpotManager spotManager;
@@ -69,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private ActivityResultLauncher<Intent> spotActivityLauncher;
 
     private FloatingActionButton fabSubLeft, fabSubRight;
+    private EditText startPoint, searchInput;
 
     public Location getLastLocation() {
         return lastLocation;
@@ -201,6 +207,21 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void setInfoTextView(TextView infoTextView) {
         this.infoTextView = infoTextView;
     }
+    public EditText getSearchInput() {
+        return searchInput;
+    }
+
+    public void setSearchInput(EditText searchInput) {
+        this.searchInput = searchInput;
+    }
+
+    public boolean isStartPointInitialized() {
+        return isStartPointInitialized;
+    }
+
+    public void setStartPointInitialized(boolean startPointInitialized) {
+        isStartPointInitialized = startPointInitialized;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -256,6 +277,15 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     LOCATION_PERMISSION_REQUEST_CODE);
         }
+
+        naverMap.addOnLocationChangeListener(location -> {
+            if (location != null) {
+                Location loc = new Location("");
+                loc.setLatitude(location.getLatitude());
+                loc.setLongitude(location.getLongitude());
+                setLastLocation(loc);
+            }
+        });
     }
 
     // 권한 요청 결과 처리
