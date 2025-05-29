@@ -11,6 +11,14 @@
         android:padding="24dp"
         android:background="#FFFFFF">
 
+        <TextView
+            android:id="@+id/user_name_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⚙ Unknown"
+            android:textSize="18sp"
+            android:layout_marginBottom="16dp" />
+
         <!-- 상단: ID + 로그아웃 -->
         <RelativeLayout
             android:layout_width="match_parent"
@@ -73,7 +81,7 @@
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/ico_myByway"
+                    android:src="@drawable/ic_byway"
                     android:contentDescription="나만의 샛길"/>
 
                 <TextView
@@ -136,9 +144,9 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView android:text="📷 충북대학교 야외공연장\n04.07 월" />
-            <TextView android:text="⚙ 자취방 샛길\n04.07 월" android:layout_marginTop="12dp"/>
-            <TextView android:text="📷 충대 정문 벚꽃나무\n04.07 월" android:layout_marginTop="12dp"/>
+<!--            <TextView android:text="📷 충북대학교 야외공연장\n04.07 월" />-->
+<!--            <TextView android:text="⚙ 자취방 샛길\n04.07 월" android:layout_marginTop="12dp"/>-->
+<!--            <TextView android:text="📷 충대 정문 벚꽃나무\n04.07 월" android:layout_marginTop="12dp"/>-->
         </LinearLayout>
 
         <Button

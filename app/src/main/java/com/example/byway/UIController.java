@@ -1,13 +1,8 @@
 package com.example.byway;
 
-import static java.security.AccessController.getContext;
-
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -17,15 +12,18 @@ import android.widget.Spinner;
 
 import androidx.cardview.widget.CardView;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.CameraUpdate;
 import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.NaverMap;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.List;
 
 
@@ -35,12 +33,14 @@ public class UIController {
     private final NaverMap naverMap;
     private final MapManager mapManager;
     private final SpotManager spotManager;
+    private final TmapRouteManager tmapRouteManager;
 
     public UIController(MainActivity activity, NaverMap naverMap, MapManager mapManager, SpotManager spotManager) {
         this.activity = activity;
         this.naverMap = naverMap;
         this.mapManager = mapManager;
         this.spotManager = spotManager;
+        this.tmapRouteManager = new TmapRouteManager(activity, naverMap);
     }
 
     public void setupUI() {
@@ -49,6 +49,8 @@ public class UIController {
         Button submitPathButton = activity.findViewById(R.id.submit_path_button);
         Button cancelSpotButton = activity.findViewById(R.id.cancel_spot_button);
         Button selectSpotButton = activity.findViewById(R.id.select_spot_button);
+        Button searchButton = activity.findViewById(R.id.searchButton);
+        Button logoutBtn = activity.findViewById(R.id.btn_logout);
         LinearLayout recordingControls = activity.findViewById(R.id.recording_controls);
         LinearLayout fabSubContainer = activity.findViewById(R.id.fab_sub_container);
         FloatingActionButton fabSubLeft = activity.findViewById(R.id.fab_sub_left);
@@ -58,6 +60,53 @@ public class UIController {
         LinearLayout pathControls = activity.findViewById(R.id.path_controls);
         LinearLayout spotControls = activity.findViewById(R.id.spot_controls);
         Spinner categorySpinner = activity.findViewById(R.id.category_spinner);
+        TextView startEditText = activity.findViewById(R.id.startEditText);
+        TextView goalEditText = activity.findViewById(R.id.endEditText);
+
+        logoutBtn.setOnClickListener(v -> {
+            FirebaseAuth.getInstance().signOut(); // Firebase 로그아웃
+            GoogleSignInClient googleSignInClient = GoogleSignIn.getClient(
+                    activity, GoogleSignInOptions.DEFAULT_SIGN_IN
+            );
+            googleSignInClient.signOut().addOnCompleteListener(task -> {
+                Intent intent = new Intent(activity, LoginActivity.class);
+                activity.startActivity(intent);
+                activity.finish();
+            });
+        });
+
+        searchButton.setOnClickListener(v -> {
+            if (activity.getLastLocation() == null)
+                return;
+
+            String goal = goalEditText.getText().toString();
+            String start = startEditText.getText().toString();
+
+            //Geocode 구현 : 주소로 검색하기
+
+            Geocoder geocoder = new Geocoder(activity);
+
+            geocoder.geocodeAddress(start, (startLat, startLng) -> {
+                geocoder.geocodeAddress(goal, (endLat, endLng) -> {
+                    tmapRouteManager.requestTmapWalkRoute(startLng, startLat, endLng, endLat);
+                });
+            });
+
+            // 여기선 테스트용으로 위도,경도 직접 입력 받는다고 가정
+            /*try {
+                String[] goals = goal.split(",");
+                double endLat = Double.parseDouble(goals[0].trim());
+                double endLng = Double.parseDouble(goals[1].trim());
+
+                String[] starts = start.split(",");
+                double startLat = Double.parseDouble(starts[0].trim());
+                double startLng = Double.parseDouble(starts[1].trim());
+
+                requestTmapWalkRoute(startLat, startLng, endLat, endLng);
+            } catch (Exception e) {
+                Toast.makeText(this, "도착지를 '위도,경도' 형식으로 입력하세요.", Toast.LENGTH_SHORT).show();
+            }*/
+        });
 
         // 현위치 버튼
         locationButton.setOnClickListener(v -> {
@@ -74,6 +123,12 @@ public class UIController {
             }
         });
 
+        // 기본 하단 바 세팅
+        bottomNavigationView.getMenu().setGroupCheckable(0, true, false);
+        for (int i = 0; i < bottomNavigationView.getMenu().size(); i++) {
+            bottomNavigationView.getMenu().getItem(i).setChecked(false);
+        }
+        bottomNavigationView.getMenu().setGroupCheckable(0, true, true);
 
         // 경로 등록 취소
         finishRecordButton.setOnClickListener(v -> {
@@ -116,6 +171,9 @@ public class UIController {
                             Toast.makeText(activity, "경로 데이터가 충분하지 않습니다. 최소 2개의 지점이 필요합니다.", Toast.LENGTH_SHORT).show();
                             return;
                         }
+
+                        //db 업로드
+                        PathUploader.uploadPath(activity, pathPoints);
 
                         Toast.makeText(activity, "경로가 등록되었습니다.", Toast.LENGTH_SHORT).show();
 
@@ -228,14 +286,6 @@ public class UIController {
 
             Toast.makeText(activity, "스팟을 지도에서 선택하세요", Toast.LENGTH_SHORT).show();
         });
-
-
-        // 기본 하단 바 세팅
-        bottomNavigationView.getMenu().setGroupCheckable(0, true, false);
-        for (int i = 0; i < bottomNavigationView.getMenu().size(); i++) {
-            bottomNavigationView.getMenu().getItem(i).setChecked(false);
-        }
-        bottomNavigationView.getMenu().setGroupCheckable(0, true, true);
     }
 
     //Map 리스너
@@ -257,5 +307,4 @@ public class UIController {
             activity.setSelectedSpot(latLng);
         });
     }
-
 }
