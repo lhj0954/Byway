@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -32,24 +33,44 @@ android {
 }
 
 dependencies {
-    // AndroidX & Test
+    // Firebase BOM - 버전 통일
+    implementation(platform(libs.firebase.bom)) // libs.versions.toml에서 관리됨
+
+    // Firebase (버전 없이 BOM 기준으로 가져감)
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore)
+    implementation ("com.google.firebase:firebase-storage:20.2.1")
+
+    //사진 불러오기
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
+
+
+    // Google Play 서비스
+    implementation(libs.play.services.auth)
+    implementation("com.google.android.gms:play-services-location:21.0.1")
+
+    // Kakao SDK
+    implementation(libs.kakao.user)
+
+    // Naver Maps
+    implementation("com.naver.maps:map-sdk:3.21.0")
+
+    // Retrofit & JSON
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+    implementation("org.json:json:20240303")
+
+
+
+    // AndroidX & 테스트
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
-    implementation("com.naver.maps:map-sdk:3.21.0") // ✅ 네이버 지도 SDK
-    implementation("com.google.android.gms:play-services-location:21.0.1") //현재 위치
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-
-    // --- OAuth 로그인용 의존성 추가 ---
-    // Google Play services
-    implementation 'com.google.gms:google-services:4.3.15'
-    implementation 'com.google.firebase:firebase-auth:22.0.0'
-    implementation 'com.google.firebase:firebase-bom:32.0.0'
-    implementation 'com.google.android.gms:play-services-auth:20.5.0'
-
-    // Kakao SDK (User API)
-    implementation "com.kakao.sdk:v2-user:2.15.0"
 }
+
