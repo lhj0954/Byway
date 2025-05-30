@@ -88,12 +88,12 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-        // ✅ 이미 로그인된 상태라면 바로 메인으로 이동
-        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
-            return;
-        }
+//        // ✅ 이미 로그인된 상태라면 바로 메인으로 이동
+//        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+//            startActivity(new Intent(this, MainActivity.class));
+//            finish();
+//            return;
+//        }
 
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
@@ -128,6 +128,7 @@ public class LoginActivity extends AppCompatActivity {
                             }
 
                             UserManager.saveUid(LoginActivity.this, uid);
+                            PreferenceManager.setKakaoLoggedIn(LoginActivity.this, true);
                             saveUserToFirestore(uid, name);
 
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -209,6 +210,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (user != null) {
                             String uid = user.getUid();
                             UserManager.saveUid(LoginActivity.this, uid);
+
                             name = user.getDisplayName();
                             String email = user.getEmail();
 
