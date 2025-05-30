@@ -1,8 +1,13 @@
 package com.example.byway;
 
 import android.graphics.Color;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.example.byway.searchPOI.KakaoResponse;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.ktx.Firebase;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.geometry.LatLngBounds;
 import com.naver.maps.map.CameraUpdate;
@@ -11,6 +16,7 @@ import com.naver.maps.map.overlay.PathOverlay;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -30,6 +36,14 @@ public class TmapRouteManager {
         this.activity = activity;
         this.naverMap = naverMap;
         this.currentPathOverlay = null;
+    }
+
+    private void drawPathOnMap(List<LatLng> path, String name) {
+        PathOverlay pathOverlay = new PathOverlay();
+        pathOverlay.setCoords(path);
+        pathOverlay.setColor(Color.BLUE);
+        pathOverlay.setWidth(10);
+        pathOverlay.setMap(naverMap);
     }
 
     public void requestTmapWalkRoute(double startX, double startY, double endX, double endY) {
@@ -108,6 +122,29 @@ public class TmapRouteManager {
                         }
                         LatLngBounds bounds = builder.build();
                         naverMap.moveCamera(CameraUpdate.fitBounds(bounds, 100));
+
+                        FirebaseFirestore db = FirebaseFirestore.getInstance();
+                        db.collection("path")
+                                .get()
+                                .addOnSuccessListener(queryDocumentSnapshots -> {
+                                    for (DocumentSnapshot doc : queryDocumentSnapshots) {
+                                        String name = doc.getString("name");
+
+                                        List<Map<String, Object>> points = (List<Map<String, Object>>) doc.get("points");
+
+                                        List<LatLng> latLngPathList = new ArrayList<>();
+                                        for (Map<String, Object> point : points) {
+                                            double lat = (double) point.get("lat");
+                                            double lng = (double) point.get("lng");
+                                            latLngPathList.add(new LatLng(lat, lng));
+                                        }
+
+                                        drawPathOnMap(latLngPathList, name); // 지도에 선 그리기
+                                    }
+                                })
+                                .addOnFailureListener(e -> {
+                                    Log.e("FireStore", "Failed to load path", e);
+                                });
                     } else {
                         Toast.makeText(activity, "경로가 충분하지 않습니다.", Toast.LENGTH_SHORT).show();
                     }
