@@ -30,9 +30,9 @@
     <ImageView
         android:id="@+id/photo_image"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:scaleType="centerCrop"
+        android:layout_height="400dp"
+        android:scaleType="fitCenter"
         android:src="@drawable/ic_launcher_foreground"
-        android:background="@android:color/darker_gray"
+        android:background="@android:color/white"
         android:contentDescription="추천 장소 사진" />
 </LinearLayout>

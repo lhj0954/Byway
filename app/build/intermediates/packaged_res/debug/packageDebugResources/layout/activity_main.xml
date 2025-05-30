@@ -68,6 +68,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="경로 찾기"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/brown"
         app:layout_constraintTop_toBottomOf="@id/search_input"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

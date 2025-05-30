@@ -5,14 +5,17 @@ color black
 color blue
 color brown
 color brown_tint_selector
+color button_text_color
 color green
 color heart
 color pink
 color white
 color yellow
+drawable border_background
 drawable bottom_nav_background
 drawable bottom_sheet_handle
 drawable btn_background
+drawable button_selector
 drawable circle_background
 drawable comment_background
 drawable ic_byway
@@ -52,7 +55,6 @@ id comment_input
 id comment_section
 id comment_submit_button
 id completeButton
-id count
 id descriptionEditText
 id detail_address
 id detail_image
@@ -112,6 +114,7 @@ layout activity_splash
 layout activity_spot
 layout activity_user_account
 layout fragment_nearby_bottom_sheet
+layout fragment_spot_bottom_sheet
 layout item_category
 layout item_photo_spot
 layout item_place

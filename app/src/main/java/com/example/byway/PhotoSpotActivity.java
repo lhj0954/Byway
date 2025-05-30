@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +16,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -32,23 +38,19 @@ public class PhotoSpotActivity extends AppCompatActivity {
         titleText.setText("사진 명소 추천 스팟");
         countText.setText("156");
 
-        List<PhotoSpot> spots = Arrays.asList(
-                new PhotoSpot("충북대학교 야외공연장", "충북 서원구 흥대로1", R.drawable.ic_launcher_foreground),
-                new PhotoSpot("충북대학교 전자정보대학 가로수길", "충북 서원구 흥대로1", R.drawable.ic_launcher_foreground)
-        );
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        List<PhotoSpot> spots = new ArrayList<>();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new PhotoSpotAdapter(this, spots));
     }
 
     static class PhotoSpot {
-        String name, address;
-        int imageRes;
+        String name, address, imageUrl;
 
-        PhotoSpot(String name, String address, int imageRes) {
+        PhotoSpot(String name, String address, String imageUrl) {
             this.name = name;
             this.address = address;
-            this.imageRes = imageRes;
+            this.imageUrl = imageUrl;
         }
     }
 
@@ -73,17 +75,20 @@ public class PhotoSpotActivity extends AppCompatActivity {
             PhotoSpot spot = list.get(position);
             holder.name.setText(spot.name);
             holder.address.setText(spot.address);
-            holder.image.setImageResource(spot.imageRes);
+            Glide.with(context)
+                    .load(spot.imageUrl)
+                    .placeholder(R.drawable.ic_launcher_foreground) // 대체 이미지
+                    .into(holder.image);
 
-            // 🔥 클릭 시 상세 페이지 이동
             holder.itemView.setOnClickListener(v -> {
                 Intent intent = new Intent(context, PhotoSpotDetailActivity.class);
                 intent.putExtra("name", spot.name);
                 intent.putExtra("address", spot.address);
-                intent.putExtra("imageRes", spot.imageRes);
+                intent.putExtra("imageUrl", spot.imageUrl);
                 context.startActivity(intent);
             });
         }
+
 
         @Override
         public int getItemCount() {

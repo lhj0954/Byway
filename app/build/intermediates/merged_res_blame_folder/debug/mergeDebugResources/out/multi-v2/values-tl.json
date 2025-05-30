@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.byway.app-mergeDebugResources-40:/values-tl/values-tl.xml",
+            "outputFile": "com.example.byway.app-mergeDebugResources-41:/values-tl/values-tl.xml",
             "map": [
                 {
                     "source": "C:\\Users\\brian\\.gradle\\caches\\transforms-4\\8eea598552256829606c2a8e7e4da6ba\\transformed\\material-1.12.0\\res\\values-tl\\values-tl.xml",
@@ -57,6 +57,23 @@
                     }
                 },
                 {
+                    "source": "C:\\Users\\brian\\.gradle\\caches\\transforms-4\\6b6d1aad7c1529b00f6628504fc9dca4\\transformed\\play-services-basement-18.3.0\\res\\values-tl\\values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "195",
+                        "endColumns": "140",
+                        "endOffsets": "335"
+                    },
+                    "to": {
+                        "startLines": "56",
+                        "startColumns": "4",
+                        "startOffsets": "5626",
+                        "endColumns": "144",
+                        "endOffsets": "5766"
+                    }
+                },
+                {
                     "source": "C:\\Users\\brian\\.gradle\\caches\\transforms-4\\1574e980d0c82a50fcdc0eebbade7187\\transformed\\browser-1.4.0\\res\\values-tl\\values-tl.xml",
                     "from": {
                         "startLines": "2,3,4,5",
@@ -88,23 +105,6 @@
                         "startOffsets": "3507,3604,3706,3807,3904,4011,4119,12902",
                         "endColumns": "96,101,100,96,106,107,121,100",
                         "endOffsets": "3599,3701,3802,3899,4006,4114,4236,12998"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\brian\\.gradle\\caches\\transforms-4\\e121e645541df8050343b2d5347718d8\\transformed\\play-services-basement-18.2.0\\res\\values-tl\\values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "195",
-                        "endColumns": "140",
-                        "endOffsets": "335"
-                    },
-                    "to": {
-                        "startLines": "56",
-                        "startColumns": "4",
-                        "startOffsets": "5626",
-                        "endColumns": "144",
-                        "endOffsets": "5766"
                     }
                 }
             ]

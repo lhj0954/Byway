@@ -1460,6 +1460,7 @@ color browser_actions_text_color
 color browser_actions_title_color
 color button_material_dark
 color button_material_light
+color button_text_color
 color call_notification_answer_color
 color call_notification_decline_color
 color cardview_dark_background
@@ -3104,6 +3105,7 @@ drawable abc_textfield_search_material
 drawable abc_vector_test
 drawable avd_hide_password
 drawable avd_show_password
+drawable border_background
 drawable bottom_nav_background
 drawable bottom_sheet_handle
 drawable btn_background
@@ -3115,6 +3117,7 @@ drawable btn_radio_off_mtrl
 drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
+drawable button_selector
 drawable circle_background
 drawable comment_background
 drawable common_full_open_on_phone
@@ -3463,7 +3466,6 @@ id contiguous
 id continuousVelocity
 id coordinator
 id cos
-id count
 id counterclockwise
 id cradle
 id currentState
@@ -3547,6 +3549,7 @@ id frost
 id fullscreen_header
 id ghost_view
 id ghost_view_holder
+id glide_custom_view_target_tag
 id gone
 id graph
 id graph_wrap
@@ -4060,6 +4063,7 @@ layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
 layout fragment_nearby_bottom_sheet
+layout fragment_spot_bottom_sheet
 layout ime_base_split_test_activity
 layout ime_secondary_split_test_activity
 layout item_category

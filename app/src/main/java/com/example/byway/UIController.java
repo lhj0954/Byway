@@ -5,6 +5,7 @@ import static android.view.View.GONE;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.location.Location;
+import android.net.Uri;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -397,11 +398,19 @@ public class UIController {
         });
 
         naverMap.setOnMapClickListener((point, latLng) -> {
-            if (!activity.isAddingSpot()) return;
-
-            // 기존 마커가 있다면 제거하고 추가
-            spotManager.addSpotMarker(naverMap, latLng);
-            activity.setSelectedSpot(latLng);
+            // 1. 스팟 등록 모드일 때
+            if (activity.isAddingSpot()) {
+                spotManager.addSpotMarker(naverMap, latLng);
+                activity.setSelectedSpot(latLng);
+                return;
+            }
+            // 2. 사진 명소 추천 모드일 때
+            else if (activity.isViewingSpots()) {
+                activity.getIntent().removeExtra("photo_spots");
+                activity.setViewingSpots(false);
+                spotManager.clearAllSpotMarkers();
+                // (선택적으로 바텀시트 닫기 등 추가 작업 가능)
+            }
         });
     }
 }

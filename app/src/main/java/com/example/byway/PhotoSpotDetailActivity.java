@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
+
 public class PhotoSpotDetailActivity extends AppCompatActivity {
 
     private ImageView emojiHappy, emojiNeutral, emojiSad;
@@ -25,10 +27,11 @@ public class PhotoSpotDetailActivity extends AppCompatActivity {
         TextView name = findViewById(R.id.detail_name);
         TextView address = findViewById(R.id.detail_address);
         ImageView image = findViewById(R.id.detail_image);
+        String imageUrl = getIntent().getStringExtra("imageUrl");
 
         name.setText(getIntent().getStringExtra("name"));
         address.setText(getIntent().getStringExtra("address"));
-        image.setImageResource(getIntent().getIntExtra("imageRes", 0));
+        Glide.with(this).load(imageUrl).into(image);
 
         // View 바인딩
         Button writeCommentBtn = findViewById(R.id.write_comment_button);
