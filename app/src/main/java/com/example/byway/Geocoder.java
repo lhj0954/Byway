@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 
 import com.google.gson.Gson;
 
+import java.util.Locale;
 import java.util.List;
 
 import okhttp3.OkHttpClient;

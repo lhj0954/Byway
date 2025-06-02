@@ -31,6 +31,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 }
+
 dependencies {
     // Firebase BOM - 버전 통일
     implementation(platform(libs.firebase.bom)) // libs.versions.toml에서 관리됨
@@ -38,6 +39,12 @@ dependencies {
     // Firebase (버전 없이 BOM 기준으로 가져감)
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
+    implementation ("com.google.firebase:firebase-storage:20.2.1")
+
+    //사진 불러오기
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
+
 
     // Google Play 서비스
     implementation(libs.play.services.auth)
@@ -55,6 +62,8 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
     implementation("org.json:json:20240303")
 
+
+
     // AndroidX & 테스트
     implementation(libs.appcompat)
     implementation(libs.material)
@@ -64,3 +73,4 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 }
+

@@ -2,9 +2,12 @@ package com.example.byway;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.pm.Signature;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -37,9 +40,10 @@ import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.util.FusedLocationSource;
 import com.naver.maps.map.overlay.Marker;
 
+import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
-
     private MapView mapView;
     private NaverMap naverMap;
 
@@ -58,6 +62,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private boolean isRecording = false; //길 등록중인지
     private boolean isAddingSpot = false; //스팟 등록중인지
     private boolean isFabOpen = false;
+    private boolean isStartPointInitialized = false;
+    private boolean isViewingSpots =false;
     private PathRecorder pathRecorder;
     private MapManager mapManager;
     private SpotManager spotManager;
@@ -69,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private ActivityResultLauncher<Intent> spotActivityLauncher;
 
     private FloatingActionButton fabSubLeft, fabSubRight;
+    private EditText startPoint, searchInput;
 
     public Location getLastLocation() {
         return lastLocation;
@@ -97,6 +104,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public PathRecorder getPathRecorder() {
         return pathRecorder;
     }
+
 
     public void setPathRecorder(PathRecorder pathRecorder) {
         this.pathRecorder = pathRecorder;
@@ -153,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void setRecordingControls(LinearLayout recordingControls) {
         this.recordingControls = recordingControls;
     }
-
+    
     public LatLng getSelectedSpot() {
         return selectedSpot;
     }
@@ -165,41 +173,19 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public ActivityResultLauncher<Intent> getSpotActivityLauncher() {
         return spotActivityLauncher;
     }
-
-    public void setSpotActivityLauncher(ActivityResultLauncher<Intent> spotActivityLauncher) {
-        this.spotActivityLauncher = spotActivityLauncher;
-    }
-
     public boolean isFabOpen() {
         return isFabOpen;
     }
-
     public void setFabOpen(boolean fabOpen) {
         isFabOpen = fabOpen;
     }
 
-    public EditText getStartEditText() {
-        return startEditText;
+    public boolean isViewingSpots() {
+        return isViewingSpots;
     }
 
-    public void setStartEditText(EditText startEditText) {
-        this.startEditText = startEditText;
-    }
-
-    public EditText getGoalEditText() {
-        return goalEditText;
-    }
-
-    public void setGoalEditText(EditText goalEditText) {
-        this.goalEditText = goalEditText;
-    }
-
-    public TextView getInfoTextView() {
-        return infoTextView;
-    }
-
-    public void setInfoTextView(TextView infoTextView) {
-        this.infoTextView = infoTextView;
+    public void setViewingSpots(boolean viewingSpots) {
+        isViewingSpots = viewingSpots;
     }
 
     @Override
@@ -256,7 +242,31 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     LOCATION_PERMISSION_REQUEST_CODE);
         }
+
+        naverMap.addOnLocationChangeListener(location -> {
+            if (location != null) {
+                Location loc = new Location("");
+                loc.setLatitude(location.getLatitude());
+                loc.setLongitude(location.getLongitude());
+                setLastLocation(loc);
+            }
+        });
     }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+
+        // 전달받은 사진 명소 스팟 데이터 처리
+        if (intent != null && intent.hasExtra("spots")) {
+            ArrayList<SpotData> photoSpots = (ArrayList<SpotData>) intent.getSerializableExtra("spots");
+
+            spotManager.showRecommendedSpots(naverMap, photoSpots);
+            setViewingSpots(true);
+        }
+    }
+
+
 
     // 권한 요청 결과 처리
     @Override

@@ -10,7 +10,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+        android:background="@color/brown"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         android:elevation="4dp"
         android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
@@ -19,52 +19,73 @@
     <!-- 스크롤 가능한 내용 -->
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
-            android:padding="16dp"
+            android:padding="20dp"
             android:layout_height="wrap_content">
 
+            <!-- 위치 정보 -->
             <TextView
                 android:id="@+id/spotLocationTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="위치 정보"
-                android:textSize="16sp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#333333"
                 android:layout_marginBottom="16dp" />
 
+            <!-- 카테고리 -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="카테고리"
                 android:textStyle="bold"
-                android:layout_marginBottom="4dp" />
+                android:textSize="16sp"
+                android:textColor="#555555"
+                android:layout_marginBottom="6dp" />
 
             <Spinner
                 android:id="@+id/keywordSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp" />
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/border_background" />
 
+            <!-- 설명 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="스팟 설명"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="#555555"
+                android:layout_marginBottom="6dp" />
 
             <EditText
                 android:id="@+id/descriptionEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="스팟에 대해 간단하게 설명해주세요"
-                android:minLines="3"
-                android:gravity="top"
-                android:background="@android:drawable/edit_text"
-                android:padding="8dp" />
+                android:minLines="4"
+                android:gravity="top|start"
+                android:background="@drawable/border_background"
+                android:padding="12dp"
+                android:layout_marginBottom="24dp" />
 
+            <!-- 사진 선택 -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="사진 선택"
                 android:textStyle="bold"
-                android:layout_marginTop="16dp"
+                android:textSize="16sp"
+                android:textColor="#555555"
                 android:layout_marginBottom="8dp" />
 
             <ImageView
@@ -72,26 +93,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginBottom="16dp"
-                android:src="@android:drawable/ic_menu_camera"
-                android:contentDescription="스팟 이미지" />
+                android:background="@drawable/border_background"
+                android:scaleType="centerCrop"
+                android:contentDescription="스팟 이미지"
+                android:padding="4dp"
+                android:src="@android:drawable/ic_menu_camera" />
 
             <Button
                 android:id="@+id/selectImageButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="이미지 선택"
-                android:backgroundTint="#FF6200EE"
-                android:textColor="#FFFFFF"
-                android:layout_marginBottom="16dp" />
+                android:background="@drawable/button_selector"
+                android:textColor="@color/button_text_color"
+                android:layout_marginBottom="20dp" />
 
             <Button
                 android:id="@+id/completeButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="등록 완료"
-                android:layout_marginTop="20dp"
-                android:backgroundTint="#FF6200EE"
-                android:textColor="#FFFFFF" />
+
+                android:background="@drawable/button_selector"
+                android:textColor="@color/button_text_color"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="30dp" />
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
