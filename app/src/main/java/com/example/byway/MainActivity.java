@@ -40,7 +40,7 @@ import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.util.FusedLocationSource;
 import com.naver.maps.map.overlay.Marker;
 
-
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private boolean isAddingSpot = false; //스팟 등록중인지
     private boolean isFabOpen = false;
     private boolean isStartPointInitialized = false;
+    private boolean isViewingSpots =false;
     private PathRecorder pathRecorder;
     private MapManager mapManager;
     private SpotManager spotManager;
@@ -103,6 +104,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public PathRecorder getPathRecorder() {
         return pathRecorder;
     }
+
 
     public void setPathRecorder(PathRecorder pathRecorder) {
         this.pathRecorder = pathRecorder;
@@ -159,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void setRecordingControls(LinearLayout recordingControls) {
         this.recordingControls = recordingControls;
     }
-
+    
     public LatLng getSelectedSpot() {
         return selectedSpot;
     }
@@ -171,56 +173,19 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public ActivityResultLauncher<Intent> getSpotActivityLauncher() {
         return spotActivityLauncher;
     }
-
-    public void setSpotActivityLauncher(ActivityResultLauncher<Intent> spotActivityLauncher) {
-        this.spotActivityLauncher = spotActivityLauncher;
-    }
-
     public boolean isFabOpen() {
         return isFabOpen;
     }
-
     public void setFabOpen(boolean fabOpen) {
         isFabOpen = fabOpen;
     }
 
-    public EditText getStartEditText() {
-        return startEditText;
+    public boolean isViewingSpots() {
+        return isViewingSpots;
     }
 
-    public void setStartEditText(EditText startEditText) {
-        this.startEditText = startEditText;
-    }
-
-    public EditText getGoalEditText() {
-        return goalEditText;
-    }
-
-    public void setGoalEditText(EditText goalEditText) {
-        this.goalEditText = goalEditText;
-    }
-
-    public TextView getInfoTextView() {
-        return infoTextView;
-    }
-
-    public void setInfoTextView(TextView infoTextView) {
-        this.infoTextView = infoTextView;
-    }
-    public EditText getSearchInput() {
-        return searchInput;
-    }
-
-    public void setSearchInput(EditText searchInput) {
-        this.searchInput = searchInput;
-    }
-
-    public boolean isStartPointInitialized() {
-        return isStartPointInitialized;
-    }
-
-    public void setStartPointInitialized(boolean startPointInitialized) {
-        isStartPointInitialized = startPointInitialized;
+    public void setViewingSpots(boolean viewingSpots) {
+        isViewingSpots = viewingSpots;
     }
 
     @Override
@@ -287,6 +252,21 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
     }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+
+        // 전달받은 사진 명소 스팟 데이터 처리
+        if (intent != null && intent.hasExtra("spots")) {
+            ArrayList<SpotData> photoSpots = (ArrayList<SpotData>) intent.getSerializableExtra("spots");
+
+            spotManager.showRecommendedSpots(naverMap, photoSpots);
+            setViewingSpots(true);
+        }
+    }
+
+
 
     // 권한 요청 결과 처리
     @Override

@@ -39,6 +39,12 @@ dependencies {
     // Firebase (버전 없이 BOM 기준으로 가져감)
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
+    implementation ("com.google.firebase:firebase-storage:20.2.1")
+
+    //사진 불러오기
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
+
 
     // Google Play 서비스
     implementation(libs.play.services.auth)
@@ -67,3 +73,4 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 }
+

@@ -68,6 +68,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="경로 찾기"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/brown"
         app:layout_constraintTop_toBottomOf="@id/search_input"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -100,17 +102,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
-        android:id="@+id/btn_logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="로그아웃"
-        android:layout_marginTop="100dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:backgroundTint="@color/brown"
-        />
+<!--    <Button-->
+<!--        android:id="@+id/btn_logout"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="로그아웃"-->
+<!--        android:layout_marginTop="100dp"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:backgroundTint="@color/brown"-->
+<!--        />-->
 
 <!--    <TextView-->
 <!--        android:id="@+id/infoTextView"-->
