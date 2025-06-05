@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.byway.app-mergeDebugResources-40:/values-en-rAU/values-en-rAU.xml",
+            "outputFile": "com.example.byway.app-mergeDebugResources-41:/values-en-rAU/values-en-rAU.xml",
             "map": [
                 {
                     "source": "C:\\Users\\gkrwn\\.gradle\\caches\\transforms-4\\1574e980d0c82a50fcdc0eebbade7187\\transformed\\browser-1.4.0\\res\\values-en-rAU\\values-en-rAU.xml",

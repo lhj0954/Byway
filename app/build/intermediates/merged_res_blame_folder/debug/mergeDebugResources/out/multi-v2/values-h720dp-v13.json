@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.byway.app-mergeDebugResources-40:/values-h720dp-v13/values-h720dp-v13.xml",
+            "outputFile": "com.example.byway.app-mergeDebugResources-41:/values-h720dp-v13/values-h720dp-v13.xml",
             "map": [
                 {
                     "source": "C:\\Users\\gkrwn\\.gradle\\caches\\transforms-4\\05642fd6f3ab7bbce7753574a60ff771\\transformed\\appcompat-1.7.0\\res\\values-h720dp-v13\\values-h720dp-v13.xml",

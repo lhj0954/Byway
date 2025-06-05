@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.byway.app-mergeDebugResources-40:/values-w360dp-port-v13/values-w360dp-port-v13.xml",
+            "outputFile": "com.example.byway.app-mergeDebugResources-41:/values-w360dp-port-v13/values-w360dp-port-v13.xml",
             "map": [
                 {
                     "source": "C:\\Users\\gkrwn\\.gradle\\caches\\transforms-4\\8eea598552256829606c2a8e7e4da6ba\\transformed\\material-1.12.0\\res\\values-w360dp-port-v13\\values-w360dp-port-v13.xml",

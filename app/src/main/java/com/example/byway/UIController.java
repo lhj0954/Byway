@@ -39,7 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class UIController {
+public class  UIController {
 
     private final MainActivity activity;
     private final NaverMap naverMap;
@@ -189,6 +189,7 @@ public class UIController {
                 System.out.println("lat : "+searchInputLat+"lng :"+searchInputLng);
                 tmapRouteManager.requestTmapWalkRoute(startPointLng, startPointLat, searchInputLng, searchInputLat);
             }
+
         });
 
         // 현위치 버튼

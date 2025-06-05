@@ -1,25 +1,8 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.byway.app-mergeDebugResources-40:/values-ms/values-ms.xml",
+            "outputFile": "com.example.byway.app-mergeDebugResources-41:/values-ms/values-ms.xml",
             "map": [
-                {
-                    "source": "C:\\Users\\gkrwn\\.gradle\\caches\\transforms-4\\e121e645541df8050343b2d5347718d8\\transformed\\play-services-basement-18.2.0\\res\\values-ms\\values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "195",
-                        "endColumns": "141",
-                        "endOffsets": "336"
-                    },
-                    "to": {
-                        "startLines": "56",
-                        "startColumns": "4",
-                        "startOffsets": "5540",
-                        "endColumns": "145",
-                        "endOffsets": "5681"
-                    }
-                },
                 {
                     "source": "C:\\Users\\gkrwn\\.gradle\\caches\\transforms-4\\6b3f8c564bed34007dba6ce442b227f1\\transformed\\play-services-base-18.1.0\\res\\values-ms\\values.xml",
                     "from": {
@@ -105,6 +88,23 @@
                         "endLines": "5,33,34,35,36,37,45,46,47,67,68,69,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,135,136,137",
                         "endColumns": "12,79,78,86,91,86,102,115,82,61,64,92,64,58,86,61,61,59,65,61,53,107,56,60,54,70,119,90,76,96,84,85,147,85,85,127,87,77,52,50,65,70,77,70,78,72,75,72,70,106,91,72,89,92,73,70,90,51,79,67,83,84,61,63,62,71,103,107,95,105,56,54,85,84,77,76",
                         "endOffsets": "324,3099,3178,3265,3357,3444,4290,4406,4489,7012,7077,7170,7556,7615,7702,7764,7826,7886,7952,8014,8068,8176,8233,8294,8349,8420,8540,8631,8708,8805,8890,8976,9124,9210,9296,9424,9512,9590,9643,9694,9760,9831,9909,9980,10059,10132,10208,10281,10352,10459,10551,10624,10714,10807,10881,10952,11043,11095,11175,11243,11327,11412,11474,11538,11601,11673,11777,11885,11981,12087,12144,12199,12285,12451,12529,12606"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\gkrwn\\.gradle\\caches\\transforms-4\\6b6d1aad7c1529b00f6628504fc9dca4\\transformed\\play-services-basement-18.3.0\\res\\values-ms\\values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "195",
+                        "endColumns": "141",
+                        "endOffsets": "336"
+                    },
+                    "to": {
+                        "startLines": "56",
+                        "startColumns": "4",
+                        "startOffsets": "5540",
+                        "endColumns": "145",
+                        "endOffsets": "5681"
                     }
                 }
             ]

@@ -8,6 +8,16 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/routeRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <com.naver.maps.map.MapView
         android:id="@+id/map_view"
         android:layout_width="0dp"
@@ -123,6 +133,19 @@
 <!--        app:layout_constraintTop_toBottomOf="@id/searchButton"-->
 <!--        app:layout_constraintStart_toStartOf="parent"-->
 <!--        app:layout_constraintEnd_toEndOf="parent"/>-->
+
+    <!-- 경로 추천 카드 -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/route_slide_recycler"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="12dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/bottom_bar_card"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <!-- 하단 네비게이션 바 -->
     <androidx.cardview.widget.CardView
