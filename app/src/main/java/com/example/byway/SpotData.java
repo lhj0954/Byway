@@ -2,6 +2,8 @@ package com.example.byway;
 
 import java.io.Serializable;
 
+import java.util.Date;
+
 public class SpotData implements Serializable {
     public double latitude;
     public double longitude;
@@ -11,7 +13,7 @@ public class SpotData implements Serializable {
     public String imageUrl;
     public String locationText;
     public String createdBy;
-
+    public Date createdAt;
     public SpotData() {}
 
     public double getLatitude() {
@@ -34,7 +36,7 @@ public class SpotData implements Serializable {
         return description;
     }
 
-    public SpotData(double latitude, double longitude, String address, String keyword, String description, String imageUrl, String locationText, String createdBy) {
+    public SpotData(double latitude, double longitude, String address, String keyword, String description, String imageUrl, String locationText, String createdBy, Date createdAt) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.address = address;
@@ -43,5 +45,6 @@ public class SpotData implements Serializable {
         this.imageUrl = imageUrl;
         this.locationText = locationText;
         this.createdBy = createdBy;
+        this.createdAt = createdAt;
     }
 }

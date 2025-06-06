@@ -11,7 +11,7 @@ import java.util.*;
 
 public class PathUploader {
 
-    public static void uploadPath(Context context, List<LatLng> path) {
+    public static void uploadPath(Context context, String keyword, List<LatLng> path) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         // 1. LatLng 리스트를 Firestore에 저장 가능한 형태로 변환
@@ -38,7 +38,7 @@ public class PathUploader {
         data.put("path", converted);            // 경로 좌표
         data.put("createdAt", new Date());      // 등록 시간
         data.put("createdBy", uid);             // 사용자 UID (등록자 정보)
-
+        data.put("keyword", keyword);
         // 4. Firestore 업로드
         Log.d("PathUploader", "Converted path size: " + converted.size());
 

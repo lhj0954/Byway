@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private LatLng selectedSpot; //스팟위치
     private Marker spotMarker; //스팟 마커
     private ActivityResultLauncher<Intent> spotActivityLauncher;
+
     private FloatingActionButton fabSubLeft, fabSubRight;
     private EditText startPoint, searchInput;
 
@@ -103,6 +104,64 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public PathRecorder getPathRecorder() {
         return pathRecorder;
     }
+
+
+    public void setPathRecorder(PathRecorder pathRecorder) {
+        this.pathRecorder = pathRecorder;
+    }
+
+    public Button getFinishRecordButton() {
+        return finishRecordButton;
+    }
+
+    public void setFinishRecordButton(Button finishRecordButton) {
+        this.finishRecordButton = finishRecordButton;
+    }
+
+    public Button getSubmitPathButton() {
+        return submitPathButton;
+    }
+
+    public void setSubmitPathButton(Button submitPathButton) {
+        this.submitPathButton = submitPathButton;
+    }
+
+    public Button getAddSpotButton() {
+        return addSpotButton;
+    }
+
+    public void setAddSpotButton(Button addSpotButton) {
+        this.addSpotButton = addSpotButton;
+    }
+
+    public Button getCancelSpotButton() {
+        return cancelSpotButton;
+    }
+
+    public void setCancelSpotButton(Button cancelSpotButton) {
+        this.cancelSpotButton = cancelSpotButton;
+    }
+
+    public Button getSearchButton() {
+        return searchButton;
+    }
+
+    public void setSearchButton(Button searchButton) {
+        this.searchButton = searchButton;
+    }
+
+    public void setSelectSpotButton(Button selectSpotButton) {
+        this.selectSpotButton = selectSpotButton;
+    }
+
+    public LinearLayout getRecordingControls() {
+        return recordingControls;
+    }
+
+    public void setRecordingControls(LinearLayout recordingControls) {
+        this.recordingControls = recordingControls;
+    }
+    
     public LatLng getSelectedSpot() {
         return selectedSpot;
     }

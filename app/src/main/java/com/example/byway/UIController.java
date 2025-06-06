@@ -97,7 +97,6 @@ public class UIController {
         Button cancelSpotButton = activity.findViewById(R.id.cancel_spot_button);
         Button selectSpotButton = activity.findViewById(R.id.select_spot_button);
         Button searchButton = activity.findViewById(R.id.searchButton);
-        Button logoutBtn = activity.findViewById(R.id.btn_logout);
         LinearLayout recordingControls = activity.findViewById(R.id.recording_controls);
         LinearLayout fabSubContainer = activity.findViewById(R.id.fab_sub_container);
         FloatingActionButton fabSubLeft = activity.findViewById(R.id.fab_sub_left);
@@ -192,19 +191,6 @@ public class UIController {
             }
         });
 
-
-        logoutBtn.setOnClickListener(v -> {
-            FirebaseAuth.getInstance().signOut(); // Firebase 로그아웃
-            GoogleSignInClient googleSignInClient = GoogleSignIn.getClient(
-                    activity, GoogleSignInOptions.DEFAULT_SIGN_IN
-            );
-            googleSignInClient.signOut().addOnCompleteListener(task -> {
-                Intent intent = new Intent(activity, LoginActivity.class);
-                activity.startActivity(intent);
-                activity.finish();
-            });
-        });
-
         // 현위치 버튼
         locationButton.setOnClickListener(v -> {
             if (activity.getLastLocation() == null) return;
@@ -262,6 +248,7 @@ public class UIController {
                             return;
                         }
 
+                        String keyword = categorySpinner.getSelectedItem().toString();
                         // PathRecorder에서 경로 데이터 가져오기
                         List<LatLng> pathPoints = activity.getPathRecorder().getPath();
                         if (pathPoints == null || !activity.getPathRecorder().hasEnoughPoints()) {
@@ -270,7 +257,7 @@ public class UIController {
                         }
 
                         //db 업로드
-                        PathUploader.uploadPath(activity, pathPoints);
+                        PathUploader.uploadPath(activity, keyword, pathPoints);
 
                         Toast.makeText(activity, "경로가 등록되었습니다.", Toast.LENGTH_SHORT).show();
 
@@ -329,28 +316,32 @@ public class UIController {
                 NearbyBottomSheetFragment bottomSheet = new NearbyBottomSheetFragment();
                 bottomSheet.show(activity.getSupportFragmentManager(), bottomSheet.getTag());
                 return false;
-            } else if (itemId == R.id.nav_my) {
-                Toast.makeText(activity, "MY 버튼 눌림", Toast.LENGTH_SHORT).show();
-                return false;
             }
-			/*
             // 로그인 체크 후 My 클릭 시
             else if (itemId == R.id.nav_my) {
                 Intent intent;
-                if (PreferenceManager.isLoggedIn(MainActivity.this)) {
-                    intent = new Intent(MainActivity.this, MyPageActivity.class);
+                if (PreferenceManager.isUserLoggedIn(activity)) {
+                    intent = new Intent(activity, MypageActivity.class); // 로그인 되어 있을 경우 Mypage
                 } else {
-                    intent = new Intent(MainActivity.this, LoginActivity.class);
+                    Toast.makeText(activity, "로그인이 필요한 기능입니다.", Toast.LENGTH_SHORT).show();
+                    intent = new Intent(activity, LoginActivity.class); // 로그인 안되어 있을 경우 Login
                 }
-                startActivity(intent);
+                activity.startActivity(intent);
                 return true;
             }
-             */
+
             return false;
         });
 
         // 오른쪽 FAB 클릭 시 샛길 등록 시작
         fabSubRight.setOnClickListener(v -> {
+            if (!PreferenceManager.isUserLoggedIn(activity)) {
+                Toast.makeText(activity, "로그인이 필요한 기능입니다.", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(activity, LoginActivity.class);
+                activity.startActivity(intent);
+                return;
+            }
+
             if (!activity.isRecording()) {
                 activity.setRecording(true);
 
@@ -370,6 +361,13 @@ public class UIController {
 
         //스팟 등록
         fabSubLeft.setOnClickListener(v -> {
+            if (!PreferenceManager.isUserLoggedIn(activity)) {
+                Toast.makeText(activity, "로그인이 필요한 기능입니다.", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(activity, LoginActivity.class);
+                activity.startActivity(intent);
+                return;
+            }
+
             activity.setAddingSpot(true);
             activity.setSelectedSpot(null);
 
