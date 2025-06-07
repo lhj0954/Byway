@@ -151,9 +151,10 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ade7ba26-ad7d-4a27-80e7-2b75b5400420" name="Changes" comment="최신버전">
+    <list default="true" id="ade7ba26-ad7d-4a27-80e7-2b75b5400420" name="Changes" comment="어플리케이션 톤 갈색으로 변경">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/themes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/themes.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/menu/bottom_nav_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/menu/bottom_nav_menu.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -292,6 +293,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\LG gram\hong\byway3\Byway\app\src\main\res\drawable" />
       <recent name="C:\Users\brian\StudioProjects\Byway\app\src\main\res\drawable" />
       <recent name="C:\Users\yjunh\StudioProjects\Byway\app\src\main\java\com\example\byway" />
       <recent name="C:\Users\yjunh\StudioProjects\Byway\app\src\main\res\drawable" />
@@ -521,7 +523,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747964681056</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="어플리케이션 톤 갈색으로 변경">
+      <option name="closed" value="true" />
+      <created>1749288330724</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1749288330724</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -551,7 +561,8 @@
     <MESSAGE value="hakjun 브랜치 merge" />
     <MESSAGE value="최종 merge" />
     <MESSAGE value="최신버전" />
-    <option name="LAST_COMMIT_MESSAGE" value="최신버전" />
+    <MESSAGE value="어플리케이션 톤 갈색으로 변경" />
+    <option name="LAST_COMMIT_MESSAGE" value="어플리케이션 톤 갈색으로 변경" />
   </component>
   <component name="play_dynamic_filters_status">
     <option name="appIdToCheckInfo">
