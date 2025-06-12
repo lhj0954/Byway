@@ -1,13 +1,14 @@
 package com.example.byway;
 
 import android.graphics.Color;
+import android.location.Location;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.byway.searchPOI.KakaoResponse;
+import androidx.annotation.NonNull;
+
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.ktx.Firebase;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.geometry.LatLngBounds;
 import com.naver.maps.map.CameraUpdate;
@@ -26,6 +27,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import com.naver.maps.map.overlay.InfoWindow;
+import com.naver.maps.map.overlay.Overlay;
 
 public class TmapRouteManager {
 
@@ -66,13 +70,161 @@ public class TmapRouteManager {
         routeInfoList.clear();
     }
 
-    public void drawPathOnMap(List<LatLng> path, String name) {
+    public void drawPathOnMap(List<LatLng> path) {
         PathOverlay pathOverlay = new PathOverlay();
         pathOverlay.setCoords(path);
         pathOverlay.setColor(Color.GREEN);
         pathOverlay.setWidth(10);
         pathOverlay.setMap(naverMap);
         _allOverlays.add(pathOverlay);
+    }
+
+    public void drawPathOnMapCategory(List<LatLng> path) {
+        // 1) 기존 오버레이·RouteInfo 초기화
+        clearOverlays();
+
+        // 2) 새 오버레이 생성
+        PathOverlay ov = new PathOverlay();
+        ov.setCoords(path);
+        ov.setColor(Color.GREEN);
+        ov.setWidth(10);
+        ov.setMap(naverMap);
+        _allOverlays.add(ov);
+
+        // 3) 클릭 리스너 달기
+        ov.setOnClickListener(new Overlay.OnClickListener() {
+            @Override
+            public boolean onClick(@NonNull Overlay overlay) {
+                // 경로의 시작점
+                LatLng guidePoint = path.get(0);
+
+                // 4) InfoWindow 생성
+                InfoWindow infoWindow = new InfoWindow();
+                infoWindow.setAdapter(new InfoWindow.DefaultTextAdapter(activity) {
+                    @NonNull @Override
+                    public CharSequence getText(@NonNull InfoWindow window) {
+                        return "시작점으로 안내";
+                    }
+                });
+
+                // 5) 말풍선 띄우기
+                infoWindow.setPosition(guidePoint);
+                infoWindow.open(naverMap);
+
+                // 6) 말풍선 클릭 시 실제 안내 경로 요청
+                infoWindow.setOnClickListener(new Overlay.OnClickListener() {
+                    @Override
+                    public boolean onClick(@NonNull Overlay overlay) {
+                        infoWindow.close();
+
+                        // 현재 위치 가져오기
+                        Location last = activity.getLastLocation();
+                        if (last != null) {
+                            double curLng = last.getLongitude();
+                            double curLat = last.getLatitude();
+                            double destLng = guidePoint.longitude;
+                            double destLat = guidePoint.latitude;
+
+                            // TmapRouteManager.requestTmapWalkRoute 로 안내 경로 그리기
+                            HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+                            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY); // 전체 로그 출력
+
+                            OkHttpClient client = new OkHttpClient.Builder()
+                                    .addInterceptor(loggingInterceptor)
+                                    .build();
+
+                            Retrofit retrofit = new Retrofit.Builder()
+                                    .baseUrl("https://apis.openapi.sk.com/tmap/")
+                                    .client(client)
+                                    .addConverterFactory(GsonConverterFactory.create())
+                                    .build();
+
+                            TmapApiService apiService = retrofit.create(TmapApiService.class);
+
+                            TmapWalkRequest request = new TmapWalkRequest(
+                                    String.valueOf(curLng),
+                                    String.valueOf(curLat),
+                                    String.valueOf(destLng),
+                                    String.valueOf(destLat)
+                            );
+
+                            Call<TmapResponse> call = apiService.getWalkingRoute(
+                                    "iwCg3TsBeQ35D1YwoVsYm9yaP1NT6UtW3vXIRpEK", // <- 반드시 본인 AppKey
+                                    request
+                            );
+
+                            call.enqueue(new Callback<TmapResponse>() {
+                                @Override
+                                public void onResponse(Call<TmapResponse> call, Response<TmapResponse> response) {
+                                    if (response.isSuccessful() && response.body() != null) {
+                                        List<LatLng> latLngList = new ArrayList<>();
+
+                                        for (TmapResponse.Feature feature : response.body().features) {
+                                            if (feature.geometry != null && feature.geometry.type.equals("LineString")) {
+                                                Object coordinatesObj = feature.geometry.coordinates;
+
+                                                if (coordinatesObj instanceof List) {
+                                                    List<?> coordList = (List<?>) coordinatesObj;
+
+                                                    for (Object coord : coordList) {
+                                                        if (coord instanceof List) {
+                                                            List<?> point = (List<?>) coord;
+
+                                                            if (point.size() >= 2 && point.get(0) instanceof Number && point.get(1) instanceof Number) {
+                                                                double lng = ((Number) point.get(0)).doubleValue();
+                                                                double lat = ((Number) point.get(1)).doubleValue();
+
+                                                                LatLng latLng = new LatLng(lat, lng);
+                                                                latLngList.add(latLng);
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        if (latLngList.size() >= 2) {
+
+                                            if (currentPathOverlay != null) {
+                                                currentPathOverlay.setMap(null); // 기존 경로 제거
+                                            }
+
+                                            currentPathOverlay = new PathOverlay();
+                                            currentPathOverlay.setCoords(latLngList);
+                                            currentPathOverlay.setColor(Color.BLUE);
+                                            currentPathOverlay.setWidth(12);
+                                            currentPathOverlay.setMap(naverMap);
+
+                                            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                                            for (LatLng latLng : latLngList) {
+                                                builder.include(latLng);
+                                            }
+                                            LatLngBounds bounds = builder.build();
+                                            naverMap.moveCamera(CameraUpdate.fitBounds(bounds, 100));
+
+                                        } else {
+                                            Toast.makeText(activity, "경로가 충분하지 않습니다.", Toast.LENGTH_SHORT).show();
+                                        }
+                                    } else {
+                                        Toast.makeText(activity, "TMAP 응답 실패", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<TmapResponse> call, Throwable t) {
+                                    Toast.makeText(activity, "TMAP 요청 실패: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        } else {
+                            Toast.makeText(activity, "현재 위치를 알 수 없습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                        return true;
+                    }
+                });
+
+                return true;  // 이벤트 소비
+            }
+        });
     }
 
     private void processAndMergeByway(List<LatLng> tmapPath, List<List<LatLng>> bywayPaths) {
@@ -117,14 +269,6 @@ public class TmapRouteManager {
                 });
             });
         }
-
-        /*for (List<LatLng> mergedBywayRoute : mergedBywayRoutes) {
-            PathOverlay pathOverlay = new PathOverlay();
-            pathOverlay.setCoords(mergedBywayRoute);
-            pathOverlay.setColor(Color.RED);
-            pathOverlay.setWidth(10);
-            pathOverlay.setMap(naverMap);
-        }*/
     }
 
     private void requestPartialTmapRoute(LatLng start, LatLng end, RouteCallback callback) {
@@ -363,7 +507,7 @@ public class TmapRouteManager {
                                 allBywayPaths.add(latLngPathList);
 
                                 //주변(300m) 샛길 경로 그리기
-                                drawPathOnMap(latLngPathList, name);
+                                drawPathOnMap(latLngPathList);
 
                             } else {
                                 Log.w("FireStore", "latLngPathList is empty for doc " + doc.getId());

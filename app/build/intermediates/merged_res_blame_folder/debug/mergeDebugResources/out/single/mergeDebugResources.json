@@ -8,6 +8,10 @@
         "source": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_emoji_happy.png"
     },
     {
+        "merged": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_spot_shop.png.flat",
+        "source": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\spot_shop.png"
+    },
+    {
         "merged": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\menu_logout_menu.xml.flat",
         "source": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\menu\\logout_menu.xml"
     },
@@ -18,6 +22,10 @@
     {
         "merged": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_route.png.flat",
         "source": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_route.png"
+    },
+    {
+        "merged": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_spot_camera.png.flat",
+        "source": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\spot_camera.png"
     },
     {
         "merged": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\layout_activity_photo_spot_detail.xml.flat",
@@ -48,12 +56,12 @@
         "source": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_launcher_foreground.xml"
     },
     {
-        "merged": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_spinner_custom.xml.flat",
-        "source": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\spinner_custom.xml"
-    },
-    {
         "merged": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\layout_item_place.xml.flat",
         "source": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\layout\\item_place.xml"
+    },
+    {
+        "merged": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_spinner_custom.xml.flat",
+        "source": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\spinner_custom.xml"
     },
     {
         "merged": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\mipmap-hdpi_ic_launcher_round.webp.flat",
@@ -66,6 +74,10 @@
     {
         "merged": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_flag.png.flat",
         "source": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_flag.png"
+    },
+    {
+        "merged": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\layout_item_user_path.xml.flat",
+        "source": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\layout\\item_user_path.xml"
     },
     {
         "merged": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\layout_activity_register.xml.flat",
@@ -156,6 +168,10 @@
         "source": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\bottom_sheet_handle.xml"
     },
     {
+        "merged": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_plus.png.flat",
+        "source": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_plus.png"
+    },
+    {
         "merged": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_map_sample.png.flat",
         "source": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\map_sample.png"
     },
@@ -186,6 +202,10 @@
     {
         "merged": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_emoji_sad.png.flat",
         "source": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_emoji_sad.png"
+    },
+    {
+        "merged": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_spot_danger.png.flat",
+        "source": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\spot_danger.png"
     },
     {
         "merged": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\layout_activity_login.xml.flat",
@@ -232,6 +252,10 @@
         "source": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\comment_background.xml"
     },
     {
+        "merged": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_addway.png.flat",
+        "source": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_addway.png"
+    },
+    {
         "merged": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\layout_item_photo_spot.xml.flat",
         "source": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\layout\\item_photo_spot.xml"
     },
@@ -258,6 +282,10 @@
     {
         "merged": "com.example.byway.app-debug-43:/layout_activity_main.xml.flat",
         "source": "com.example.byway.app-main-45:/layout/activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\layout_item_user_spot.xml.flat",
+        "source": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\layout\\item_user_spot.xml"
     },
     {
         "merged": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_logout.png.flat",

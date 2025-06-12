@@ -3146,6 +3146,7 @@ int drawable design_password_eye 0x7f08009f
 int drawable design_snackbar_background 0x7f0800a0
 int drawable googleg_disabled_color_18 0x7f0800a1
 int drawable googleg_standard_color_18 0x7f0800a2
+int drawable ic_addway 0x7f08014a
 int drawable ic_arrow_back_black_24 0x7f0800a3
 int drawable ic_byway 0x7f0800a4
 int drawable ic_call_answer 0x7f0800a5
@@ -3179,6 +3180,7 @@ int drawable ic_mtrl_chip_checked_circle 0x7f0800c0
 int drawable ic_mtrl_chip_close_circle 0x7f0800c1
 int drawable ic_my 0x7f0800c2
 int drawable ic_nearby 0x7f0800c3
+int drawable ic_plus 0x7f08014b
 int drawable ic_route 0x7f0800c4
 int drawable ic_search 0x7f0800c5
 int drawable ic_search_black_24 0x7f0800c6
@@ -3309,6 +3311,9 @@ int drawable notification_tile_bg 0x7f080142
 int drawable notify_panel_notification_icon_bg 0x7f080143
 int drawable search_background 0x7f080144
 int drawable spinner_custom 0x7f080145
+int drawable spot_camera 0x7f08014c
+int drawable spot_danger 0x7f08014d
+int drawable spot_shop 0x7f08014e
 int drawable test_level_drawable 0x7f080146
 int drawable tooltip_frame_dark 0x7f080147
 int drawable tooltip_frame_light 0x7f080148
@@ -3736,6 +3741,10 @@ int id password_toggle 0x7f0901a4
 int id path 0x7f0901a5
 int id pathRelative 0x7f0901a6
 int id path_controls 0x7f0901a7
+int id path_icon 0x7f090266
+int id path_keyword 0x7f090267
+int id path_timestamp 0x7f090268
+int id path_title 0x7f090269
 int id peekHeight 0x7f0901a8
 int id percent 0x7f0901a9
 int id photo_address 0x7f0901aa
@@ -3759,6 +3768,7 @@ int id ratio 0x7f0901bb
 int id recording_controls 0x7f0901bc
 int id rectangles 0x7f0901bd
 int id recyclerView 0x7f0901be
+int id recycler_history 0x7f09026a
 int id report_drawn 0x7f0901bf
 int id reverseSawtooth 0x7f0901c0
 int id right 0x7f0901c1
@@ -3803,6 +3813,7 @@ int id shortcut 0x7f0901e5
 int id showCustom 0x7f0901e6
 int id showHome 0x7f0901e7
 int id showTitle 0x7f0901e8
+int id show_all_button 0x7f09026b
 int id sin 0x7f0901e9
 int id skipCollapsed 0x7f0901ea
 int id skipped 0x7f0901eb
@@ -3818,7 +3829,13 @@ int id spline 0x7f0901f4
 int id split_action_bar 0x7f0901f5
 int id spotImageView 0x7f0901f6
 int id spotLocationTextView 0x7f0901f7
+int id spot_address 0x7f09026c
 int id spot_controls 0x7f0901f8
+int id spot_description 0x7f09026d
+int id spot_icon 0x7f09026e
+int id spot_keyword 0x7f09026f
+int id spot_timestamp 0x7f090270
+int id spot_title 0x7f090271
 int id spread 0x7f0901f9
 int id spread_inside 0x7f0901fa
 int id spring 0x7f0901fb
@@ -3899,7 +3916,6 @@ int id uniform 0x7f090243
 int id unlabeled 0x7f090244
 int id up 0x7f090245
 int id useLogo 0x7f090246
-int id user_name_text 0x7f090247
 int id vertical 0x7f090248
 int id vertical_only 0x7f090249
 int id view_offset_helper 0x7f09024a
@@ -4073,6 +4089,8 @@ int layout item_category 0x7f0c003c
 int layout item_photo_spot 0x7f0c003d
 int layout item_place 0x7f0c003e
 int layout item_route_card 0x7f0c0089
+int layout item_user_path 0x7f0c008a
+int layout item_user_spot 0x7f0c008b
 int layout m3_alert_dialog 0x7f0c003f
 int layout m3_alert_dialog_actions 0x7f0c0040
 int layout m3_alert_dialog_title 0x7f0c0041
