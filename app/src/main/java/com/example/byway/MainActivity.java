@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -14,6 +15,8 @@ import android.widget.Toast;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.naver.maps.geometry.LatLngBounds;
+import com.naver.maps.map.CameraUpdate;
 import com.naver.maps.map.overlay.PathOverlay;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -35,6 +38,7 @@ import com.naver.maps.map.util.FusedLocationSource;
 import com.naver.maps.map.overlay.Marker;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -75,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private RecyclerView routeRecyclerView;
     private RouteCardAdapter routeInfoAdapter;
+    private TmapRouteManager tmapRouteManager;
 
     public Location getLastLocation() {
         return lastLocation;
@@ -233,6 +238,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         uiController.setupUI();
         uiController.setupMapListeners();
 
+        tmapRouteManager = new TmapRouteManager(this, naverMap);
+
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
@@ -250,6 +257,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 setLastLocation(loc);
             }
         });
+    }
+
+    public void drawCategoryPath(List<LatLng> coords) {
+
+        tmapRouteManager.clearOverlays();
+        tmapRouteManager.drawPathOnMapCategory(coords);
+        // 카메라도 맞춰 줍니다
+        LatLngBounds.Builder b = new LatLngBounds.Builder();
+        for (LatLng p : coords) b.include(p);
+        naverMap.moveCamera(CameraUpdate.fitBounds(b.build(), 100));
     }
 
     @Override

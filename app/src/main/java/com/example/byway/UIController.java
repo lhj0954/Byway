@@ -147,7 +147,7 @@ public class  UIController {
         routeCardAdapter = new RouteCardAdapter(new ArrayList<>(), info -> {
             // 카드 클릭 시: 기존 오버레이 제거 후 해당 경로만 그림
             tmapRouteManager.clearOverlays();
-            tmapRouteManager.drawPathOnMap(info.getPath(), "");
+            tmapRouteManager.drawPathOnMap(info.getPath());
         });
         routeRecycler.setAdapter(routeCardAdapter);
 
