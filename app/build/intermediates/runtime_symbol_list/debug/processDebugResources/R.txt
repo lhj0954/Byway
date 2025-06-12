@@ -3856,12 +3856,10 @@ int id tag_unhandled_key_listeners 0x7f09021a
 int id tag_window_insets_animation_callback 0x7f09021b
 int id text 0x7f09021c
 int id text2 0x7f09021d
-int id textDistance 0x7f090262
 int id textEnd 0x7f09021e
 int id textSpacerNoButtons 0x7f09021f
 int id textSpacerNoTitle 0x7f090220
 int id textStart 0x7f090221
-int id textTime 0x7f090263
 int id textTop 0x7f090222
 int id text_input_end_icon 0x7f090223
 int id text_input_error_icon 0x7f090224
@@ -3894,6 +3892,8 @@ int id transition_position 0x7f09023e
 int id transition_scene_layoutid_cache 0x7f09023f
 int id transition_transform 0x7f090240
 int id triangle 0x7f090241
+int id tv_route_distance 0x7f090264
+int id tv_route_time 0x7f090265
 int id unchecked 0x7f090242
 int id uniform 0x7f090243
 int id unlabeled 0x7f090244
@@ -4072,7 +4072,7 @@ int layout ime_secondary_split_test_activity 0x7f0c003b
 int layout item_category 0x7f0c003c
 int layout item_photo_spot 0x7f0c003d
 int layout item_place 0x7f0c003e
-int layout item_route_info 0x7f0c0088
+int layout item_route_card 0x7f0c0089
 int layout m3_alert_dialog 0x7f0c003f
 int layout m3_alert_dialog_actions 0x7f0c0040
 int layout m3_alert_dialog_title 0x7f0c0041

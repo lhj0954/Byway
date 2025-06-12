@@ -62,7 +62,8 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
     implementation("org.json:json:20240303")
 
-
+    // RecyclerView (1.x 버전을 쓰고 계신다면 최신 버전으로)
+    implementation ("androidx.recyclerview:recyclerview:1.2.1")
 
     // AndroidX & 테스트
     implementation(libs.appcompat)

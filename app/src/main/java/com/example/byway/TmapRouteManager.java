@@ -15,6 +15,7 @@ import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.overlay.PathOverlay;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -41,12 +42,37 @@ public class TmapRouteManager {
         this.currentPathOverlay = null;
     }
 
-    private void drawPathOnMap(List<LatLng> path, String name) {
+    // 1) 준비된 RouteInfo 리스트를 전달할 리스너 인터페이스
+    public interface OnRoutesReadyListener {
+        void onRoutesReady(List<RouteInfo> routes);
+    }
+
+    private OnRoutesReadyListener routesReadyListener;
+
+    /** 외부에서 리스너 등록 */
+    public void setOnRoutesReadyListener(OnRoutesReadyListener listener) {
+        this.routesReadyListener = listener;
+    }
+
+    // 2) 지도 위에 그린 모든 PathOverlay를 저장해두고, 필요 시 지울 수 있도록 리스트로 관리
+    private final List<PathOverlay> _allOverlays = new ArrayList<>();
+
+    /** 기존에 그려진 모든 오버레이(경로)를 제거 */
+    public void clearOverlays() {
+        for (PathOverlay ov : _allOverlays) {
+            ov.setMap(null);
+        }
+        _allOverlays.clear();
+        routeInfoList.clear();
+    }
+
+    public void drawPathOnMap(List<LatLng> path, String name) {
         PathOverlay pathOverlay = new PathOverlay();
         pathOverlay.setCoords(path);
         pathOverlay.setColor(Color.GREEN);
         pathOverlay.setWidth(10);
         pathOverlay.setMap(naverMap);
+        _allOverlays.add(pathOverlay);
     }
 
     private void processAndMergeByway(List<LatLng> tmapPath, List<List<LatLng>> bywayPaths) {
@@ -81,18 +107,24 @@ public class TmapRouteManager {
                     // UI에 사용할 경로 정보 저장
                     routeInfoList.add(new RouteInfo(merged, totalDistance, estimatedTime));
 
+                    // 콜백
+                    if (routesReadyListener != null) {
+                        // 방어적 복사 권장
+                        routesReadyListener.onRoutesReady(
+                                Collections.unmodifiableList(routeInfoList)
+                        );
+                    }
                 });
             });
         }
-        activity.updateRouteListUI(routeInfoList);
 
-        for (List<LatLng> mergedBywayRoute : mergedBywayRoutes) {
+        /*for (List<LatLng> mergedBywayRoute : mergedBywayRoutes) {
             PathOverlay pathOverlay = new PathOverlay();
             pathOverlay.setCoords(mergedBywayRoute);
             pathOverlay.setColor(Color.RED);
             pathOverlay.setWidth(10);
             pathOverlay.setMap(naverMap);
-        }
+        }*/
     }
 
     private void requestPartialTmapRoute(LatLng start, LatLng end, RouteCallback callback) {
@@ -271,6 +303,7 @@ public class TmapRouteManager {
                         LatLngBounds bounds = builder.build();
                         naverMap.moveCamera(CameraUpdate.fitBounds(bounds, 100));
 
+                        Log.d("suc","suc");
                         //주변(300m) 샛길 불러오기 및 샛길 연결하기
                         fetchAndProcessByways(latLngList);
                     } else {
@@ -320,6 +353,11 @@ public class TmapRouteManager {
                                     Log.w("FireStore", "Null point in points list, doc " + doc.getId());
                                 }
                             }
+
+                            Log.d("BywayDebug", "doc " + doc.getId() +
+                                    " pathSize=" + latLngPathList.size() +
+                                    " within300m=" + isWithin300m(tmapPath, latLngPathList)
+                            );
                             if (!latLngPathList.isEmpty() && isWithin300m(tmapPath, latLngPathList)) {
                                 //300m 이내 샛길만 추가
                                 allBywayPaths.add(latLngPathList);

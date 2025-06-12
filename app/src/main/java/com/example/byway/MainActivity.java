@@ -2,13 +2,9 @@ package com.example.byway;
 
 import android.Manifest;
 import android.content.Intent;
-import android.content.pm.Signature;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
-import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -18,8 +14,6 @@ import android.widget.Toast;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.naver.maps.geometry.LatLngBounds;
-import com.naver.maps.map.CameraUpdate;
 import com.naver.maps.map.overlay.PathOverlay;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -27,18 +21,11 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.app.AppCompatDelegate; // ✅ 추가됨
 import androidx.core.app.ActivityCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseAuth;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.MapView;
@@ -48,7 +35,6 @@ import com.naver.maps.map.util.FusedLocationSource;
 import com.naver.maps.map.overlay.Marker;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -88,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private EditText startPoint, searchInput;
 
     private RecyclerView routeRecyclerView;
-    private RouteInfoAdapter routeInfoAdapter;
+    private RouteCardAdapter routeInfoAdapter;
 
     public Location getLastLocation() {
         return lastLocation;
@@ -232,18 +218,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     }
                 }
         );
-
-        // RecyclerView 세팅
-        routeRecyclerView = findViewById(R.id.routeRecyclerView);
-        routeRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        routeInfoAdapter = new RouteInfoAdapter(new ArrayList<>());
-        routeRecyclerView.setAdapter(routeInfoAdapter);
-    }
-
-    //병합 샛길 ui
-    public void updateRouteListUI(List<RouteInfo> routeInfoList) {
-        runOnUiThread(() -> routeInfoAdapter.updateRoutes(routeInfoList));
     }
 
     @Override

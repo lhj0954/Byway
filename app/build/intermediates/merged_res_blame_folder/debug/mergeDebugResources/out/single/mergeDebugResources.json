@@ -28,6 +28,10 @@
         "source": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\layout\\activity_mypage.xml"
     },
     {
+        "merged": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\layout_item_route_card.xml.flat",
+        "source": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\layout\\item_route_card.xml"
+    },
+    {
         "merged": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\mipmap-mdpi_ic_launcher_round.webp.flat",
         "source": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\mipmap-mdpi\\ic_launcher_round.webp"
     },
@@ -172,10 +176,6 @@
         "source": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\mipmap-xhdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.byway.app-debug-43:/drawable_bg_card.xml.flat",
-        "source": "com.example.byway.app-main-45:/drawable/bg_card.xml"
-    },
-    {
         "merged": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\mipmap-xhdpi_ic_launcher.webp.flat",
         "source": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\mipmap-xhdpi\\ic_launcher.webp"
     },
@@ -196,10 +196,6 @@
         "source": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\border_background.xml"
     },
     {
-        "merged": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\layout_item_route.xml.flat",
-        "source": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\layout\\item_route.xml"
-    },
-    {
         "merged": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\layout_activity_photo_spot.xml.flat",
         "source": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\layout\\activity_photo_spot.xml"
     },
@@ -210,6 +206,10 @@
     {
         "merged": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\mipmap-xxhdpi_ic_launcher.webp.flat",
         "source": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\mipmap-xxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_bg_card.xml.flat",
+        "source": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\bg_card.xml"
     },
     {
         "merged": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_nearby.png.flat",
@@ -238,10 +238,6 @@
     {
         "merged": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\mipmap-hdpi_ic_launcher.webp.flat",
         "source": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\mipmap-hdpi\\ic_launcher.webp"
-    },
-    {
-        "merged": "com.example.byway.app-debug-43:/layout_item_route_info.xml.flat",
-        "source": "com.example.byway.app-main-45:/layout/item_route_info.xml"
     },
     {
         "merged": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_current_location.png.flat",
