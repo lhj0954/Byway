@@ -27,6 +27,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -153,6 +154,7 @@ public class SpotActivity extends AppCompatActivity {
                     storageRef.getDownloadUrl().addOnSuccessListener(uri -> {
                         String downloadUrl = uri.toString();
 
+
                         // SpotData 생성 및 Firestore 저장
                         double latitude = getIntent().getDoubleExtra("latitude", 0.0);
                         double longitude = getIntent().getDoubleExtra("longitude", 0.0);
@@ -161,7 +163,7 @@ public class SpotActivity extends AppCompatActivity {
                         String description = descriptionEditText.getText().toString();
                         String locationText = spotLocationTextView.getText().toString();
 
-                        SpotData spot = new SpotData(latitude, longitude, address, keyword, description, downloadUrl, locationText, uid);
+                        SpotData spot = new SpotData(latitude, longitude, address, keyword, description, downloadUrl, locationText, uid, new Date());
 
                         db.collection("spots")
                                 .add(spot)

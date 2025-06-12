@@ -290,6 +290,7 @@ public class  UIController {
                             return;
                         }
 
+                        String keyword = categorySpinner.getSelectedItem().toString();
                         // PathRecorder에서 경로 데이터 가져오기
                         List<LatLng> pathPoints = activity.getPathRecorder().getPath();
                         if (pathPoints == null || !activity.getPathRecorder().hasEnoughPoints()) {
@@ -298,7 +299,7 @@ public class  UIController {
                         }
 
                         //db 업로드
-                        PathUploader.uploadPath(activity, pathPoints);
+                        PathUploader.uploadPath(activity, keyword, pathPoints);
 
                         Toast.makeText(activity, "경로가 등록되었습니다.", Toast.LENGTH_SHORT).show();
 
@@ -368,7 +369,7 @@ public class  UIController {
                     intent = new Intent(activity, LoginActivity.class); // 로그인 안되어 있을 경우 Login
                 }
                 activity.startActivity(intent);
-                return true;
+                return false;
             }
 
             return false;

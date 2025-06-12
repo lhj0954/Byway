@@ -121,9 +121,6 @@ public class SpotManager {
         dialog.show();
     }
 
-
-
-
     public void clearAllSpotMarkers() {
         for (Marker marker : spotMarkers) {
             marker.setMap(null);
