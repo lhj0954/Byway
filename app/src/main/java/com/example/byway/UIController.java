@@ -327,7 +327,7 @@ public class UIController {
                     intent = new Intent(activity, LoginActivity.class); // 로그인 안되어 있을 경우 Login
                 }
                 activity.startActivity(intent);
-                return true;
+                return false;
             }
 
             return false;
