@@ -41,12 +41,12 @@ public class NearbyBottomSheetFragment extends BottomSheetDialogFragment {
 
 	private List<CategoryItem> getMockData() {
 		List<CategoryItem> items = new ArrayList<>();
-		items.add(new CategoryItem("우리 지역 베스트 샛길",  R.drawable.ic_launcher_foreground, R.color.brown));
-		items.add(new CategoryItem("데이트 코스",  R.drawable.ic_launcher_foreground, R.color.heart));
-		items.add(new CategoryItem("산책 코스",  R.drawable.ic_launcher_foreground, R.color.green));
-		items.add(new CategoryItem("쇼핑 코스",  R.drawable.ic_launcher_foreground, R.color.yellow));
-		items.add(new CategoryItem("노점상",  R.drawable.ic_launcher_foreground, R.color.pink));
-		items.add(new CategoryItem("사진 명소 추천 스팟", R.drawable.ic_launcher_foreground, R.color.blue));
+		items.add(new CategoryItem("우리 지역 베스트 샛길",  R.drawable.ic_category_best, R.color.brown));
+		items.add(new CategoryItem("데이트 코스",  R.drawable.ic_category_heart, R.color.heart));
+		items.add(new CategoryItem("산책 코스",  R.drawable.ic_category_walk, R.color.green));
+		items.add(new CategoryItem("쇼핑 코스",  R.drawable.ic_category_market, R.color.yellow));
+		items.add(new CategoryItem("노점상",  R.drawable.ic_category_fish, R.color.pink));
+		items.add(new CategoryItem("사진 명소 추천 스팟", R.drawable.ic_category_camera, R.color.blue));
 		return items;
 	}
 
