@@ -19,6 +19,16 @@ public class SplashActivity extends AppCompatActivity {
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+            startActivity(new Intent(SplashActivity.this, MainActivity.class));
+
+            /*if (user != null) {
+                // 🔐 로그인 되어 있으면 Main으로
+                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+            } else {
+                // 🔓 로그인 안 되어 있으면 Login으로
+                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+            }*/
+
             if (FirebaseAuth.getInstance().getCurrentUser() == null && PreferenceManager.isKakaoLoggedIn(this)) {
                 PreferenceManager.clear(this);
             }
@@ -31,6 +41,7 @@ public class SplashActivity extends AppCompatActivity {
 //                // 🔓 로그인 안 되어 있으면 Login으로
 //                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
 //            }
+
 
             finish(); // SplashActivity 종료
         }, 2000); // 2초 지연
