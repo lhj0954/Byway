@@ -2,6 +2,8 @@ package com.example.byway;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,21 +14,19 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class NearbyBottomSheetFragment extends BottomSheetDialogFragment {
 	FirebaseFirestore db = FirebaseFirestore.getInstance();
+
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -41,11 +41,11 @@ public class NearbyBottomSheetFragment extends BottomSheetDialogFragment {
 
 	private List<CategoryItem> getMockData() {
 		List<CategoryItem> items = new ArrayList<>();
-		items.add(new CategoryItem("우리 지역 베스트 샛길",  R.drawable.ic_category_best, R.color.brown));
-		items.add(new CategoryItem("데이트 코스",  R.drawable.ic_category_heart, R.color.heart));
-		items.add(new CategoryItem("산책 코스",  R.drawable.ic_category_walk, R.color.green));
-		items.add(new CategoryItem("쇼핑 코스",  R.drawable.ic_category_market, R.color.yellow));
-		items.add(new CategoryItem("노점상",  R.drawable.ic_category_fish, R.color.pink));
+		items.add(new CategoryItem("우리 지역 베스트 샛길", R.drawable.ic_category_best, R.color.brown));
+		items.add(new CategoryItem("데이트 코스", R.drawable.ic_category_heart, R.color.heart));
+		items.add(new CategoryItem("산책 코스", R.drawable.ic_category_walk, R.color.green));
+		items.add(new CategoryItem("쇼핑 코스", R.drawable.ic_category_market, R.color.yellow));
+		items.add(new CategoryItem("노점상", R.drawable.ic_category_fish, R.color.pink));
 		items.add(new CategoryItem("사진 명소 추천 스팟", R.drawable.ic_category_camera, R.color.blue));
 		return items;
 	}
@@ -79,30 +79,35 @@ public class NearbyBottomSheetFragment extends BottomSheetDialogFragment {
 		@Override
 		public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 			CategoryItem item = items.get(position);
-			holder.icon.setImageResource(item.iconRes);
-			holder.icon.setColorFilter(holder.itemView.getContext().getColor(item.colorRes));
-			holder.title.setText(item.title);
+			Context context = holder.itemView.getContext();
 
+			holder.icon.setImageResource(item.iconRes);
+			// ✅ circle_background의 색상을 동적으로 변경
+			Drawable bg = holder.icon.getBackground();
+			if (bg instanceof GradientDrawable) {
+				((GradientDrawable) bg.mutate()).setColor(context.getColor(item.colorRes));
+			}
+
+			holder.title.setText(item.title);
 
 			holder.itemView.setOnClickListener(v -> {
 				String title = item.title;
-				Context context = holder.itemView.getContext();
 				Intent intent = new Intent(getContext(), MainActivity.class);
 				intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
 				switch (title) {
 					case "사진 명소 추천 스팟":
-						fetchAndSendSpots(context,"사진 명소", intent);
+						fetchAndSendSpots(context, "사진 명소", intent);
 						break;
 					case "노점상":
-						fetchAndSendSpots(context,"노점상", intent);
+						fetchAndSendSpots(context, "노점상", intent);
 						break;
 					case "데이트 코스":
 					case "산책 코스":
 						// TODO: 산책/데이트 코스 처리
 						break;
 				}
-				// ✅ 이 프래그먼트를 직접 닫기
+
 				NearbyBottomSheetFragment.this.dismiss();
 			});
 		}
