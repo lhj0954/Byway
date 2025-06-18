@@ -85,7 +85,6 @@ public class POIAdapter extends RecyclerView.Adapter<POIAdapter.ViewHolder> {
         holder.itemView.setOnClickListener(v -> {
             double lat = Double.parseDouble(poi.y);
             double lng = Double.parseDouble(poi.x);
-            Toast.makeText(context, "위치: " + lat + ", " + lng, Toast.LENGTH_SHORT).show();
 
             // 포커스된 EditText에 값 설정
             EditText targetEditText = startPoint.hasFocus() ? startPoint : searchInput;

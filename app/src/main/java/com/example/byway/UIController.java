@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.location.Location;
 import android.net.Uri;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,9 +38,10 @@ import com.naver.maps.map.NaverMap;
 
 import java.util.ArrayList;
 import java.util.List;
+import androidx.recyclerview.widget.PagerSnapHelper;
 
 
-public class UIController {
+public class  UIController {
 
     private final MainActivity activity;
     private final NaverMap naverMap;
@@ -52,6 +54,10 @@ public class UIController {
     private SearchTextWatcher startPointWatcher;
     private SearchTextWatcher searchInputWatcher;
     private EditText startPoint;
+
+    // RecyclerView for route cards
+    private RecyclerView routeRecycler;
+    private RouteCardAdapter routeCardAdapter;
 
     public SearchTextWatcher getStartPointWatcher() { return startPointWatcher; }
     public SearchTextWatcher getSearchInputWatcher() { return searchInputWatcher; }
@@ -73,12 +79,12 @@ public class UIController {
         this.searchInputLng = searchInputLng;
     }
 
-    public UIController(MainActivity activity, NaverMap naverMap, MapManager mapManager, SpotManager spotManager) {
+    public UIController(MainActivity activity, NaverMap naverMap, MapManager mapManager, SpotManager spotManager, TmapRouteManager tmapRouteManager) {
         this.activity = activity;
         this.naverMap = naverMap;
         this.mapManager = mapManager;
         this.spotManager = spotManager;
-        this.tmapRouteManager = new TmapRouteManager(activity, naverMap);
+        this.tmapRouteManager = tmapRouteManager;
         this.startPointLat = null;
         this.startPointLng = null;
 
@@ -97,6 +103,7 @@ public class UIController {
         Button cancelSpotButton = activity.findViewById(R.id.cancel_spot_button);
         Button selectSpotButton = activity.findViewById(R.id.select_spot_button);
         Button searchButton = activity.findViewById(R.id.searchButton);
+        ImageButton eraseButton = activity.findViewById(R.id.eraseButton);
         LinearLayout recordingControls = activity.findViewById(R.id.recording_controls);
         LinearLayout fabSubContainer = activity.findViewById(R.id.fab_sub_container);
         FloatingActionButton fabSubLeft = activity.findViewById(R.id.fab_sub_left);
@@ -130,9 +137,54 @@ public class UIController {
                 startPointWatcher
         );
 
+        // 1) find and init the route RecyclerView
+        routeRecycler = activity.findViewById(R.id.route_slide_recycler);
+        routeRecycler.setLayoutManager(
+                new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        );
+        new PagerSnapHelper().attachToRecyclerView(routeRecycler);
+
+        // 빈 어댑터 미리 연결
+        routeCardAdapter = new RouteCardAdapter(new ArrayList<>(), info -> {
+            // 카드 클릭 시: 기존 오버레이 제거 후 해당 경로만 그림
+            tmapRouteManager.clearOverlays();
+            tmapRouteManager.drawPathOnMap(info.getPath());
+        });
+        routeRecycler.setAdapter(routeCardAdapter);
+
         searchInput.addTextChangedListener(searchInputWatcher);
 
+        // set up listener for when routes are ready
+        tmapRouteManager.setOnRoutesReadyListener(routes -> {
+            // ensure UI thread
+            activity.runOnUiThread(() -> {
+                if (routes.isEmpty()) {
+                    routeRecycler.setVisibility(View.GONE);
+                } else {
+                    routeRecycler.setVisibility(View.VISIBLE);
+                    routeCardAdapter.updateData(routes);
+                }
+            });
+        });
+
+        eraseButton.setOnClickListener(v->{
+            routeCardAdapter.clear();
+            tmapRouteManager.clearOverlays();
+            tmapRouteManager.clearCurrentPathOverlay();
+            tmapRouteManager.clearWindow();
+            startPoint.setText(null);
+            searchInput.setText(null);
+            searchInput.clearFocus();
+        });
+
         searchButton.setOnClickListener(v -> {
+            Log.d("UIController", "searchButton clicked");
+
+            // 1) 이전 결과 초기화
+            routeCardAdapter.clear();
+            routeRecycler.setVisibility(GONE);
+            tmapRouteManager.clearOverlays();
+
             String start = startPoint.getText().toString().trim();
             String goal = searchInput.getText().toString().trim();
 
@@ -189,6 +241,7 @@ public class UIController {
                 System.out.println("lat : "+searchInputLat+"lng :"+searchInputLng);
                 tmapRouteManager.requestTmapWalkRoute(startPointLng, startPointLat, searchInputLng, searchInputLat);
             }
+
         });
 
         // 현위치 버튼
@@ -327,7 +380,7 @@ public class UIController {
                     intent = new Intent(activity, LoginActivity.class); // 로그인 안되어 있을 경우 Login
                 }
                 activity.startActivity(intent);
-                return true;
+                return false;
             }
 
             return false;
@@ -404,10 +457,9 @@ public class UIController {
             }
             // 2. 사진 명소 추천 모드일 때
             else if (activity.isViewingSpots()) {
-                activity.getIntent().removeExtra("photo_spots");
+                activity.getIntent().removeExtra("spots");
                 activity.setViewingSpots(false);
                 spotManager.clearAllSpotMarkers();
-                // (선택적으로 바텀시트 닫기 등 추가 작업 가능)
             }
         });
     }

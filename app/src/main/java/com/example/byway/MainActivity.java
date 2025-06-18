@@ -2,14 +2,13 @@ package com.example.byway;
 
 import android.Manifest;
 import android.content.Intent;
-import android.content.pm.Signature;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
-import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -17,21 +16,20 @@ import android.widget.Toast;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.naver.maps.geometry.LatLngBounds;
+import com.naver.maps.map.CameraUpdate;
+import com.naver.maps.map.overlay.PathOverlay;
+
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.app.AppCompatDelegate; // ✅ 추가됨
 import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseAuth;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.MapView;
@@ -41,6 +39,7 @@ import com.naver.maps.map.util.FusedLocationSource;
 import com.naver.maps.map.overlay.Marker;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -56,6 +55,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private EditText goalEditText;
     private TextView infoTextView;
 
+    private PathOverlay currentPathOverlay;
+
     private FusedLocationSource locationSource;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
     private Location lastLocation;
@@ -64,10 +65,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private boolean isFabOpen = false;
     private boolean isStartPointInitialized = false;
     private boolean isViewingSpots =false;
+    private boolean isViewingPaths = false;
     private PathRecorder pathRecorder;
     private MapManager mapManager;
     private SpotManager spotManager;
     private Button finishRecordButton, submitPathButton, addSpotButton, cancelSpotButton, selectSpotButton, searchButton ;
+    private ImageButton eraseButton;
     private LinearLayout recordingControls;
     private LinearLayout fabSubContainer;
     private LatLng selectedSpot; //스팟위치
@@ -76,6 +79,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private FloatingActionButton fabSubLeft, fabSubRight;
     private EditText startPoint, searchInput;
+
+    private RecyclerView routeRecyclerView;
+    private RouteCardAdapter routeInfoAdapter;
+    private TmapRouteManager tmapRouteManager;
 
     public Location getLastLocation() {
         return lastLocation;
@@ -188,6 +195,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         isViewingSpots = viewingSpots;
     }
 
+    public boolean isViewingPaths() {
+        return isViewingPaths;
+    }
+
+    public void setViewingPaths(boolean viewingPaths) {
+        isViewingPaths = viewingPaths;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
@@ -230,7 +245,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         naverMap.setLocationSource(locationSource);
         naverMap.getUiSettings().setLocationButtonEnabled(false);
 
-        UIController uiController = new UIController(this, naverMap, mapManager, spotManager);
+        tmapRouteManager = new TmapRouteManager(this, naverMap);
+
+        UIController uiController = new UIController(this, naverMap, mapManager, spotManager, tmapRouteManager);
         uiController.setupUI();
         uiController.setupMapListeners();
 
@@ -253,9 +270,20 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
     }
 
+    public void drawCategoryPath(List<LatLng> coords) {
+
+        tmapRouteManager.clearOverlays();
+        tmapRouteManager.drawPathOnMapCategory(coords);
+        // 카메라도 맞춰 줍니다
+        LatLngBounds.Builder b = new LatLngBounds.Builder();
+        for (LatLng p : coords) b.include(p);
+        naverMap.moveCamera(CameraUpdate.fitBounds(b.build(), 100));
+    }
+
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
+        setIntent(intent);
 
         // 전달받은 사진 명소 스팟 데이터 처리
         if (intent != null && intent.hasExtra("spots")) {
