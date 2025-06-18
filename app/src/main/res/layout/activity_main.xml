@@ -89,21 +89,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="16dp"/>
 
-
-
     <!-- 현재 위치 버튼 -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/my_location_button"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_current_location_xml"
+        android:contentDescription="@string/desc_current_location"
+        app:backgroundTint="@color/brown"
+        app:tint="@null"
+        app:fabSize="normal"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="120dp"
-        android:contentDescription="@string/desc_current_location"
-        android:src="@drawable/ic_current_location"
-        app:backgroundTint="#A47764"
-        app:tint="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"/>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_results_recycler"
