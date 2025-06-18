@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -64,10 +65,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private boolean isFabOpen = false;
     private boolean isStartPointInitialized = false;
     private boolean isViewingSpots =false;
+    private boolean isViewingPaths = false;
     private PathRecorder pathRecorder;
     private MapManager mapManager;
     private SpotManager spotManager;
     private Button finishRecordButton, submitPathButton, addSpotButton, cancelSpotButton, selectSpotButton, searchButton ;
+    private ImageButton eraseButton;
     private LinearLayout recordingControls;
     private LinearLayout fabSubContainer;
     private LatLng selectedSpot; //스팟위치
@@ -192,6 +195,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         isViewingSpots = viewingSpots;
     }
 
+    public boolean isViewingPaths() {
+        return isViewingPaths;
+    }
+
+    public void setViewingPaths(boolean viewingPaths) {
+        isViewingPaths = viewingPaths;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
@@ -234,11 +245,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         naverMap.setLocationSource(locationSource);
         naverMap.getUiSettings().setLocationButtonEnabled(false);
 
-        UIController uiController = new UIController(this, naverMap, mapManager, spotManager);
+        tmapRouteManager = new TmapRouteManager(this, naverMap);
+
+        UIController uiController = new UIController(this, naverMap, mapManager, spotManager, tmapRouteManager);
         uiController.setupUI();
         uiController.setupMapListeners();
-
-        tmapRouteManager = new TmapRouteManager(this, naverMap);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
@@ -272,6 +283,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
+        setIntent(intent);
 
         // 전달받은 사진 명소 스팟 데이터 처리
         if (intent != null && intent.hasExtra("spots")) {

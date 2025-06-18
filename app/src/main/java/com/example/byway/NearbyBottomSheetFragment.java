@@ -110,7 +110,7 @@ public class NearbyBottomSheetFragment extends BottomSheetDialogFragment {
 					case "데이트 코스":
 					case "산책 코스":
 					case "쇼핑 코스":
-						fetchAndSendCourses(context, title, NearbyBottomSheetFragment.this);
+						fetchAndSendCourses(context, title, intent,NearbyBottomSheetFragment.this);
 						break;
 					case "우리 지역 베스트 샛길":
 						// TODO: 경로 평가 로직 필요
@@ -143,7 +143,7 @@ public class NearbyBottomSheetFragment extends BottomSheetDialogFragment {
 					});
 		}
 
-		private void fetchAndSendCourses(Context context, String category, NearbyBottomSheetFragment fragment) {
+		private void fetchAndSendCourses(Context context, String category, Intent intent, NearbyBottomSheetFragment fragment) {
 			db.collection("paths")
 					.whereEqualTo("keyword", category)
 					.get()

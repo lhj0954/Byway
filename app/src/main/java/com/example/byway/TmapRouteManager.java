@@ -60,7 +60,7 @@ public class TmapRouteManager {
 
     // 2) 지도 위에 그린 모든 PathOverlay를 저장해두고, 필요 시 지울 수 있도록 리스트로 관리
     private final List<PathOverlay> _allOverlays = new ArrayList<>();
-
+    private final List<InfoWindow> _allInfowindow = new ArrayList<>();
     /** 기존에 그려진 모든 오버레이(경로)를 제거 */
     public void clearOverlays() {
         for (PathOverlay ov : _allOverlays) {
@@ -68,6 +68,16 @@ public class TmapRouteManager {
         }
         _allOverlays.clear();
         routeInfoList.clear();
+    }
+
+    public void clearWindow(){
+        for(InfoWindow info:_allInfowindow){
+            info.setMap(null);
+        }
+        _allInfowindow.clear();
+    }
+    public void clearCurrentPathOverlay(){
+        currentPathOverlay.setMap(null);
     }
 
     public void drawPathOnMap(List<LatLng> path) {
@@ -110,6 +120,7 @@ public class TmapRouteManager {
                 // 5) 말풍선 띄우기
                 infoWindow.setPosition(guidePoint);
                 infoWindow.open(naverMap);
+                _allInfowindow.add(infoWindow);
 
                 // 6) 말풍선 클릭 시 실제 안내 경로 요청
                 infoWindow.setOnClickListener(new Overlay.OnClickListener() {

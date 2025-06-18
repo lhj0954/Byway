@@ -79,12 +79,12 @@ public class  UIController {
         this.searchInputLng = searchInputLng;
     }
 
-    public UIController(MainActivity activity, NaverMap naverMap, MapManager mapManager, SpotManager spotManager) {
+    public UIController(MainActivity activity, NaverMap naverMap, MapManager mapManager, SpotManager spotManager, TmapRouteManager tmapRouteManager) {
         this.activity = activity;
         this.naverMap = naverMap;
         this.mapManager = mapManager;
         this.spotManager = spotManager;
-        this.tmapRouteManager = new TmapRouteManager(activity, naverMap);
+        this.tmapRouteManager = tmapRouteManager;
         this.startPointLat = null;
         this.startPointLng = null;
 
@@ -103,6 +103,7 @@ public class  UIController {
         Button cancelSpotButton = activity.findViewById(R.id.cancel_spot_button);
         Button selectSpotButton = activity.findViewById(R.id.select_spot_button);
         Button searchButton = activity.findViewById(R.id.searchButton);
+        ImageButton eraseButton = activity.findViewById(R.id.eraseButton);
         LinearLayout recordingControls = activity.findViewById(R.id.recording_controls);
         LinearLayout fabSubContainer = activity.findViewById(R.id.fab_sub_container);
         FloatingActionButton fabSubLeft = activity.findViewById(R.id.fab_sub_left);
@@ -164,6 +165,16 @@ public class  UIController {
                     routeCardAdapter.updateData(routes);
                 }
             });
+        });
+
+        eraseButton.setOnClickListener(v->{
+            routeCardAdapter.clear();
+            tmapRouteManager.clearOverlays();
+            tmapRouteManager.clearCurrentPathOverlay();
+            tmapRouteManager.clearWindow();
+            startPoint.setText(null);
+            searchInput.setText(null);
+            searchInput.clearFocus();
         });
 
         searchButton.setOnClickListener(v -> {
@@ -446,10 +457,9 @@ public class  UIController {
             }
             // 2. 사진 명소 추천 모드일 때
             else if (activity.isViewingSpots()) {
-                activity.getIntent().removeExtra("photo_spots");
+                activity.getIntent().removeExtra("spots");
                 activity.setViewingSpots(false);
                 spotManager.clearAllSpotMarkers();
-                // (선택적으로 바텀시트 닫기 등 추가 작업 가능)
             }
         });
     }
