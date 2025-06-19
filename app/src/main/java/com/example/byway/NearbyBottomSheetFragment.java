@@ -9,7 +9,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,17 +22,21 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.naver.maps.geometry.LatLng;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class NearbyBottomSheetFragment extends BottomSheetDialogFragment {
 	FirebaseFirestore db = FirebaseFirestore.getInstance();
+	private LinearLayout examplesContainer;
 
 	@Nullable
 	@Override
@@ -128,6 +135,7 @@ public class NearbyBottomSheetFragment extends BottomSheetDialogFragment {
 						for (DocumentSnapshot doc : queryDocumentSnapshots.getDocuments()) {
 							SpotData spot = doc.toObject(SpotData.class);
 							if (spot != null) {
+								spot.id = doc.getId();
 								spotList.add(spot);
 							}
 						}
@@ -148,21 +156,31 @@ public class NearbyBottomSheetFragment extends BottomSheetDialogFragment {
 					.whereEqualTo("keyword", category)
 					.get()
 					.addOnSuccessListener(querySnapshot -> {
-						List<LatLng> coords = new ArrayList<>();
+						// 샛길마다 좌표 리스트를 담을 상위 리스트
+						List<List<LatLng>> allCoords = new ArrayList<>();
 						for (DocumentSnapshot doc : querySnapshot.getDocuments()) {
 							List<Map<String, Object>> rawPath = (List<Map<String, Object>>) doc.get("path");
 							if (rawPath == null) continue;
 
+							List<LatLng> pathCoords = new ArrayList<>();
 							for (Map<String, Object> p : rawPath) {
 								double lat = ((Number) p.get("lat")).doubleValue();
 								double lng = ((Number) p.get("lng")).doubleValue();
-								coords.add(new LatLng(lat, lng));
+								pathCoords.add(new LatLng(lat, lng));
 							}
+							allCoords.add(pathCoords);
 						}
 
 						FragmentActivity fa = fragment.getActivity();
 						if (fa instanceof MainActivity) {
-							((MainActivity) fa).runOnUiThread(() -> ((MainActivity) fa).drawCategoryPath(coords));
+							MainActivity main = (MainActivity) fa;
+							main.runOnUiThread(() -> {
+								// allCoords 대신 yourBywayPaths 리스트 이름을 사용하세요
+								List<List<LatLng>> yourBywayPaths = allCoords;
+
+								// TmapRouteManager 의 한 번에 그리기 메서드 호출
+								main.drawCategoryPath(yourBywayPaths);
+							});
 						} else {
 							Log.e("NearbyAdapter", "context is not MainActivity!");
 						}

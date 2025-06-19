@@ -88,6 +88,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         return lastLocation;
     }
 
+    public NaverMap getNaverMap() {
+        return naverMap;
+    }
+
+    public TmapRouteManager getTmapRouteManager() {
+        return tmapRouteManager;
+    }
+
     public void setLastLocation(Location lastLocation) {
         this.lastLocation = lastLocation;
     }
@@ -270,13 +278,21 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
     }
 
-    public void drawCategoryPath(List<LatLng> coords) {
+    public void drawCategoryPath(List<List<LatLng>> bywayPaths) {
 
         tmapRouteManager.clearOverlays();
-        tmapRouteManager.drawPathOnMapCategory(coords);
+        tmapRouteManager.clearWindow();
+
+        for (List<LatLng> path : bywayPaths) {
+            tmapRouteManager.drawPathOnMapCategory(path);
+        }
         // 카메라도 맞춰 줍니다
         LatLngBounds.Builder b = new LatLngBounds.Builder();
-        for (LatLng p : coords) b.include(p);
+        for (List<LatLng> path : bywayPaths) {
+            for (LatLng p : path) {
+                b.include(p);
+            }
+        }
         naverMap.moveCamera(CameraUpdate.fitBounds(b.build(), 100));
     }
 
