@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -56,15 +57,24 @@ public class MergedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         if (holder instanceof PathViewHolder) {
             ((PathViewHolder) holder).bind((PathData) item);
 
-            //MainPageActivity에서 콜백 받아서 처리해주면 됨
+            //마이페이지에서 콜백 받아서 처리
             holder.itemView.setOnClickListener(v->{
                 if(listener != null) listener.onPathClick((PathData) item);
+            });
+
+            //삭제버튼
+            ((PathViewHolder) holder).deletePathBtn.setOnClickListener(v -> {
+                if (listener != null) listener.onPathDelete((PathData) item);
             });
         } else {
             ((SpotViewHolder) holder).bind((SpotData) item);
 
             holder.itemView.setOnClickListener(v -> {
                 if (listener != null) listener.onSpotClick((SpotData) item);
+            });
+
+            ((SpotViewHolder) holder).deleteSpotBtn.setOnClickListener(v -> {
+                if (listener != null) listener.onSpotDelete((SpotData) item);
             });
         }
     }
@@ -76,12 +86,14 @@ public class MergedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     static class PathViewHolder extends RecyclerView.ViewHolder {
         TextView titleText, keywordText, timestampText;
+        Button deletePathBtn;
 
         public PathViewHolder(View itemView) {
             super(itemView);
             titleText = itemView.findViewById(R.id.path_title);
             keywordText = itemView.findViewById(R.id.path_keyword);
             timestampText = itemView.findViewById(R.id.path_timestamp);
+            deletePathBtn = itemView.findViewById(R.id.btn_delete_path);
         }
 
         void bind(PathData path) {
@@ -97,6 +109,8 @@ public class MergedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public interface OnItemClickListener {
         void onPathClick(PathData path);
         void onSpotClick(SpotData spot);
+        void onPathDelete(PathData path);
+        void onSpotDelete(SpotData spot);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener){
@@ -106,7 +120,7 @@ public class MergedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     static class SpotViewHolder extends RecyclerView.ViewHolder {
         TextView titleText, keywordText, descriptionText, addressText, timestampText;
-
+        Button deleteSpotBtn;
         public SpotViewHolder(View itemView) {
             super(itemView);
             titleText = itemView.findViewById(R.id.spot_title);
@@ -114,6 +128,7 @@ public class MergedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             descriptionText = itemView.findViewById(R.id.spot_description);
             addressText = itemView.findViewById(R.id.spot_address);
             timestampText = itemView.findViewById(R.id.spot_timestamp);
+            deleteSpotBtn = itemView.findViewById(R.id.btn_delete_spot);
         }
 
         void bind(SpotData spot) {

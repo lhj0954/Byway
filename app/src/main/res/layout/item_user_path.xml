@@ -3,9 +3,10 @@
     android:orientation="horizontal"
     android:padding="12dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical">
 
-    <!-- 👇 원형 배경이 적용된 아이콘 -->
+    <!-- 아이콘 -->
     <ImageView
         android:id="@+id/path_icon"
         android:layout_width="36dp"
@@ -15,7 +16,7 @@
         android:src="@drawable/ic_location"
         android:tint="@android:color/black" />
 
-    <!-- 👇 텍스트 세로 정렬 -->
+    <!-- 텍스트 + 날짜 -->
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="0dp"
@@ -53,4 +54,14 @@
                 android:layout_height="wrap_content"/>
         </LinearLayout>
     </LinearLayout>
+
+    <!-- 삭제 버튼 -->
+    <Button
+        android:id="@+id/btn_delete_path"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="삭제"
+        android:background="@drawable/btn_background"
+        android:textColor="#FFFFFF"
+        android:textSize="13sp"/>
 </LinearLayout>

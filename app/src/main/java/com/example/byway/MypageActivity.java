@@ -262,6 +262,60 @@ public class MypageActivity extends AppCompatActivity implements OnMapReadyCallb
                 LatLng latLng = new LatLng(spot.getLatitude(),spot.getLongitude());
                 spotManager.addSpotMarker(naverMap, latLng);
             }
+
+            @Override
+            public void onPathDelete(PathData path) {
+                new android.app.AlertDialog.Builder(MypageActivity.this)
+                        .setTitle("샛길 삭제")
+                        .setMessage("이 샛길을 정말 삭제하시겠습니까?")
+                        .setPositiveButton("예", (dialog, which) -> {
+                            FirebaseFirestore.getInstance()
+                                    .collection("paths")
+                                    .whereEqualTo("createdBy", path.getCreatedBy())
+                                    .whereEqualTo("createdAt", path.getCreatedAt())
+                                    .get()
+                                    .addOnSuccessListener(querySnapshot -> {
+                                        for (DocumentSnapshot doc : querySnapshot.getDocuments()) {
+                                            doc.getReference().delete();
+                                        }
+                                        mergedList.remove(path);
+                                        showMergedList();
+                                        Toast.makeText(MypageActivity.this, "샛길이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        Toast.makeText(MypageActivity.this, "샛길 삭제 실패", Toast.LENGTH_SHORT).show();
+                                    });
+                        })
+                        .setNegativeButton("아니오", null)
+                        .show();
+            }
+
+            @Override
+            public void onSpotDelete(SpotData spot) {
+                new android.app.AlertDialog.Builder(MypageActivity.this)
+                        .setTitle("스팟 삭제")
+                        .setMessage("이 스팟을 정말 삭제하시겠습니까?")
+                        .setPositiveButton("예", (dialog, which) -> {
+                            FirebaseFirestore.getInstance()
+                                    .collection("spots")
+                                    .whereEqualTo("createdBy", spot.createdBy)
+                                    .whereEqualTo("createdAt", spot.createdAt)
+                                    .get()
+                                    .addOnSuccessListener(querySnapshot -> {
+                                        for (DocumentSnapshot doc : querySnapshot.getDocuments()) {
+                                            doc.getReference().delete();
+                                        }
+                                        mergedList.remove(spot);
+                                        showMergedList();
+                                        Toast.makeText(MypageActivity.this, "스팟이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        Toast.makeText(MypageActivity.this, "스팟 삭제 실패", Toast.LENGTH_SHORT).show();
+                                    });
+                        })
+                        .setNegativeButton("아니오", null)
+                        .show();
+            }
         });
 
         // 4) 버튼 가시성 & 텍스트 처리
