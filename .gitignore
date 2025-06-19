@@ -1,15 +1,36 @@
+# === Android Studio ===
 *.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
+.gradle/
 local.properties
+.idea/
+.DS_Store
+/build/
+captures/
+.externalNativeBuild/
+.cxx/
+
+# === OS, Tool 관련 ===
+*.log
+*.swp
+*.swo
+*.tmp
+*.bak
+*.orig
+*.class
+
+# === Firebase/Crashlytics ===
+crashlytics-build.properties
+fabric.properties
+
+# === Sign Keys (보안) ===
+*.jks
+*.keystore
+
+# === Jetpack Compose / Kotlin ===
+build/
+*.apk
+*.aar
+*.dex
+
+# === Node or npm 캐시가 있는 경우 (RN 등) ===
+node_modules/

@@ -1,100 +1,316 @@
 package com.example.byway;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
+//경로추천 import
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.naver.maps.geometry.LatLngBounds;
+import com.naver.maps.map.CameraUpdate;
+import com.naver.maps.map.overlay.PathOverlay;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import com.naver.maps.geometry.LatLng;
-import com.naver.maps.map.CameraUpdate;
 import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.MapView;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.util.FusedLocationSource;
+import com.naver.maps.map.overlay.Marker;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
-
     private MapView mapView;
     private NaverMap naverMap;
+
+    //경로 탐색 인자
+    private static final String CLIENT_ID = "b8amspex8g".trim();
+    private static final String CLIENT_SECRET = "n3S8Tc6Tt88WDBC1qyJ8UBytr8Smq9cXmwSkvsWi".trim();
+
+
+    private EditText startEditText;
+    private EditText goalEditText;
+    private TextView infoTextView;
+
+    private PathOverlay currentPathOverlay;
+
     private FusedLocationSource locationSource;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1000;
     private Location lastLocation;
+    private boolean isRecording = false; //길 등록중인지
+    private boolean isAddingSpot = false; //스팟 등록중인지
+    private boolean isFabOpen = false;
+    private boolean isStartPointInitialized = false;
+    private boolean isViewingSpots =false;
+    private boolean isViewingPaths = false;
+    private PathRecorder pathRecorder;
+    private MapManager mapManager;
+    private SpotManager spotManager;
+    private Button finishRecordButton, submitPathButton, addSpotButton, cancelSpotButton, selectSpotButton, searchButton ;
+    private ImageButton eraseButton;
+    private LinearLayout recordingControls;
+    private LinearLayout fabSubContainer;
+    private LatLng selectedSpot; //스팟위치
+    private Marker spotMarker; //스팟 마커
+    private ActivityResultLauncher<Intent> spotActivityLauncher;
+
+    private FloatingActionButton fabSubLeft, fabSubRight;
+    private EditText startPoint, searchInput;
+
+    private RecyclerView routeRecyclerView;
+    private RouteCardAdapter routeInfoAdapter;
+    private TmapRouteManager tmapRouteManager;
+
+    public Location getLastLocation() {
+        return lastLocation;
+    }
+
+    public NaverMap getNaverMap() {
+        return naverMap;
+    }
+
+    public TmapRouteManager getTmapRouteManager() {
+        return tmapRouteManager;
+    }
+
+    public void setLastLocation(Location lastLocation) {
+        this.lastLocation = lastLocation;
+    }
+
+    public boolean isRecording() {
+        return isRecording;
+    }
+
+    public void setRecording(boolean recording) {
+        isRecording = recording;
+    }
+
+    public boolean isAddingSpot() {
+        return isAddingSpot;
+    }
+
+    public void setAddingSpot(boolean addingSpot) {
+        isAddingSpot = addingSpot;
+    }
+
+    public PathRecorder getPathRecorder() {
+        return pathRecorder;
+    }
+
+
+    public void setPathRecorder(PathRecorder pathRecorder) {
+        this.pathRecorder = pathRecorder;
+    }
+
+    public Button getFinishRecordButton() {
+        return finishRecordButton;
+    }
+
+    public void setFinishRecordButton(Button finishRecordButton) {
+        this.finishRecordButton = finishRecordButton;
+    }
+
+    public Button getSubmitPathButton() {
+        return submitPathButton;
+    }
+
+    public void setSubmitPathButton(Button submitPathButton) {
+        this.submitPathButton = submitPathButton;
+    }
+
+    public Button getAddSpotButton() {
+        return addSpotButton;
+    }
+
+    public void setAddSpotButton(Button addSpotButton) {
+        this.addSpotButton = addSpotButton;
+    }
+
+    public Button getCancelSpotButton() {
+        return cancelSpotButton;
+    }
+
+    public void setCancelSpotButton(Button cancelSpotButton) {
+        this.cancelSpotButton = cancelSpotButton;
+    }
+
+    public Button getSearchButton() {
+        return searchButton;
+    }
+
+    public void setSearchButton(Button searchButton) {
+        this.searchButton = searchButton;
+    }
+
+    public void setSelectSpotButton(Button selectSpotButton) {
+        this.selectSpotButton = selectSpotButton;
+    }
+
+    public LinearLayout getRecordingControls() {
+        return recordingControls;
+    }
+
+    public void setRecordingControls(LinearLayout recordingControls) {
+        this.recordingControls = recordingControls;
+    }
+    
+    public LatLng getSelectedSpot() {
+        return selectedSpot;
+    }
+
+    public void setSelectedSpot(LatLng selectedSpot) {
+        this.selectedSpot = selectedSpot;
+    }
+
+    public ActivityResultLauncher<Intent> getSpotActivityLauncher() {
+        return spotActivityLauncher;
+    }
+    public boolean isFabOpen() {
+        return isFabOpen;
+    }
+    public void setFabOpen(boolean fabOpen) {
+        isFabOpen = fabOpen;
+    }
+
+    public boolean isViewingSpots() {
+        return isViewingSpots;
+    }
+
+    public void setViewingSpots(boolean viewingSpots) {
+        isViewingSpots = viewingSpots;
+    }
+
+    public boolean isViewingPaths() {
+        return isViewingPaths;
+    }
+
+    public void setViewingPaths(boolean viewingPaths) {
+        isViewingPaths = viewingPaths;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         mapView = findViewById(R.id.map_view);
         mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(this);
+        mapView.getMapAsync(this); //onMapReady 호출
 
         // 위치 소스 초기화
         locationSource = new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
 
-        // 위치 버튼 클릭 리스너 등록
-        ImageButton locationButton = findViewById(R.id.my_location_button);
-        locationButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (naverMap == null || lastLocation == null) return;
+        pathRecorder=new PathRecorder();
 
-                LatLng currentLatLng = new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude());
-                LatLng center = naverMap.getCameraPosition().target;
-
-                double distance = currentLatLng.distanceTo(center);
-
-                if (distance > 100) {
-                    // 지도 중심이 많이 벗어나 있으면 이동만 함
-                    naverMap.moveCamera(CameraUpdate.scrollTo(currentLatLng));
-                } else {
-                    // 가까우면 추적 모드 전환 (Follow <-> Face)
-                    LocationTrackingMode currentMode = naverMap.getLocationTrackingMode();
-                    if (currentMode == LocationTrackingMode.Face) {
-                        naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
-                    } else {
-                        naverMap.setLocationTrackingMode(LocationTrackingMode.Face);
+        //스팟등록모드
+        spotActivityLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK) {
+                        Intent data = result.getData();
+                        if (data != null && data.getBooleanExtra("restoreSpotMode", false)) {
+                            isAddingSpot = true;
+                            cancelSpotButton.setVisibility(View.VISIBLE);
+                            selectSpotButton.setVisibility(View.VISIBLE);
+                            addSpotButton.setVisibility(View.GONE);
+                            Toast.makeText(this, "스팟 등록 모드로 돌아왔습니다.", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
-            }
-        });
+        );
     }
 
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
         this.naverMap = naverMap;
-        naverMap.setLocationSource(locationSource);
+        mapManager = new MapManager(naverMap);
+        spotManager = new SpotManager();
 
-        // 위치 추적 모드 초기화
+        naverMap.setLocationSource(locationSource);
+        naverMap.getUiSettings().setLocationButtonEnabled(false);
+
+        tmapRouteManager = new TmapRouteManager(this, naverMap);
+
+        UIController uiController = new UIController(this, naverMap, mapManager, spotManager, tmapRouteManager);
+        uiController.setupUI();
+        uiController.setupMapListeners();
+
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
-            naverMap.setLocationTrackingMode(LocationTrackingMode.Face);
+            naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
         } else {
-            requestLocationPermission();
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    LOCATION_PERMISSION_REQUEST_CODE);
         }
 
-        // 위치 변경 감지
         naverMap.addOnLocationChangeListener(location -> {
-            lastLocation = location;
+            if (location != null) {
+                Location loc = new Location("");
+                loc.setLatitude(location.getLatitude());
+                loc.setLongitude(location.getLongitude());
+                setLastLocation(loc);
+            }
         });
-
-        // 기본 위치 버튼 비활성화
-        naverMap.getUiSettings().setLocationButtonEnabled(false);
     }
 
-    // 위치 권한 요청 메서드
-    private void requestLocationPermission() {
-        ActivityCompat.requestPermissions(this,
-                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                LOCATION_PERMISSION_REQUEST_CODE);
+    public void drawCategoryPath(List<List<LatLng>> bywayPaths) {
+
+        tmapRouteManager.clearOverlays();
+        tmapRouteManager.clearWindow();
+
+        for (List<LatLng> path : bywayPaths) {
+            tmapRouteManager.drawPathOnMapCategory(path);
+        }
+        // 카메라도 맞춰 줍니다
+        LatLngBounds.Builder b = new LatLngBounds.Builder();
+        for (List<LatLng> path : bywayPaths) {
+            for (LatLng p : path) {
+                b.include(p);
+            }
+        }
+        naverMap.moveCamera(CameraUpdate.fitBounds(b.build(), 100));
     }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+
+        // 전달받은 사진 명소 스팟 데이터 처리
+        if (intent != null && intent.hasExtra("spots")) {
+            ArrayList<SpotData> photoSpots = (ArrayList<SpotData>) intent.getSerializableExtra("spots");
+
+            spotManager.showRecommendedSpots(naverMap, photoSpots);
+            setViewingSpots(true);
+        }
+    }
+
+
 
     // 권한 요청 결과 처리
     @Override
@@ -102,7 +318,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (locationSource.onRequestPermissionsResult(requestCode, permissions, grantResults)) {
             if (naverMap != null) {
                 if (locationSource.isActivated()) {
-                    naverMap.setLocationTrackingMode(LocationTrackingMode.Face);
+                    naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
                 } else {
                     naverMap.setLocationTrackingMode(LocationTrackingMode.None);
                 }

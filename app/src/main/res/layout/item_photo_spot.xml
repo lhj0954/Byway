@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    android:padding="16dp"
+    android:layout_marginBottom="12dp">
+
+    <View
+        android:layout_width="36dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bottom_sheet_handle" />
+
+    <TextView
+        android:id="@+id/photo_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="충북대학교 야외공연장"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="#333333" />
+
+    <TextView
+        android:id="@+id/photo_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="충북 서원구 흥대로1"
+        android:textSize="14sp"
+        android:textColor="#777777"
+        android:layout_marginBottom="8dp" />
+
+    <ImageView
+        android:id="@+id/photo_image"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_launcher_foreground"
+        android:background="@android:color/white"
+        android:contentDescription="추천 장소 사진" />
+
+    <Button
+        android:id="@+id/write_comment_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="상세보기"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#A47764"
+        android:textColor="@android:color/white"
+        android:drawableLeft="@drawable/ic_flag"
+        android:drawablePadding="4dp" />
+
+    <!--코멘트 예시들  -->
+    <LinearLayout
+        android:id="@+id/comment_examples"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/comment_background"
+            android:padding="12dp"
+            android:text="🗨 자연광 들 땐 사진이 예쁘게 나오는데 장소가 훌륭한지는 모르겠어요.\n가끔 중대생들이 소풍처럼 와서 쉼터로도 쓰고 시끌벅적해요."
+            android:textColor="#333333"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/comment_background"
+            android:padding="12dp"
+            android:text="😀 양성재-전정대 도로 빙 둘러 안 가고 여기 지나가면 지름길이다"
+            android:textColor="#333333"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/comment_background"
+            android:padding="12dp"
+            android:text="😶 흙바닥이고 비포장이라 비오면 웅덩이에 진흙에 날라나니 유의 바람"
+            android:textColor="#333333"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <!-- 코멘트 입력 UI (초기엔 안보임) -->
+    <LinearLayout
+        android:id="@+id/comment_section9"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:background="@drawable/comment_background"
+        android:padding="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">>
+
+        <!-- 이모지 선택 -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginBottom="8dp">
+
+            <ImageView
+                android:id="@+id/emoji_happy9"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_emoji_happy"
+                android:layout_marginEnd="8dp" />
+
+            <ImageView
+                android:id="@+id/emoji_neutral9"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_emoji_neutral"
+                android:layout_marginEnd="8dp" />
+
+            <ImageView
+                android:id="@+id/emoji_sad9"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_emoji_sad" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/comment_input9"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:hint="샛길 스팟에 대한 코멘트를 작성해 주세요."
+            android:background="@android:color/transparent"
+            android:padding="8dp"
+            android:textColor="#333333"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/photo_attach_button9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="사진 첨부하기"
+            android:textColor="#A47764"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/ic_image"
+            android:drawablePadding="6dp" />
+
+        <Button
+            android:id="@+id/comment_submit_button9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="상세보기"
+            android:layout_gravity="end"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#A47764"
+            android:textColor="@android:color/white"
+            android:drawableLeft="@drawable/ic_flag"
+            android:drawablePadding="6dp" />
+    </LinearLayout>
+</LinearLayout>
