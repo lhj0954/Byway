@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,6 +43,7 @@ public class PhotoSpotActivity extends AppCompatActivity {
         List<PhotoSpot> spots = new ArrayList<>();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new PhotoSpotAdapter(this, spots));
     }
 
     static class PhotoSpot {
@@ -80,13 +82,24 @@ public class PhotoSpotActivity extends AppCompatActivity {
                     .placeholder(R.drawable.ic_launcher_foreground) // 대체 이미지
                     .into(holder.image);
 
-            holder.itemView.setOnClickListener(v -> {
+            holder.itemView.setOnClickListener(null);
+
+            // ② 버튼에만 상세보기 Intent 설정
+            holder.detailButton.setOnClickListener(v -> {
                 Intent intent = new Intent(context, PhotoSpotDetailActivity.class);
                 intent.putExtra("name", spot.name);
                 intent.putExtra("address", spot.address);
                 intent.putExtra("imageUrl", spot.imageUrl);
                 context.startActivity(intent);
             });
+
+            /*holder.itemView.setOnClickListener(v -> {
+                Intent intent = new Intent(context, PhotoSpotDetailActivity.class);
+                intent.putExtra("name", spot.name);
+                intent.putExtra("address", spot.address);
+                intent.putExtra("imageUrl", spot.imageUrl);
+                context.startActivity(intent);
+            });*/
         }
 
 
@@ -98,12 +111,14 @@ public class PhotoSpotActivity extends AppCompatActivity {
         static class ViewHolder extends RecyclerView.ViewHolder {
             TextView name, address;
             ImageView image;
+            Button detailButton;
 
             ViewHolder(@NonNull View itemView) {
                 super(itemView);
-                name = itemView.findViewById(R.id.photo_name);
-                address = itemView.findViewById(R.id.photo_address);
-                image = itemView.findViewById(R.id.photo_image);
+                name = itemView.findViewById(R.id.detail_name);
+                address = itemView.findViewById(R.id.detail_address);
+                image = itemView.findViewById(R.id.detail_image);
+                detailButton = itemView.findViewById(R.id.write_comment_button);
             }
         }
     }

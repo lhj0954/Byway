@@ -52,8 +52,9 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class PreferenceManager {
 
-    private static final String PREF_NAME = "UserPrefs";
-    private static final String KEY_IS_LOGGED_IN = "isLoggedIn"; // 카카오 로그인 여부 저장용
+    private static final String PREF_NAME = "UserPrefs";           // 🔄 모든 SharedPreferences 통일
+    private static final String KEY_IS_LOGGED_IN = "isLoggedIn";
+    private static final String KEY_KAKAO_ID = "kakao_id";
 
     // ✅ 통합 로그인 여부 확인 함수 (카카오 OR 구글 중 하나만 되어 있어도 true)
     public static boolean isUserLoggedIn(Context context) {
@@ -77,4 +78,19 @@ public class PreferenceManager {
         SharedPreferences prefs = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         prefs.edit().clear().apply();
     }
+
+    // 🔹 Kakao ID 저장
+    public static void saveKakaoId(Context context, long kakaoId) {
+        context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+                .edit()
+                .putLong(KEY_KAKAO_ID, kakaoId)
+                .apply();
+    }
+
+    // 🔹 Kakao ID 가져오기
+    public static long getCurrentKakaoId(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        return prefs.getLong(KEY_KAKAO_ID, -1);
+    }
+
 }
