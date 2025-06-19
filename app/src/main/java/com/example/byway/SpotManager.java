@@ -1,5 +1,7 @@
 package com.example.byway;
 
+import static android.content.ContentValues.TAG;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -254,27 +256,22 @@ public class SpotManager {
             String un = "";
             long userId = 0;
             // 현재 로그인한 사용자 정보 가져오기
-            UserApiClient.getInstance().me((user, thowable) -> {
-                if (user != null) {
-                    long kakaoId = user.getId();
-                    String uid = String.valueOf(kakaoId);
 
-                    //FirebaseFirestore db = FirebaseFirestore.getInstance();
+            String uid = UserManager.getUid(context);
+            if(uid != null){
+                db.collection("users").document(uid)
+                        .get()
+                        .addOnSuccessListener(document -> {
+                            if (document.exists()) {
+                                String userName = document.getString("name");
+                                System.out.println(userName);
 
-                    db.collection("users").document(uid)
-                            .get()
-                            .addOnSuccessListener(document -> {
-                                if (document.exists()) {
-                                    String userName = document.getString("userName");
-
-                                    // ✅ 댓글 작성 시 사용할 정보: uid, userName
-                                    postComment(uid, userName, commentText, selectedEmoji[0],commentInput, context, spot);
-                                    commentSection.setVisibility(View.GONE);
-                                }
-                            });
-                }
-                return null;
-            });
+                                // ✅ 댓글 작성 시 사용할 정보: uid, userName
+                                postComment(uid, userName, commentText, selectedEmoji[0],commentInput, context, spot);
+                                commentSection.setVisibility(View.GONE);
+                            }
+                        });
+            }
         });
 
         emojiHappy.setOnClickListener(v -> {
@@ -312,6 +309,10 @@ public class SpotManager {
         commentData.put("timestamp", FieldValue.serverTimestamp());
         commentData.put("emoji", emoji);
 
+        System.out.println("userID: " + userId);
+        System.out.println("userName: " + userName);
+        System.out.println("content: " + commentText);
+        System.out.println("emoji: " + emoji);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("spots").document(spot.getId()) // 해당 스팟 문서 ID 사용
                 .collection("comments")

@@ -1,330 +1,326 @@
 [
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_refresh.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_refresh.xml"
+        "merged": "com.example.byway.app-debug-43:/layout_activity_splash.xml.flat",
+        "source": "com.example.byway.app-main-45:/layout/activity_splash.xml"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\layout_activity_photo_spot.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\layout\\activity_photo_spot.xml"
+        "merged": "com.example.byway.app-debug-43:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.example.byway.app-main-45:/mipmap-anydpi-v26/ic_launcher_round.xml"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\layout_activity_login.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\layout\\activity_login.xml"
+        "merged": "com.example.byway.app-debug-43:/drawable_ic_kakao.xml.flat",
+        "source": "com.example.byway.app-main-45:/drawable/ic_kakao.xml"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\layout_item_place.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\layout\\item_place.xml"
+        "merged": "com.example.byway.app-debug-43:/layout_item_user_spot.xml.flat",
+        "source": "com.example.byway.app-main-45:/layout/item_user_spot.xml"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_current_location.png.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_current_location.png"
+        "merged": "com.example.byway.app-debug-43:/layout_fragment_spot_bottom_sheet.xml.flat",
+        "source": "com.example.byway.app-main-45:/layout/fragment_spot_bottom_sheet.xml"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_byway.png.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_byway.png"
+        "merged": "com.example.byway.app-debug-43:/drawable_ic_emoji_happy.png.flat",
+        "source": "com.example.byway.app-main-45:/drawable/ic_emoji_happy.png"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_comment_background.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\comment_background.xml"
+        "merged": "com.example.byway.app-debug-43:/layout_activity_photo_spot.xml.flat",
+        "source": "com.example.byway.app-main-45:/layout/activity_photo_spot.xml"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_category_camera.png.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_category_camera.png"
+        "merged": "com.example.byway.app-debug-43:/drawable_ic_flag.png.flat",
+        "source": "com.example.byway.app-main-45:/drawable/ic_flag.png"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_emoji_sad.png.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_emoji_sad.png"
+        "merged": "com.example.byway.app-debug-43:/menu_bottom_nav_menu.xml.flat",
+        "source": "com.example.byway.app-main-45:/menu/bottom_nav_menu.xml"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_addway.png.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_addway.png"
+        "merged": "com.example.byway.app-debug-43:/drawable_ic_google.xml.flat",
+        "source": "com.example.byway.app-main-45:/drawable/ic_google.xml"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\layout_item_route_card.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\layout\\item_route_card.xml"
+        "merged": "com.example.byway.app-debug-43:/drawable_spinner_custom.xml.flat",
+        "source": "com.example.byway.app-main-45:/drawable/spinner_custom.xml"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_circle_background.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\circle_background.xml"
+        "merged": "com.example.byway.app-debug-43:/layout_activity_mypage.xml.flat",
+        "source": "com.example.byway.app-main-45:/layout/activity_mypage.xml"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_btn_background.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\btn_background.xml"
+        "merged": "com.example.byway.app-debug-43:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "com.example.byway.app-main-45:/mipmap-xhdpi/ic_launcher.webp"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_my.png.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_my.png"
+        "merged": "com.example.byway.app-debug-43:/layout_item_photo_spot.xml.flat",
+        "source": "com.example.byway.app-main-45:/layout/item_photo_spot.xml"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+        "merged": "com.example.byway.app-debug-43:/menu_logout_menu.xml.flat",
+        "source": "com.example.byway.app-main-45:/menu/logout_menu.xml"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_google.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_google.xml"
+        "merged": "com.example.byway.app-debug-43:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.byway.app-main-45:/mipmap-hdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_emoji_neutral.png.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_emoji_neutral.png"
+        "merged": "com.example.byway.app-debug-43:/drawable_ic_category_fish.png.flat",
+        "source": "com.example.byway.app-main-45:/drawable/ic_category_fish.png"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\layout_item_user_spot.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\layout\\item_user_spot.xml"
+        "merged": "com.example.byway.app-debug-43:/drawable_ic_category_market.png.flat",
+        "source": "com.example.byway.app-main-45:/drawable/ic_category_market.png"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_category_best.png.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_category_best.png"
+        "merged": "com.example.byway.app-debug-43:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.example.byway.app-main-45:/mipmap-anydpi-v26/ic_launcher.xml"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_launcher_foreground.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_launcher_foreground.xml"
+        "merged": "com.example.byway.app-debug-43:/drawable_ic_category_heart.png.flat",
+        "source": "com.example.byway.app-main-45:/drawable/ic_category_heart.png"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_category_fish.png.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_category_fish.png"
+        "merged": "com.example.byway.app-debug-43:/drawable_ic_current_location_24.png.flat",
+        "source": "com.example.byway.app-main-45:/drawable/ic_current_location_24.png"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_flag.png.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_flag.png"
+        "merged": "com.example.byway.app-debug-43:/drawable_ic_plus.png.flat",
+        "source": "com.example.byway.app-main-45:/drawable/ic_plus.png"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_route.png.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_route.png"
+        "merged": "com.example.byway.app-debug-43:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.example.byway.app-main-45:/drawable/ic_launcher_background.xml"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_map_sample.png.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\map_sample.png"
+        "merged": "com.example.byway.app-debug-43:/color_button_text_color.xml.flat",
+        "source": "com.example.byway.app-main-45:/color/button_text_color.xml"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_launcher_background.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_launcher_background.xml"
+        "merged": "com.example.byway.app-debug-43:/layout_item_user_path.xml.flat",
+        "source": "com.example.byway.app-main-45:/layout/item_user_path.xml"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\color_button_text_color.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\color\\button_text_color.xml"
+        "merged": "com.example.byway.app-debug-43:/layout_activity_user_account.xml.flat",
+        "source": "com.example.byway.app-main-45:/layout/activity_user_account.xml"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\menu_logout_menu.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\menu\\logout_menu.xml"
-    },
-    {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_current_location_24.png.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_current_location_24.png"
-    },
-    {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_kakao.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_kakao.xml"
-    },
-    {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\layout_fragment_spot_bottom_sheet.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\layout\\fragment_spot_bottom_sheet.xml"
-    },
-    {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
-    },
-    {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_spot_shop.png.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\spot_shop.png"
-    },
-    {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\mipmap-xxxhdpi\\ic_launcher.webp"
+        "merged": "com.example.byway.app-debug-43:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.byway.app-main-45:/mipmap-xhdpi/ic_launcher_round.webp"
     },
     {
         "merged": "com.example.byway.app-debug-43:/layout_activity_photo_spot_detail.xml.flat",
         "source": "com.example.byway.app-main-45:/layout/activity_photo_spot_detail.xml"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_spot_camera.png.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\spot_camera.png"
+        "merged": "com.example.byway.app-debug-43:/layout_item_comment.xml.flat",
+        "source": "com.example.byway.app-main-45:/layout/item_comment.xml"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\mipmap-mdpi_ic_launcher.webp.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\mipmap-mdpi\\ic_launcher.webp"
+        "merged": "com.example.byway.app-debug-43:/drawable_ic_category_walk.png.flat",
+        "source": "com.example.byway.app-main-45:/drawable/ic_category_walk.png"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_plus.png.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_plus.png"
+        "merged": "com.example.byway.app-debug-43:/drawable_spot_shop.png.flat",
+        "source": "com.example.byway.app-main-45:/drawable/spot_shop.png"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_button_selector.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\button_selector.xml"
+        "merged": "com.example.byway.app-debug-43:/layout_activity_login.xml.flat",
+        "source": "com.example.byway.app-main-45:/layout/activity_login.xml"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\layout_item_category.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\layout\\item_category.xml"
+        "merged": "com.example.byway.app-debug-43:/drawable_ic_nearby.png.flat",
+        "source": "com.example.byway.app-main-45:/drawable/ic_nearby.png"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\layout_activity_main.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\layout\\activity_main.xml"
+        "merged": "com.example.byway.app-debug-43:/drawable_ic_current_location.png.flat",
+        "source": "com.example.byway.app-main-45:/drawable/ic_current_location.png"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_spot_danger.png.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\spot_danger.png"
+        "merged": "com.example.byway.app-debug-43:/drawable_ic_byway.png.flat",
+        "source": "com.example.byway.app-main-45:/drawable/ic_byway.png"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\xml_data_extraction_rules.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\xml\\data_extraction_rules.xml"
+        "merged": "com.example.byway.app-debug-43:/drawable_ic_settings.png.flat",
+        "source": "com.example.byway.app-main-45:/drawable/ic_settings.png"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\layout_activity_register.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\layout\\activity_register.xml"
+        "merged": "com.example.byway.app-debug-43:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.byway.app-main-45:/mipmap-xxhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\mipmap-hdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\mipmap-hdpi\\ic_launcher_round.webp"
+        "merged": "com.example.byway.app-debug-43:/drawable_bottom_sheet_handle.xml.flat",
+        "source": "com.example.byway.app-main-45:/drawable/bottom_sheet_handle.xml"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_border_background.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\border_background.xml"
+        "merged": "com.example.byway.app-debug-43:/drawable_border_background.xml.flat",
+        "source": "com.example.byway.app-main-45:/drawable/border_background.xml"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_location.png.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_location.png"
+        "merged": "com.example.byway.app-debug-43:/drawable_ic_image.png.flat",
+        "source": "com.example.byway.app-main-45:/drawable/ic_image.png"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\mipmap-xxhdpi_ic_launcher.webp.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\mipmap-xxhdpi\\ic_launcher.webp"
+        "merged": "com.example.byway.app-debug-43:/drawable_map_sample.png.flat",
+        "source": "com.example.byway.app-main-45:/drawable/map_sample.png"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_bottom_nav_background.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\bottom_nav_background.xml"
+        "merged": "com.example.byway.app-debug-43:/drawable_ic_current_location_xml.xml.flat",
+        "source": "com.example.byway.app-main-45:/drawable/ic_current_location_xml.xml"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_bg_card.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\bg_card.xml"
+        "merged": "com.example.byway.app-debug-43:/drawable_ic_search.png.flat",
+        "source": "com.example.byway.app-main-45:/drawable/ic_search.png"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\layout_item_comment.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\layout\\item_comment.xml"
+        "merged": "com.example.byway.app-debug-43:/drawable_ic_location.png.flat",
+        "source": "com.example.byway.app-main-45:/drawable/ic_location.png"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_nearby.png.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_nearby.png"
+        "merged": "com.example.byway.app-debug-43:/drawable_ico_tools.png.flat",
+        "source": "com.example.byway.app-main-45:/drawable/ico_tools.png"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_search.png.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_search.png"
+        "merged": "com.example.byway.app-debug-43:/drawable_ic_route.png.flat",
+        "source": "com.example.byway.app-main-45:/drawable/ic_route.png"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_emoji_happy.png.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_emoji_happy.png"
+        "merged": "com.example.byway.app-debug-43:/drawable_spot_danger.png.flat",
+        "source": "com.example.byway.app-main-45:/drawable/spot_danger.png"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_search_background.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\search_background.xml"
+        "merged": "com.example.byway.app-debug-43:/layout_item_place.xml.flat",
+        "source": "com.example.byway.app-main-45:/layout/item_place.xml"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\layout_item_photo_spot.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\layout\\item_photo_spot.xml"
+        "merged": "com.example.byway.app-debug-43:/drawable_bg_card.xml.flat",
+        "source": "com.example.byway.app-main-45:/drawable/bg_card.xml"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\mipmap-xhdpi_ic_launcher.webp.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\mipmap-xhdpi\\ic_launcher.webp"
+        "merged": "com.example.byway.app-debug-43:/layout_item_route_card.xml.flat",
+        "source": "com.example.byway.app-main-45:/layout/item_route_card.xml"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_category_heart.png.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_category_heart.png"
+        "merged": "com.example.byway.app-debug-43:/drawable_ic_category_camera.png.flat",
+        "source": "com.example.byway.app-main-45:/drawable/ic_category_camera.png"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_current_location_xml.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_current_location_xml.xml"
+        "merged": "com.example.byway.app-debug-43:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.byway.app-main-45:/mipmap-xxhdpi/ic_launcher.webp"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ico_tools.png.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ico_tools.png"
+        "merged": "com.example.byway.app-debug-43:/color_brown_tint_selector.xml.flat",
+        "source": "com.example.byway.app-main-45:/color/brown_tint_selector.xml"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_logout.png.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_logout.png"
+        "merged": "com.example.byway.app-debug-43:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.byway.app-main-45:/mipmap-mdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\color_brown_tint_selector.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\color\\brown_tint_selector.xml"
+        "merged": "com.example.byway.app-debug-43:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "com.example.byway.app-main-45:/mipmap-hdpi/ic_launcher.webp"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\layout_activity_user_account.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\layout\\activity_user_account.xml"
+        "merged": "com.example.byway.app-debug-43:/drawable_ic_logout.png.flat",
+        "source": "com.example.byway.app-main-45:/drawable/ic_logout.png"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\layout_activity_photo_spot_detail.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\layout\\activity_photo_spot_detail.xml"
+        "merged": "com.example.byway.app-debug-43:/drawable_comment_background.xml.flat",
+        "source": "com.example.byway.app-main-45:/drawable/comment_background.xml"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\mipmap-xhdpi\\ic_launcher_round.webp"
+        "merged": "com.example.byway.app-debug-43:/drawable_ic_category_best.png.flat",
+        "source": "com.example.byway.app-main-45:/drawable/ic_category_best.png"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\layout_activity_splash.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\layout\\activity_splash.xml"
+        "merged": "com.example.byway.app-debug-43:/drawable_ic_emoji_neutral.png.flat",
+        "source": "com.example.byway.app-main-45:/drawable/ic_emoji_neutral.png"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\layout_activity_spot.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\layout\\activity_spot.xml"
+        "merged": "com.example.byway.app-debug-43:/drawable_circle_background.xml.flat",
+        "source": "com.example.byway.app-main-45:/drawable/circle_background.xml"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\mipmap-hdpi_ic_launcher.webp.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\mipmap-hdpi\\ic_launcher.webp"
+        "merged": "com.example.byway.app-debug-43:/drawable_button_selector.xml.flat",
+        "source": "com.example.byway.app-main-45:/drawable/button_selector.xml"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_category_walk.png.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_category_walk.png"
+        "merged": "com.example.byway.app-debug-43:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.byway.app-main-45:/mipmap-xxxhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_splash.png.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_splash.png"
+        "merged": "com.example.byway.app-debug-43:/drawable_ic_emoji_sad.png.flat",
+        "source": "com.example.byway.app-main-45:/drawable/ic_emoji_sad.png"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_category_market.png.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_category_market.png"
+        "merged": "com.example.byway.app-debug-43:/drawable_ic_splash.png.flat",
+        "source": "com.example.byway.app-main-45:/drawable/ic_splash.png"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_spinner_custom.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\spinner_custom.xml"
+        "merged": "com.example.byway.app-debug-43:/xml_data_extraction_rules.xml.flat",
+        "source": "com.example.byway.app-main-45:/xml/data_extraction_rules.xml"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_settings.png.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_settings.png"
+        "merged": "com.example.byway.app-debug-43:/xml_backup_rules.xml.flat",
+        "source": "com.example.byway.app-main-45:/xml/backup_rules.xml"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\layout_activity_mypage.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\layout\\activity_mypage.xml"
+        "merged": "com.example.byway.app-debug-43:/drawable_ic_addway.png.flat",
+        "source": "com.example.byway.app-main-45:/drawable/ic_addway.png"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\mipmap-anydpi-v26\\ic_launcher.xml"
+        "merged": "com.example.byway.app-debug-43:/drawable_search_background.xml.flat",
+        "source": "com.example.byway.app-main-45:/drawable/search_background.xml"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+        "merged": "com.example.byway.app-debug-43:/layout_activity_register.xml.flat",
+        "source": "com.example.byway.app-main-45:/layout/activity_register.xml"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_bottom_sheet_handle.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\bottom_sheet_handle.xml"
+        "merged": "com.example.byway.app-debug-43:/drawable_btn_background.xml.flat",
+        "source": "com.example.byway.app-main-45:/drawable/btn_background.xml"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\menu_bottom_nav_menu.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\menu\\bottom_nav_menu.xml"
+        "merged": "com.example.byway.app-debug-43:/drawable_spot_camera.png.flat",
+        "source": "com.example.byway.app-main-45:/drawable/spot_camera.png"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\mipmap-mdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\mipmap-mdpi\\ic_launcher_round.webp"
+        "merged": "com.example.byway.app-debug-43:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.example.byway.app-main-45:/drawable/ic_launcher_foreground.xml"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\layout_fragment_nearby_bottom_sheet.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\layout\\fragment_nearby_bottom_sheet.xml"
+        "merged": "com.example.byway.app-debug-43:/layout_item_category.xml.flat",
+        "source": "com.example.byway.app-main-45:/layout/item_category.xml"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_image.png.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_image.png"
+        "merged": "com.example.byway.app-debug-43:/drawable_ic_refresh.xml.flat",
+        "source": "com.example.byway.app-main-45:/drawable/ic_refresh.xml"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\xml_backup_rules.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\xml\\backup_rules.xml"
+        "merged": "com.example.byway.app-debug-43:/layout_activity_spot.xml.flat",
+        "source": "com.example.byway.app-main-45:/layout/activity_spot.xml"
     },
     {
-        "merged": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\layout_item_user_path.xml.flat",
-        "source": "C:\\Users\\brian\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\layout\\item_user_path.xml"
+        "merged": "com.example.byway.app-debug-43:/layout_fragment_nearby_bottom_sheet.xml.flat",
+        "source": "com.example.byway.app-main-45:/layout/fragment_nearby_bottom_sheet.xml"
+    },
+    {
+        "merged": "com.example.byway.app-debug-43:/layout_activity_main.xml.flat",
+        "source": "com.example.byway.app-main-45:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.example.byway.app-debug-43:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.byway.app-main-45:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.byway.app-debug-43:/drawable_bottom_nav_background.xml.flat",
+        "source": "com.example.byway.app-main-45:/drawable/bottom_nav_background.xml"
+    },
+    {
+        "merged": "com.example.byway.app-debug-43:/drawable_ic_my.png.flat",
+        "source": "com.example.byway.app-main-45:/drawable/ic_my.png"
+    },
+    {
+        "merged": "com.example.byway.app-debug-43:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.example.byway.app-main-45:/mipmap-mdpi/ic_launcher.webp"
     }
 ]
