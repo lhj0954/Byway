@@ -1,90 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:background="#FFFFFF">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <!-- 상단: ID + 로그아웃 -->
+    <RelativeLayout
+        android:id="@+id/user_info"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="24dp"
-        android:background="#FFFFFF">
+        android:layout_margin="24dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-
-
-        <!-- 상단: ID + 로그아웃 -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp">
-
-            <!-- 위치 아이콘 (텍스트 왼쪽 아이콘처럼 보이기) -->
-            <ImageView
-                android:id="@+id/icon_location"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/ic_location" />
-
-            <!-- ID 텍스트 -->
-            <TextView
-                android:id="@+id/text_user_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/icon_location"
-                android:layout_marginStart="8dp"
-                android:text="ID20250407 님"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="#000000" />
-
-            <!-- 로그아웃 버튼 -->
-            <TextView
-                android:id="@+id/text_logout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:text="로그아웃 >"
-                android:textColor="#888888"
-                android:textSize="14sp"
-                android:clickable="true"
-                android:focusable="true" />
-        </RelativeLayout>
+        <ImageView
+            android:id="@+id/icon_location"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_location" />
 
         <TextView
-            android:text="내 히스토리"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:layout_marginBottom="12dp"
+            android:id="@+id/text_user_id"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <!-- 맵 뷰가 들어와야 할 곳-->
-        <com.naver.maps.map.MapView
-            android:id="@+id/map_view"
-            android:layout_width="match_parent"
-            android:layout_height="360dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher_foreground"
-            android:layout_marginBottom="16dp"/>
-
-        <!-- 히스토리 목록 -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_history"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:nestedScrollingEnabled="false"/>
+            android:layout_toEndOf="@id/icon_location"
+            android:layout_marginStart="8dp"
+            android:text="ID20250407 님"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#000000" />
 
-        <Button
-            android:id="@+id/show_all_button"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/text_logout"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="전체 내역 보기"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/btn_background"
-            android:textColor="#B68D6D"/>
-    </LinearLayout>
-</ScrollView>
+            android:layout_alignParentEnd="true"
+            android:text="로그아웃 >"
+            android:textColor="#888888"
+            android:textSize="14sp"
+            android:clickable="true"
+            android:focusable="true" />
+    </RelativeLayout>
+
+    <!-- 내 히스토리 제목 -->
+    <TextView
+        android:id="@+id/title_history"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="내 히스토리"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/user_info"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="12dp"/>
+
+    <!-- 지도 뷰 -->
+    <com.naver.maps.map.MapView
+        android:id="@+id/map_view"
+        android:layout_width="0dp"
+        android:layout_height="360dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/title_history"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- 히스토리 목록 -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_history"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/map_view"
+        app:layout_constraintBottom_toTopOf="@id/show_all_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- 전체 보기 버튼 -->
+    <Button
+        android:id="@+id/show_all_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="전체 내역 보기"
+        android:layout_margin="24dp"
+        android:background="@drawable/btn_background"
+        android:textColor="#B68D6D"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

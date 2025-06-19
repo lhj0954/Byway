@@ -99,7 +99,7 @@ public class MypageActivity extends AppCompatActivity implements OnMapReadyCallb
 
         showAllBtn.setOnClickListener(v->{
             if(showingAll){
-               showAllBtn.setText("전체 내역 보기");
+                showAllBtn.setText("전체 내역 보기");
             }else{
                 showAllBtn.setText("목록 숨기기");
             }

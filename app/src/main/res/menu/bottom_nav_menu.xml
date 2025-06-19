@@ -9,11 +9,6 @@
         android:icon="@drawable/ic_plus"
         android:title=""
         />
-
-<!--    <item-->
-<!--        android:id="@+id/nav_byway"-->
-<!--        android:icon="@drawable/ic_byway"-->
-<!--        android:title="샛길"/>-->
     <item
         android:id="@+id/nav_my"
         android:icon="@drawable/ic_my"

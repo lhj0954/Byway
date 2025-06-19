@@ -172,6 +172,7 @@ public class  UIController {
             tmapRouteManager.clearOverlays();
             tmapRouteManager.clearCurrentPathOverlay();
             tmapRouteManager.clearWindow();
+            spotManager.clearAllSpotMarkers();
             startPoint.setText(null);
             searchInput.setText(null);
             searchInput.clearFocus();
