@@ -20,16 +20,20 @@
         "source": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_byway.png"
     },
     {
-        "merged": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_spot_camera.png.flat",
-        "source": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\spot_camera.png"
-    },
-    {
         "merged": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_route.png.flat",
         "source": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_route.png"
     },
     {
+        "merged": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_spot_camera.png.flat",
+        "source": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\spot_camera.png"
+    },
+    {
         "merged": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\layout_activity_photo_spot_detail.xml.flat",
         "source": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\layout\\activity_photo_spot_detail.xml"
+    },
+    {
+        "merged": "com.example.byway.app-debug-43:/layout_item_user_spot.xml.flat",
+        "source": "com.example.byway.app-main-45:/layout/item_user_spot.xml"
     },
     {
         "merged": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\layout_activity_mypage.xml.flat",
@@ -58,6 +62,10 @@
     {
         "merged": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_launcher_foreground.xml.flat",
         "source": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.example.byway.app-debug-43:/layout_activity_mypage.xml.flat",
+        "source": "com.example.byway.app-main-45:/layout/activity_mypage.xml"
     },
     {
         "merged": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_spinner_custom.xml.flat",
@@ -102,10 +110,6 @@
     {
         "merged": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\drawable_ic_launcher_background.xml.flat",
         "source": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-main-45:\\drawable\\ic_launcher_background.xml"
-    },
-    {
-        "merged": "com.example.byway.app-debug-43:/layout_activity_photo_spot_detail.xml.flat",
-        "source": "com.example.byway.app-main-45:/layout/activity_photo_spot_detail.xml"
     },
     {
         "merged": "C:\\Users\\gkrwn\\.gradle\\daemon\\8.7\\com.example.byway.app-debug-43:\\xml_data_extraction_rules.xml.flat",
