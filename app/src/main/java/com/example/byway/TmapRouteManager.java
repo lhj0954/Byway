@@ -587,6 +587,7 @@ public class TmapRouteManager {
         List<List<LatLng>> allBywayPaths = new ArrayList<>();
 
         db.collection("paths")
+                .whereEqualTo("keyword","샛길")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     for (DocumentSnapshot doc : queryDocumentSnapshots) {
