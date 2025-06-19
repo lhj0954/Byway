@@ -77,7 +77,9 @@ public class TmapRouteManager {
         _allInfowindow.clear();
     }
     public void clearCurrentPathOverlay(){
-        currentPathOverlay.setMap(null);
+        if(currentPathOverlay != null) {
+            currentPathOverlay.setMap(null);
+        }
     }
 
     public void drawPathOnMap(List<LatLng> path) {

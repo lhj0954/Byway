@@ -98,7 +98,11 @@ public class MypageActivity extends AppCompatActivity implements OnMapReadyCallb
         logoutBtn.setOnClickListener(v -> logoutAll(MypageActivity.this));
 
         showAllBtn.setOnClickListener(v->{
-
+            if(showingAll){
+               showAllBtn.setText("전체 내역 보기");
+            }else{
+                showAllBtn.setText("목록 숨기기");
+            }
             showingAll = !showingAll;
             showMergedList();
         });

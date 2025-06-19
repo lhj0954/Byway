@@ -45,7 +45,7 @@ public class NearbyBottomSheetFragment extends BottomSheetDialogFragment {
 
 	private List<CategoryItem> getMockData() {
 		List<CategoryItem> items = new ArrayList<>();
-		items.add(new CategoryItem("우리 지역 베스트 샛길", R.drawable.ic_category_best, R.color.brown));
+		items.add(new CategoryItem("근처 샛길", R.drawable.ic_category_best, R.color.brown));
 		items.add(new CategoryItem("데이트 코스", R.drawable.ic_category_heart, R.color.heart));
 		items.add(new CategoryItem("산책 코스", R.drawable.ic_category_walk, R.color.green));
 		items.add(new CategoryItem("쇼핑 코스", R.drawable.ic_category_market, R.color.yellow));
@@ -112,8 +112,8 @@ public class NearbyBottomSheetFragment extends BottomSheetDialogFragment {
 					case "쇼핑 코스":
 						fetchAndSendCourses(context, title, intent,NearbyBottomSheetFragment.this);
 						break;
-					case "우리 지역 베스트 샛길":
-						// TODO: 경로 평가 로직 필요
+					case "근처 샛길":
+						fetchAndSendCourses(context, "샛길", intent, NearbyBottomSheetFragment.this);
 						break;
 				}
 			});

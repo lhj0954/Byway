@@ -15,6 +15,8 @@ MERGED from [com.naver.maps:map-sdk:3.21.0] C:\Users\brian\.gradle\caches\transf
 MERGED from [com.kakao.sdk:v2-auth:2.19.0] C:\Users\brian\.gradle\caches\transforms-4\39c48f6518329e8722be146a855cef76\transformed\v2-auth-2.19.0\AndroidManifest.xml:2:1-22:12
 MERGED from [com.kakao.sdk:v2-network:2.19.0] C:\Users\brian\.gradle\caches\transforms-4\5ec46cac4126e8db221188904f9bb7b3\transformed\v2-network-2.19.0\AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\brian\.gradle\caches\transforms-4\8eea598552256829606c2a8e7e4da6ba\transformed\material-1.12.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.viewpager2:viewpager2:1.1.0-beta02] C:\Users\brian\.gradle\caches\transforms-4\541184856d1f73e2fc40bc575876ccbf\transformed\viewpager2-1.1.0-beta02\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.recyclerview:recyclerview:1.3.2] C:\Users\brian\.gradle\caches\transforms-4\751431893f370f919a899812a5a7f121\transformed\recyclerview-1.3.2\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.2.1] C:\Users\brian\.gradle\caches\transforms-4\d248b743ee143e5e82339389e49639ae\transformed\constraintlayout-2.2.1\AndroidManifest.xml:2:1-9:12
 MERGED from [androidx.appcompat:appcompat-resources:1.7.0] C:\Users\brian\.gradle\caches\transforms-4\b7f2ee3839e71258bae48d7fc4a0956e\transformed\appcompat-resources-1.7.0\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.appcompat:appcompat:1.7.0] C:\Users\brian\.gradle\caches\transforms-4\05642fd6f3ab7bbce7753574a60ff771\transformed\appcompat-1.7.0\AndroidManifest.xml:2:1-7:12
@@ -25,8 +27,6 @@ MERGED from [com.google.firebase:firebase-database-collection:18.0.1] C:\Users\b
 MERGED from [com.google.firebase:firebase-appcheck:17.1.2] C:\Users\brian\.gradle\caches\transforms-4\c27d47ce7317f2ef9802085ed115c56e\transformed\firebase-appcheck-17.1.2\AndroidManifest.xml:15:1-34:12
 MERGED from [com.google.firebase:firebase-appcheck-interop:17.1.0] C:\Users\brian\.gradle\caches\transforms-4\4d39f73e6d0f825ef368f249e0423669\transformed\firebase-appcheck-interop-17.1.0\AndroidManifest.xml:15:1-23:12
 MERGED from [com.google.android.gms:play-services-base:18.1.0] C:\Users\brian\.gradle\caches\transforms-4\6b3f8c564bed34007dba6ce442b227f1\transformed\play-services-base-18.1.0\AndroidManifest.xml:16:1-24:12
-MERGED from [androidx.recyclerview:recyclerview:1.3.2] C:\Users\brian\.gradle\caches\transforms-4\751431893f370f919a899812a5a7f121\transformed\recyclerview-1.3.2\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.viewpager2:viewpager2:1.1.0-beta02] C:\Users\brian\.gradle\caches\transforms-4\541184856d1f73e2fc40bc575876ccbf\transformed\viewpager2-1.1.0-beta02\AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.android.recaptcha:recaptcha:18.4.0] C:\Users\brian\.gradle\caches\transforms-4\247b460d24a694bb1f2d0898c3002bfd\transformed\recaptcha-18.4.0\AndroidManifest.xml:2:1-11:12
 MERGED from [com.google.android.play:integrity:1.2.0] C:\Users\brian\.gradle\caches\transforms-4\2337dc656526c0621acf461e6f81c82c\transformed\integrity-1.2.0\AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.firebase:firebase-auth-interop:20.0.0] C:\Users\brian\.gradle\caches\transforms-4\6bd7b6c0e5c1d6285922c824c2ec55d1\transformed\firebase-auth-interop-20.0.0\AndroidManifest.xml:2:1-10:12
@@ -306,6 +306,10 @@ MERGED from [com.kakao.sdk:v2-network:2.19.0] C:\Users\brian\.gradle\caches\tran
 MERGED from [com.kakao.sdk:v2-network:2.19.0] C:\Users\brian\.gradle\caches\transforms-4\5ec46cac4126e8db221188904f9bb7b3\transformed\v2-network-2.19.0\AndroidManifest.xml:5:5-7:41
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\brian\.gradle\caches\transforms-4\8eea598552256829606c2a8e7e4da6ba\transformed\material-1.12.0\AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.material:material:1.12.0] C:\Users\brian\.gradle\caches\transforms-4\8eea598552256829606c2a8e7e4da6ba\transformed\material-1.12.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager2:viewpager2:1.1.0-beta02] C:\Users\brian\.gradle\caches\transforms-4\541184856d1f73e2fc40bc575876ccbf\transformed\viewpager2-1.1.0-beta02\AndroidManifest.xml:5:5-44
+MERGED from [androidx.viewpager2:viewpager2:1.1.0-beta02] C:\Users\brian\.gradle\caches\transforms-4\541184856d1f73e2fc40bc575876ccbf\transformed\viewpager2-1.1.0-beta02\AndroidManifest.xml:5:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.3.2] C:\Users\brian\.gradle\caches\transforms-4\751431893f370f919a899812a5a7f121\transformed\recyclerview-1.3.2\AndroidManifest.xml:20:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.3.2] C:\Users\brian\.gradle\caches\transforms-4\751431893f370f919a899812a5a7f121\transformed\recyclerview-1.3.2\AndroidManifest.xml:20:5-44
 MERGED from [androidx.constraintlayout:constraintlayout:2.2.1] C:\Users\brian\.gradle\caches\transforms-4\d248b743ee143e5e82339389e49639ae\transformed\constraintlayout-2.2.1\AndroidManifest.xml:5:5-44
 MERGED from [androidx.constraintlayout:constraintlayout:2.2.1] C:\Users\brian\.gradle\caches\transforms-4\d248b743ee143e5e82339389e49639ae\transformed\constraintlayout-2.2.1\AndroidManifest.xml:5:5-44
 MERGED from [androidx.appcompat:appcompat-resources:1.7.0] C:\Users\brian\.gradle\caches\transforms-4\b7f2ee3839e71258bae48d7fc4a0956e\transformed\appcompat-resources-1.7.0\AndroidManifest.xml:5:5-44
@@ -326,10 +330,6 @@ MERGED from [com.google.firebase:firebase-appcheck-interop:17.1.0] C:\Users\bria
 MERGED from [com.google.firebase:firebase-appcheck-interop:17.1.0] C:\Users\brian\.gradle\caches\transforms-4\4d39f73e6d0f825ef368f249e0423669\transformed\firebase-appcheck-interop-17.1.0\AndroidManifest.xml:18:5-44
 MERGED from [com.google.android.gms:play-services-base:18.1.0] C:\Users\brian\.gradle\caches\transforms-4\6b3f8c564bed34007dba6ce442b227f1\transformed\play-services-base-18.1.0\AndroidManifest.xml:18:5-43
 MERGED from [com.google.android.gms:play-services-base:18.1.0] C:\Users\brian\.gradle\caches\transforms-4\6b3f8c564bed34007dba6ce442b227f1\transformed\play-services-base-18.1.0\AndroidManifest.xml:18:5-43
-MERGED from [androidx.recyclerview:recyclerview:1.3.2] C:\Users\brian\.gradle\caches\transforms-4\751431893f370f919a899812a5a7f121\transformed\recyclerview-1.3.2\AndroidManifest.xml:20:5-44
-MERGED from [androidx.recyclerview:recyclerview:1.3.2] C:\Users\brian\.gradle\caches\transforms-4\751431893f370f919a899812a5a7f121\transformed\recyclerview-1.3.2\AndroidManifest.xml:20:5-44
-MERGED from [androidx.viewpager2:viewpager2:1.1.0-beta02] C:\Users\brian\.gradle\caches\transforms-4\541184856d1f73e2fc40bc575876ccbf\transformed\viewpager2-1.1.0-beta02\AndroidManifest.xml:5:5-44
-MERGED from [androidx.viewpager2:viewpager2:1.1.0-beta02] C:\Users\brian\.gradle\caches\transforms-4\541184856d1f73e2fc40bc575876ccbf\transformed\viewpager2-1.1.0-beta02\AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.recaptcha:recaptcha:18.4.0] C:\Users\brian\.gradle\caches\transforms-4\247b460d24a694bb1f2d0898c3002bfd\transformed\recaptcha-18.4.0\AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.recaptcha:recaptcha:18.4.0] C:\Users\brian\.gradle\caches\transforms-4\247b460d24a694bb1f2d0898c3002bfd\transformed\recaptcha-18.4.0\AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.play:integrity:1.2.0] C:\Users\brian\.gradle\caches\transforms-4\2337dc656526c0621acf461e6f81c82c\transformed\integrity-1.2.0\AndroidManifest.xml:4:5-44

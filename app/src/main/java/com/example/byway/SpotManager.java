@@ -110,7 +110,6 @@ public class SpotManager {
 
         RecyclerView recyclerView = bottomSheetView.findViewById(R.id.photo_spot_list);
 
-
         // RecyclerView 세팅
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         List<SpotData> list = Arrays.asList(spot); // 단일 아이템 리스트로 처리 (또는 연관 데이터 리스트)
