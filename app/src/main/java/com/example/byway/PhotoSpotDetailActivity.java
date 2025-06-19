@@ -1,7 +1,10 @@
 package com.example.byway;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -12,6 +15,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class PhotoSpotDetailActivity extends AppCompatActivity {
 
@@ -39,7 +47,7 @@ public class PhotoSpotDetailActivity extends AppCompatActivity {
         LinearLayout commentExamples = findViewById(R.id.comment_examples);
         EditText commentInput = findViewById(R.id.comment_input);
         Button commentSubmitBtn = findViewById(R.id.comment_submit_button);
-        Button attachPhotoBtn = findViewById(R.id.photo_attach_button);
+        //Button attachPhotoBtn = findViewById(R.id.photo_attach_button);
 
         emojiHappy = findViewById(R.id.emoji_happy);
         emojiNeutral = findViewById(R.id.emoji_neutral);
@@ -79,9 +87,9 @@ public class PhotoSpotDetailActivity extends AppCompatActivity {
         });
 
         // 사진 첨부 버튼
-        attachPhotoBtn.setOnClickListener(v -> {
+        /*attachPhotoBtn.setOnClickListener(v -> {
             Toast.makeText(this, "사진 첨부는 아직 구현되지 않았습니다.", Toast.LENGTH_SHORT).show();
-        });
+        });*/
     }
 
     private void selectEmotion(String emotion) {

@@ -1,5 +1,6 @@
 package com.example.byway;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -50,11 +51,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     // 카카오 유저정보 db에 저장
-    private void saveUserToFirestore(String uid, String name) {
+    private void saveUserToFirestore(String uid, String name, long kakaoId, String userName) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         Map<String, Object> userData = new HashMap<>();
         userData.put("name", name);
+        userData.put("kakaoId", kakaoId);       // ✅ 추가: 카카오 고유 사용자 ID
+        userData.put("userName", userName);
 
 
         db.collection("users").document(uid)
@@ -122,14 +125,20 @@ public class LoginActivity extends AppCompatActivity {
                         } else if (user != null) {
                             String uid = user.getId().toString();
                             String name = "Unknown";
+                            long kakaoId = 0;
+                            String userName = "";
 
                             if (user.getKakaoAccount().getProfile() != null) {
                                 name = user.getKakaoAccount().getProfile().getNickname();
+                                kakaoId = user.getId();
+                                userName = user.getKakaoAccount().getProfile().getNickname();
+
+                                PreferenceManager.saveKakaoId(LoginActivity.this, kakaoId);
                             }
 
                             UserManager.saveUid(LoginActivity.this, uid);
                             PreferenceManager.setKakaoLoggedIn(LoginActivity.this, true);
-                            saveUserToFirestore(uid, name);
+                            saveUserToFirestore(uid, name, kakaoId, userName);
 
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             intent.putExtra("name", name);

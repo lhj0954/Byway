@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class SpotData implements Serializable {
+    public String id;
     public double latitude;
     public double longitude;
     public String address;
@@ -36,7 +37,9 @@ public class SpotData implements Serializable {
         return description;
     }
 
-    public SpotData(double latitude, double longitude, String address, String keyword, String description, String imageUrl, String locationText, String createdBy, Date createdAt) {
+    public String getId() { return id; }
+
+    public SpotData( double latitude, double longitude, String address, String keyword, String description, String imageUrl, String locationText, String createdBy, Date createdAt) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.address = address;
